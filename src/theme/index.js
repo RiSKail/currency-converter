@@ -3,17 +3,20 @@ export default {
     half: '4px',
     single: '8px',
     double: '16px',
+    triple: '20px',
     quadriple: '32px',
     eight: '64px',
   },
   colors: {
-    background: '#ffffff',
+    background: 'linear-gradient(262.85deg, #192038 0%, #2E3A59 100%)',
     backgroundDark: '#f9f9f9',
-    primary: '#fe2419',
+    backgroundLight: 'rgba(255, 255, 255, 0.17)',
+    primary: '#0384C6',
     primaryDark: '#d4251c',
     secondary: '#26499d',
     secondaryLight: 'rgba(38, 73, 157, 0.73)',
-    font: '#222222',
+    font: 'rgba(17, 17, 17, 0.48)',
+    fontLight: '#ffffff',
   },
   fontSizes: {
     werySmall: '12px',
@@ -29,7 +32,8 @@ export default {
   fontWeights: {
     light: 300,
     normal: 400,
+    middle: 500,
     bold: 700,
   },
-  fontFamily: ['Lato, "Helvetica Neue", Arial'],
+  fontFamily: ['Lato, "Helvetica Neue", Roboto, "DM Sans", Arial'],
 }
