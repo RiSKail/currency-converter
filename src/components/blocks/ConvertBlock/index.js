@@ -1,3 +1,3 @@
-import ConvertBlock from './container'
+import ConvertBlock from './component'
 
 export default ConvertBlock

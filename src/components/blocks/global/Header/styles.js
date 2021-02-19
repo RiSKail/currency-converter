@@ -1,7 +1,8 @@
 import styled from 'styled-components'
+import { device } from '../../../../constants/devices'
 
 export default styled.header`
-  height: 48px;
+  height: 75px;
   color: ${props => props.theme.colors.backgroundDark};
   font-size: ${props => props.theme.fontSizes.weryBig};
   padding-left: ${props => props.theme.unit.quadriple};
@@ -12,6 +13,12 @@ export default styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
+
+  @media ${device.tablet} {
+    height: 48px;
+    flex-direction: row;
+  }
 
   ul {
     display: flex;
@@ -30,6 +37,7 @@ export default styled.header`
     align-items: center;
     justify-content: space-between;
     margin: 0 0 0 35px;
+    text-align: center;
   }
 
   ul li:first-child{

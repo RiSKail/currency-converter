@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import bg from './img/bg.jpg'
+import { device } from '../constants/devices'
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap');
@@ -39,16 +40,28 @@ export default createGlobalStyle`
         display: inline-block;
         content: '';
         height: 1px;
-        width: 144px
+        width: 64px
         background: #DDDDDD;
+
+        @media ${device.tablet} {
+          width: 144px
+        }
       }
 
       &::after {
-        margin: 0 0 0 35px;
+        margin: 0 0 0 25px;
+
+        @media ${device.tablet} {
+          margin: 0 0 0 35px;
+        }
       }
 
       &::before {
-        margin: 0 35px 0 0;
+        margin: 0 25px 0 0;
+
+        @media ${device.tablet} {
+          margin: 0 35px 0 0;
+        }
       }
     }
   }

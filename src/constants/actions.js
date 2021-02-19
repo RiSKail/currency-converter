@@ -1,5 +1,6 @@
 // Place here Action types constants
 
-export const DEMO_ACTION = 'DEMO_ACTION'
-
+export const SET_BASE_PRIMARY_VALUE = 'SET_BASE_PRIMARY_VALUE'
+export const SET_BASE_SECONDARY_VALUE = 'SET_BASE_SECONDARY_VALUE'
 export const SET_LOCALE = 'SET_LOCALE'
+export const GET_CURRENCIES_LIST = 'GET_CURRENCIES_LIST'

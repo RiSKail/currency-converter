@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { device } from '../../../constants/devices'
 
 export default styled.div`
   color: ${props => props.theme.colors.font};
@@ -7,8 +8,16 @@ export default styled.div`
   padding: 46px;
   display: flex;
   flex-direction: column;
-  margin: 0 46px;
-  min-width: 300px;
+  margin: 46px 0px;
+  min-width: 200px;
+
+  @media ${device.laptop} {
+    margin: 0 46px;
+  }
+
+  @media ${device.mobileL} {
+    min-width: 300px;
+  }
 
   input, select {
     box-shadow: 0px 4px 4px rgba(51, 51, 51, 0.04), 0px 4px 16px rgba(51, 51, 51, 0.08);
