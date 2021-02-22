@@ -19,7 +19,7 @@ export default styled.div`
     min-width: 300px;
   }
 
-  input, select {
+  input, select, .selectBtn {
     box-shadow: 0px 4px 4px rgba(51, 51, 51, 0.04), 0px 4px 16px rgba(51, 51, 51, 0.08);
     border-radius: ${props => props.theme.unit.half};
     border: none;
@@ -27,7 +27,17 @@ export default styled.div`
     padding: 14px;
   }
 
-  select {
-    margin: 0 0 27px 0;
+  .selectBtn {
+    height: 45px;
+    background: #ffff;
+  }
+
+  .select {
+    margin: 0 0 20px 0;
+
+    ul {
+      border: none;
+      outline: none;
+    }
   }
 `

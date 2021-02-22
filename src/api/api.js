@@ -10,11 +10,7 @@ export const CurrenciesAPI = {
     return instance.get(`/currencies`)
   },
 
-  getCurrentCourse(code) {
-    return instance.get(`/latest/${code}`)
-  },
-
-  getConversionCourse(baseCode, targetCode, value) {
-    return instance.get(`/pair/${baseCode}/${targetCode}/${value}`)
+  getDataListByBase(base) {
+    return instance.get(`/latest?from=${base}`)
   },
 }
