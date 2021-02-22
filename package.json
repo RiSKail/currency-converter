@@ -1,4 +1,5 @@
 {
+  "homepage": "http://RiSKail.github.io/currency-converter",
   "name": "ig-react-starter",
   "version": "0.1.1",
   "private": true,
@@ -22,6 +23,8 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
@@ -53,6 +56,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "gh-pages": "^3.1.0",
     "jest-image-snapshot": "^2.9.0",
     "jest-styled-components": "^6.3.3",
     "jest-transform-css": "^2.0.0",
