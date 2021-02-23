@@ -7,10 +7,13 @@ import ConvertBlock from '../../blocks/ConvertBlock'
 import Button from './../../blocks/global/Button/index'
 import styled from 'styled-components'
 import { device } from '../../../constants/devices'
+import { GeoAPI } from '../../../api/api'
 
 import swapIcon from './img/swap-icon.svg'
 import downloadIcon from './img/download-icon.svg'
 import { setBasePrimaryType, setBaseSecondaryType, swapBaseValues } from '../../../actions'
+import { countries } from '../../../constants/countries'
+import { useLocalStorage } from '../../../localStorage'
 
 const Converter = styled.div`
   display: flex;
@@ -25,6 +28,8 @@ const Converter = styled.div`
 `
 
 const LandingPage = () => {
+  const [storedValue, setValue] = useLocalStorage('baseValues')
+
   const dispatch = useDispatch()
 
   const onSwapHandle = () => {
@@ -32,19 +37,39 @@ const LandingPage = () => {
   }
 
   useEffect(() => {
-    dispatch(setBasePrimaryType('RUB'))
-    dispatch(setBaseSecondaryType('USD'))
-  }, [dispatch])
+    if (!storedValue) {
+      GeoAPI.getCurrentCountry().then(res => {
+        dispatch(setBaseSecondaryType('USD'))
+        dispatch(setBasePrimaryType(countries[res.data.country.iso]))
+        setValue([countries[res.data.country.iso], 'USD'])
+      })
+    } else {
+      dispatch(setBasePrimaryType(storedValue[0]))
+      dispatch(setBaseSecondaryType(storedValue[1]))
+    }
+  }, [dispatch, storedValue, setValue])
 
   return (
     <StandardLayout>
       <h1><FormattedMessage id="page_content_title" /></h1>
       <Converter>
-        <ConvertBlock type="primary" />
-        <Button type="Circle" onClick={onSwapHandle}><img src={swapIcon} width={23} height={23} alt="Swap-icon" /></Button>
-        <ConvertBlock type="secondary" />
+        <ConvertBlock type="primary" setValue={setValue} storedValue={storedValue} />
+        <Button type="Circle" onClick={onSwapHandle}>
+          <img
+            src={swapIcon}
+            width={23}
+            height={23}
+            alt="Swap-icon" />
+        </Button>
+        <ConvertBlock type="secondary" setValue={setValue} storedValue={storedValue} />
       </Converter>
-      <Button type="Primary"><img src={downloadIcon} alt="Download-icon" style={{ marginRight: '10px' }} /><FormattedMessage id="button_cache_text" /></Button>
+      <Button type="Primary">
+        <img
+          src={downloadIcon}
+          alt="Download-icon"
+          style={{ marginRight: '10px' }} />
+        <FormattedMessage id="button_cache_text" />
+      </Button>
     </StandardLayout>
   )
 }

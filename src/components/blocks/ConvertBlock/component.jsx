@@ -8,7 +8,7 @@ import ConvertBlock from './styles'
 import { setBasePrimaryType, setBaseSecondaryType, setBasePrimaryValue, setBaseSecondaryValue } from '../../../actions'
 import { countries } from './../../../constants/countries'
 
-export default ({ type }) => {
+export default ({ type, storedValue, setValue }) => {
   const intl = useIntl()
   const inputPlaceholder = intl.formatMessage({ id: 'convert_block_input_placeholder' })
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
@@ -31,12 +31,14 @@ export default ({ type }) => {
     }
   }
 
-  const onChangeSelect = (value) => {
+  const onChangeSelect = value => {
     switch (type) {
       case 'primary':
+        setValue([value, storedValue[1]])
         dispatch(setBasePrimaryType(value))
         break
       case 'secondary':
+        setValue([storedValue[0], value])
         dispatch(setBaseSecondaryType(value))
         break
       default:
@@ -55,8 +57,7 @@ export default ({ type }) => {
         selectButtonClassName="selectBtn"
         className="select"
         searchPlaceholder={selectPlaceholder}
-        searchable
-      />
+        searchable />
       <input type="text" value={inputValue} onChange={onChangeInput} placeholder={inputPlaceholder} />
     </ConvertBlock>
   )
