@@ -14,7 +14,7 @@ export default {
     primary: '#0384C6',
     primaryDark: '#d4251c',
     secondary: '#26499d',
-    secondaryLight: 'rgba(38, 73, 157, 0.73)',
+    secondaryLight: '#0492da',
     font: 'rgba(17, 17, 17, 0.48)',
     fontLight: '#ffffff',
   },

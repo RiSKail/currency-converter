@@ -10,10 +10,12 @@ export default styled.button`
     outline: none;
     background: ${props => props.theme.colors.primary};
     border-radius: ${props => props.borderRadius};
+    transition: 0.3s;
     display: flex;
     align-items: center;
 
     &:hover {
+      background: ${props => props.theme.colors.secondaryLight};
       cursor: pointer;
     }
 `
