@@ -1,5 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+import HttpsRedirect from 'react-https-redirect'
 
 import Router from '@/Router'
 import { getStore } from '@/store'
@@ -9,11 +10,13 @@ import Internalization from '@/components/wrappers/Internalization'
 function App () {
   return (
     <Provider store={getStore()}>
-      <Internalization>
-        <ThemeProviderWrapper>
-          <Router />
-        </ThemeProviderWrapper>
-      </Internalization>
+      <HttpsRedirect>
+        <Internalization>
+          <ThemeProviderWrapper>
+            <Router />
+          </ThemeProviderWrapper>
+        </Internalization>
+      </HttpsRedirect>
     </Provider>
   )
 }

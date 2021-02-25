@@ -4,7 +4,7 @@ import { CurrenciesAPI } from './../api/api'
 import { updateDataListValues } from '../actions/dataList'
 import { updateBasePrimaryValue, updateBaseSecondaryValue } from '../actions/baseValues'
 
-export default function * () {
+export default function* () {
   yield takeEvery(SET_BASE_PRIMARY_TYPE, getDataListWorker)
   yield takeEvery(SET_BASE_SECONDARY_TYPE, updateSecondaryValueWorker)
   yield takeEvery(SET_BASE_PRIMARY_VALUE, calculateSecondaryWorker)
@@ -12,7 +12,7 @@ export default function * () {
   yield takeEvery(SWAP_BASE_VALUES, swapBaseValuesWorker)
 }
 
-function * getDataListWorker (action) {
+function* getDataListWorker(action) {
   const data = yield call(getDataListFetch, action.payload)
   yield put(updateDataListValues(data))
   const baseCoefficient = yield getBaseCoefficient()
@@ -20,13 +20,13 @@ function * getDataListWorker (action) {
   yield put(updateBaseSecondaryValue(String(+currentValue * baseCoefficient)))
 }
 
-function * updateSecondaryValueWorker () {
+function* updateSecondaryValueWorker() {
   const baseCoefficient = yield getBaseCoefficient()
   const currentValue = yield select(state => state.baseValues.primary.value)
   yield put(updateBasePrimaryValue(String(+currentValue / baseCoefficient)))
 }
 
-function * swapBaseValuesWorker () {
+function* swapBaseValuesWorker() {
   const primaryType = yield select(state => state.baseValues.primary.type)
   const primaryValue = yield select(state => state.baseValues.primary.value)
   const data = yield call(getDataListFetch, primaryType)
@@ -35,25 +35,28 @@ function * swapBaseValuesWorker () {
   yield put(updateBaseSecondaryValue(String(primaryValue * baseCoefficient)))
 }
 
-function * calculateSecondaryWorker (action) {
+function* calculateSecondaryWorker(action) {
   yield put(updateBasePrimaryValue(action.payload))
   const baseCoefficient = yield getBaseCoefficient()
   yield put(updateBaseSecondaryValue(String(+action.payload * baseCoefficient)))
 }
 
-function * calculatePrimaryWorker (action) {
+function* calculatePrimaryWorker(action) {
   yield put(updateBaseSecondaryValue(action.payload))
   const baseCoefficient = yield getBaseCoefficient()
   yield put(updateBasePrimaryValue(String(+action.payload / baseCoefficient)))
 }
 
-function * getBaseCoefficient () {
+function* getBaseCoefficient() {
   const baseType = yield select(state => state.baseValues.secondary.type)
   const baseCoefficient = yield select(state => state.dataList[baseType] || 1)
   return baseCoefficient
 }
 
-async function getDataListFetch (base) {
-  const data = await CurrenciesAPI.getDataListByBase(base).then(res => res.data.rates)
+async function getDataListFetch(base) {
+  const data = await CurrenciesAPI.getDataListByBase(base).then(res => {
+    localStorage.setItem(base, JSON.stringify(res.data.rates))
+    return res.data.rates
+  }).catch(error => JSON.parse(localStorage.getItem(base)))
   return data
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import registerServiceWorker from 'react-service-worker'
 
 import App from '@/App'
+import swDev from './swDev'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />), document.getElementById('root'))
 
-registerServiceWorker()
+swDev()
