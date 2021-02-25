@@ -1,14 +1,15 @@
 
 import React from 'react'
+import pt from 'prop-types'
 import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactFlagsSelect from 'react-flags-select'
 
-import ConvertBlock from './styles'
+import ConvertBlockStyle from './styles'
 import { setBasePrimaryType, setBaseSecondaryType, setBasePrimaryValue, setBaseSecondaryValue } from '../../../actions'
 import { countries } from './../../../constants/countries'
 
-export default ({ type, storedValue, setValue }) => {
+const ConvertBlock = ({ type, storedValue, setValue }) => {
   const intl = useIntl()
   const inputPlaceholder = intl.formatMessage({ id: 'convert_block_input_placeholder' })
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
@@ -48,7 +49,7 @@ export default ({ type, storedValue, setValue }) => {
   }
 
   return (
-    <ConvertBlock>
+    <ConvertBlockStyle>
       <ReactFlagsSelect
         selected={key}
         onSelect={code => onChangeSelect(countries[code])}
@@ -58,7 +59,19 @@ export default ({ type, storedValue, setValue }) => {
         className="select"
         searchPlaceholder={selectPlaceholder}
         searchable />
-      <input type="text" value={inputValue} onChange={onChangeInput} placeholder={inputPlaceholder} />
-    </ConvertBlock>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={onChangeInput}
+        placeholder={inputPlaceholder} />
+    </ConvertBlockStyle>
   )
 }
+
+ConvertBlock.propTypes = {
+  setValue: pt.func.isRequired,
+  type: pt.string.isRequired,
+  storedValue: pt.array.isRequired,
+}
+
+export default ConvertBlock

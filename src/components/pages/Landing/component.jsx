@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
+import pt from 'prop-types'
 import { useDispatch } from 'react-redux'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import StandardLayout from '@/components/layouts/Standard'
 import ConvertBlock from '../../blocks/ConvertBlock'
@@ -11,7 +12,7 @@ import { GeoAPI } from '../../../api/api'
 
 import swapIcon from './img/swap-icon.svg'
 import downloadIcon from './img/download-icon.svg'
-import { setBasePrimaryType, setBaseSecondaryType, swapBaseValues } from '../../../actions'
+import { setBasePrimaryType, setBaseSecondaryType, swapBaseValues, cacheAllDataListValues } from '../../../actions'
 import { countries } from '../../../constants/countries'
 import { useLocalStorage } from '../../../localStorage'
 
@@ -27,13 +28,20 @@ const Converter = styled.div`
   }
 `
 
-const LandingPage = () => {
-  const [storedValue, setValue] = useLocalStorage('baseValues')
-
+const LandingPage = ({ update }) => {
   const dispatch = useDispatch()
+  const intl = useIntl()
+  const alertSuccess = intl.formatMessage({ id: 'alert_success_text' })
+  const [storedValue, setValue] = useLocalStorage('baseValues')
 
   const onSwapHandle = () => {
     dispatch(swapBaseValues())
+  }
+
+  const onUpdateCacheHandle = () => {
+    dispatch(cacheAllDataListValues(countries))
+    update()
+    alert(alertSuccess)
   }
 
   useEffect(() => {
@@ -63,7 +71,7 @@ const LandingPage = () => {
         </Button>
         <ConvertBlock type="secondary" setValue={setValue} storedValue={storedValue} />
       </Converter>
-      <Button type="Primary">
+      <Button type="Primary" onClick={onUpdateCacheHandle}>
         <img
           src={downloadIcon}
           alt="Download-icon"
@@ -72,6 +80,10 @@ const LandingPage = () => {
       </Button>
     </StandardLayout>
   )
+}
+
+LandingPage.propTypes = {
+  update: pt.func.isRequired,
 }
 
 export default LandingPage
