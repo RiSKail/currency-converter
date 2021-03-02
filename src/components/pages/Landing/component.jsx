@@ -36,6 +36,7 @@ const LandingPage = ({ update }) => {
 
   const onSwapHandle = () => {
     dispatch(swapBaseValues())
+    setValue([...storedValue].reverse())
   }
 
   const onUpdateCacheHandle = () => {
