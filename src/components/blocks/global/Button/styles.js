@@ -13,6 +13,7 @@ export default styled.button`
     transition: 0.3s;
     display: flex;
     align-items: center;
+    justify-content: center;
 
     &:hover {
       background: ${props => props.theme.colors.secondaryLight};

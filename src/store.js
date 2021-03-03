@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore, compose } from 'redux'
 import reduxLogger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -12,15 +12,17 @@ const sagaMiddleware = createSagaMiddleware()
 
 const createDevelopmentStore = () => {
   return createStore(
-    reducer,
-    composeWithDevTools(applyMiddleware(sagaMiddleware, reduxLogger)),
+    reducer, composeWithDevTools(
+      applyMiddleware(sagaMiddleware, reduxLogger),
+    ),
   )
 }
 
 const createProductionStore = () => {
   return createStore(
-    reducer,
-    applyMiddleware(sagaMiddleware)
+    reducer, compose(
+      applyMiddleware(sagaMiddleware),
+    ),
   )
 }
 

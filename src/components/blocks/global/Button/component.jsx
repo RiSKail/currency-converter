@@ -1,15 +1,23 @@
 
 import React from 'react'
+import pt from 'prop-types'
 
-import Button from './styles'
+import ButtonStyle from './styles'
 
-export default ({ type, ...props }) => {
+const Button = ({ type, children, ...props }) => {
   switch (type) {
     case 'Primary':
-      return <Button borderRadius="8px" padding="13px 20px" {...props}>{props.children}</Button>
+      return <ButtonStyle borderRadius="8px" padding="13px 20px" {...props}>{children}</ButtonStyle>
     case 'Circle':
-      return <Button borderRadius="180px" {...props}>{props.children}</Button>
+      return <ButtonStyle borderRadius="180px" {...props}>{children}</ButtonStyle>
     default:
-      return <Button {...props} />
+      return <ButtonStyle {...props} />
   }
 }
+
+Button.propTypes = {
+  type: pt.string.isRequired,
+  children: pt.any,
+}
+
+export default Button

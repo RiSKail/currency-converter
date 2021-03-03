@@ -1,8 +1,10 @@
+import firebase from '../firebase'
 import { call, put, select, takeEvery } from 'redux-saga/effects'
-import { SET_BASE_PRIMARY_TYPE, SET_BASE_PRIMARY_VALUE, SET_BASE_SECONDARY_VALUE, SWAP_BASE_VALUES, SET_BASE_SECONDARY_TYPE, CACHE_ALL_DATA_LIST } from './../constants/actions'
+import { SET_BASE_PRIMARY_TYPE, SET_BASE_PRIMARY_VALUE, SET_BASE_SECONDARY_VALUE, SWAP_BASE_VALUES, SET_BASE_SECONDARY_TYPE, CACHE_ALL_DATA_LIST, SIGNIN, SIGNUP, SIGNOUT, FIREBASE_LOGIN } from './../constants/actions'
 import { CurrenciesAPI } from './../api/api'
 import { updateDataListValues } from '../actions/dataList'
 import { updateBasePrimaryValue, updateBaseSecondaryValue } from '../actions/baseValues'
+import { loginSuccess, loginError, signUpSuccess, signUpError, signOutSuccess, signInUserData } from '../actions/authActions'
 
 export default function * () {
   yield takeEvery(SET_BASE_PRIMARY_TYPE, getDataListWorker)
@@ -11,24 +13,28 @@ export default function * () {
   yield takeEvery(SET_BASE_SECONDARY_VALUE, calculatePrimaryWorker)
   yield takeEvery(SWAP_BASE_VALUES, swapBaseValuesWorker)
   yield takeEvery(CACHE_ALL_DATA_LIST, getAllDataListWorker)
+  yield takeEvery(SIGNIN, signInWorker)
+  yield takeEvery(SIGNUP, signUpWorker)
+  yield takeEvery(SIGNOUT, signOutWorker)
+  yield takeEvery(FIREBASE_LOGIN, getAuthUserDataWorker)
 }
 
-function * getDataListWorker (action) {
-  const data = yield call(getDataListFetch, action.payload)
+function * getDataListWorker ({ payload }) {
+  const data = yield call(getDataListFetch, payload)
   yield put(updateDataListValues(data))
   const baseCoefficient = yield getBaseCoefficient()
   const currentValue = yield select(state => state.baseValues.primary.value)
-  yield put(updateBaseSecondaryValue(String(+currentValue * baseCoefficient)))
+  yield put(updateBaseSecondaryValue(String((+currentValue * baseCoefficient).toFixed(4))))
 }
 
-function * getAllDataListWorker (action) {
-  yield call(getAllDataList, action.payload)
+function * getAllDataListWorker ({ payload }) {
+  yield call(getAllDataList, payload)
 }
 
 function * updateSecondaryValueWorker () {
   const baseCoefficient = yield getBaseCoefficient()
   const currentValue = yield select(state => state.baseValues.primary.value)
-  yield put(updateBasePrimaryValue(String(+currentValue / baseCoefficient)))
+  yield put(updateBasePrimaryValue(String((+currentValue / baseCoefficient).toFixed(4))))
 }
 
 function * swapBaseValuesWorker () {
@@ -37,19 +43,19 @@ function * swapBaseValuesWorker () {
   const data = yield call(getDataListFetch, primaryType)
   yield put(updateDataListValues(data))
   const baseCoefficient = yield getBaseCoefficient()
-  yield put(updateBaseSecondaryValue(String(primaryValue * baseCoefficient)))
+  yield put(updateBaseSecondaryValue(String((primaryValue * baseCoefficient).toFixed(4))))
 }
 
-function * calculateSecondaryWorker (action) {
-  yield put(updateBasePrimaryValue(action.payload))
+function * calculateSecondaryWorker ({ payload }) {
+  yield put(updateBasePrimaryValue(payload))
   const baseCoefficient = yield getBaseCoefficient()
-  yield put(updateBaseSecondaryValue(String(+action.payload * baseCoefficient)))
+  yield put(updateBaseSecondaryValue(String((+payload * baseCoefficient).toFixed(4))))
 }
 
-function * calculatePrimaryWorker (action) {
-  yield put(updateBaseSecondaryValue(action.payload))
+function * calculatePrimaryWorker ({ payload }) {
+  yield put(updateBaseSecondaryValue(payload))
   const baseCoefficient = yield getBaseCoefficient()
-  yield put(updateBasePrimaryValue(String(+action.payload / baseCoefficient)))
+  yield put(updateBasePrimaryValue(String((+payload / baseCoefficient).toFixed(4))))
 }
 
 function * getBaseCoefficient () {
@@ -58,9 +64,65 @@ function * getBaseCoefficient () {
   return baseCoefficient
 }
 
+function * signInWorker ({ payload }) {
+  const actionSignIn = yield call(signInFunc, payload)
+  yield put(actionSignIn)
+  yield getAuthUserDataWorker()
+}
+
+function * getAuthUserDataWorker () {
+  const uid = yield select(state => state.firebase.auth.uid)
+  const actionUserData = yield call(getAuthUserData, uid)
+  yield put(actionUserData)
+}
+
+function * signUpWorker ({ payload }) {
+  const action = yield call(signUpFunc, payload)
+  yield put(action)
+}
+
+function * signOutWorker () {
+  const action = yield call(signOutFunc)
+  yield put(action)
+}
+
+async function getAuthUserData (uid) {
+  const action = await firebase.firestore().collection('users').doc(uid).get().then(res => signInUserData(res.data()))
+  return action
+}
+
+async function signOutFunc () {
+  const action = await firebase.auth().signOut().then(() => signOutSuccess())
+  return action
+}
+
+async function signInFunc ({ email, password }) {
+  const action = await firebase.auth().signInWithEmailAndPassword(
+    email,
+    password,
+  ).then(() => loginSuccess(),
+  ).catch(err => loginError(err))
+  return action
+}
+
+async function signUpFunc ({ email, password, firstName, lastName }) {
+  const action = await firebase.auth().createUserWithEmailAndPassword(
+    email,
+    password,
+  ).then(resp => {
+    return firebase.firestore().collection('users').doc(resp.user.uid).set({
+      firstName,
+      lastName,
+      initials: firstName[0] + lastName[0],
+    })
+  }).then(() => signUpSuccess(),
+  ).catch(err => signUpError(err))
+  return action
+}
+
 async function getAllDataList (list) {
   await Object.keys(list).forEach(function (objectKey) {
-    var value = list[objectKey]
+    const value = list[objectKey]
     getDataListFetch(value)
   })
 }
@@ -70,7 +132,7 @@ async function getDataListFetch (base) {
     const data = await CurrenciesAPI.getDataListByBase(base).then(res => {
       localStorage.setItem(base, JSON.stringify(res.data.rates))
       return res.data.rates
-    }).catch(_ => JSON.parse(localStorage.getItem(base)))
+    }).catch(() => JSON.parse(localStorage.getItem(base)))
     return data
   }
 

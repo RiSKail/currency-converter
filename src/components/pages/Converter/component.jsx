@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import pt from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import StandardLayout from '@/components/layouts/Standard'
 import ConvertBlock from '../../blocks/ConvertBlock'
-import Button from './../../blocks/global/Button/index'
+import Button from '../../blocks/global/Button/index'
 import styled from 'styled-components'
 import { device } from '../../../constants/devices'
 import { GeoAPI } from '../../../api/api'
+import Alert from '../../blocks/global/Alert'
 
 import swapIcon from './img/swap-icon.svg'
 import downloadIcon from './img/download-icon.svg'
 import { setBasePrimaryType, setBaseSecondaryType, swapBaseValues, cacheAllDataListValues } from '../../../actions'
 import { countries } from '../../../constants/countries'
 import { useLocalStorage } from '../../../localStorage'
+import useDidMount from '../../../useDidMountHook'
 
 const Converter = styled.div`
   display: flex;
@@ -31,8 +33,10 @@ const Converter = styled.div`
 const LandingPage = ({ update }) => {
   const dispatch = useDispatch()
   const intl = useIntl()
-  const alertSuccess = intl.formatMessage({ id: 'alert_success_text' })
+  const updateCacheSuccess = intl.formatMessage({ id: 'update_cache_success_text' })
   const [storedValue, setValue] = useLocalStorage('baseValues')
+  const [alertShow, setAlertShow] = useState({ show: false })
+  const initialBaseValues = ['RUB', 'USD']
 
   const onSwapHandle = () => {
     dispatch(swapBaseValues())
@@ -42,10 +46,10 @@ const LandingPage = ({ update }) => {
   const onUpdateCacheHandle = () => {
     dispatch(cacheAllDataListValues(countries))
     update()
-    alert(alertSuccess)
+    setAlertShow({ show: true, type: 'success', text: updateCacheSuccess, time: 3000 })
   }
 
-  useEffect(() => {
+  useDidMount(() => {
     if (!storedValue) {
       GeoAPI.getCurrentCountry().then(res => {
         dispatch(setBaseSecondaryType('USD'))
@@ -56,13 +60,16 @@ const LandingPage = ({ update }) => {
       dispatch(setBasePrimaryType(storedValue[0]))
       dispatch(setBaseSecondaryType(storedValue[1]))
     }
-  }, [dispatch, storedValue, setValue])
+  })
 
   return (
     <StandardLayout>
+      {alertShow.show && <Alert
+        {...alertShow}
+        callback={() => setAlertShow({ show: false })} />}
       <h1><FormattedMessage id="page_content_title" /></h1>
       <Converter>
-        <ConvertBlock type="primary" setValue={setValue} storedValue={storedValue} />
+        <ConvertBlock type="primary" setValue={setValue} storedValue={storedValue || initialBaseValues} />
         <Button type="Circle" onClick={onSwapHandle}>
           <img
             src={swapIcon}
@@ -70,7 +77,7 @@ const LandingPage = ({ update }) => {
             height={23}
             alt="Swap-icon" />
         </Button>
-        <ConvertBlock type="secondary" setValue={setValue} storedValue={storedValue} />
+        <ConvertBlock type="secondary" setValue={setValue} storedValue={storedValue || initialBaseValues} />
       </Converter>
       <Button type="Primary" onClick={onUpdateCacheHandle}>
         <img
