@@ -31,4 +31,5 @@ export const countries = {
   TH: 'THB',
   TR: 'TRY',
   ZA: 'ZAR',
+  BY: 'RUB',
 }

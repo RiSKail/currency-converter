@@ -10,4 +10,5 @@ export default {
   access_denied: 'You have no access to open this page',
   return_home: 'Return Home',
   page_not_found: 'Requested page is not found',
+  alert_success_text: 'Saved successfully!',
 }

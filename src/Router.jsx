@@ -13,14 +13,14 @@ import { LANDING_PAGE_PATH } from '@/constants'
 const LandingPage = React.lazy(() => import('@/components/pages/Landing'))
 const NotFoundPage = React.lazy(() => import('@/components/pages/NotFound'))
 
-export default () => (
+export default props => (
   <Router>
     <React.Suspense fallback={<Loader />}>
       <Switch>
         <Route
           exact
           path={LANDING_PAGE_PATH}
-          component={LandingPage} />
+          render={() => <LandingPage {...props} />} />
 
         <SecuredRoute
           path="/success"
