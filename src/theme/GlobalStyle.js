@@ -40,6 +40,7 @@ export default createGlobalStyle`
       color: #FFFFFF;
       display: flex;
       align-items: center;
+      justify-content: center;
       text-align: center;
 
       &::after, &::before{

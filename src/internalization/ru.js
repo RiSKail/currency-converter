@@ -1,5 +1,6 @@
 export default {
-  page_content_title: 'Конвертер валют',
+  converter_page_title: 'Конвертер валют',
+  map_page_title: 'Карта мира',
   footer: 'Подвал',
   headerVersion: 'Версия 1.0',
   headerAuthor: 'Автор: Егор Малишевский',

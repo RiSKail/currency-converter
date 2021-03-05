@@ -67,7 +67,7 @@ const LandingPage = ({ update }) => {
       {alertShow.show && <Alert
         {...alertShow}
         callback={() => setAlertShow({ show: false })} />}
-      <h1><FormattedMessage id="page_content_title" /></h1>
+      <h1><FormattedMessage id="converter_page_title" /></h1>
       <Converter>
         <ConvertBlock type="primary" setValue={setValue} storedValue={storedValue || initialBaseValues} />
         <Button type="Circle" onClick={onSwapHandle}>

@@ -1,5 +1,6 @@
 export default {
-  page_content_title: 'Currency Converter',
+  converter_page_title: 'Currency Converter',
+  map_page_title: 'World Map',
   footer: 'Footer',
   headerVersion: 'Version 1.0',
   headerAuthor: 'by Egor Malishevski',
