@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR, SIGNIN, SIGNUP, SIGNOUT, CLEAR_ERRORS, SIGNIN_USER_DATA } from '@/constants'
+import { LOGIN_SUCCESS, SET_AUTH_COUNTRY_INFO, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR, SIGNIN, SIGNUP, SIGNOUT, CLEAR_ERRORS, SIGNIN_USER_DATA } from '@/constants'
 
 export const signIn = value => ({
   type: SIGNIN,
@@ -44,4 +44,9 @@ export const signUpError = value => ({
 
 export const signOutSuccess = () => ({
   type: SIGNOUT_SUCCESS,
+})
+
+export const setAuthCountryInfo = data => ({
+  type: SET_AUTH_COUNTRY_INFO,
+  payload: data,
 })

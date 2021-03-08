@@ -1,4 +1,5 @@
 import { SIGNIN_USER_DATA, LOGIN_SUCCESS, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR, CLEAR_ERRORS } from '@/constants'
+import { SET_AUTH_COUNTRY_INFO } from '../constants/actions'
 
 const initState = {
   authError: null,
@@ -45,6 +46,12 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         ...action.payload,
+      }
+
+    case SET_AUTH_COUNTRY_INFO:
+      return {
+        ...state,
+        country: action.payload,
       }
 
     default:

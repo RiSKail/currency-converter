@@ -34,7 +34,7 @@ function * getAllDataListWorker ({ payload }) {
 function * updateSecondaryValueWorker () {
   const baseCoefficient = yield getBaseCoefficient()
   const currentValue = yield select(state => state.baseValues.primary.value)
-  yield put(updateBasePrimaryValue(String((+currentValue / baseCoefficient).toFixed(4))))
+  yield put(updateBaseSecondaryValue(String((+currentValue * baseCoefficient).toFixed(4))))
 }
 
 function * swapBaseValuesWorker () {

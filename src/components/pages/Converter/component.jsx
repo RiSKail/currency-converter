@@ -8,12 +8,12 @@ import ConvertBlock from '../../blocks/ConvertBlock'
 import Button from '../../blocks/global/Button/index'
 import styled from 'styled-components'
 import { device } from '../../../constants/devices'
-import { GeoAPI } from '../../../api/api'
+import { GeoAPI, CountriesAPI } from '../../../api/api'
 import Alert from '../../blocks/global/Alert'
 
 import swapIcon from './img/swap-icon.svg'
 import downloadIcon from './img/download-icon.svg'
-import { setBasePrimaryType, setBaseSecondaryType, swapBaseValues, cacheAllDataListValues } from '../../../actions'
+import { setBasePrimaryType, setBaseSecondaryType, swapBaseValues, cacheAllDataListValues, setAuthCountryInfo } from '../../../actions'
 import { countries } from '../../../constants/countries'
 import { useLocalStorage } from '../../../localStorage'
 import useDidMount from '../../../useDidMountHook'
@@ -35,6 +35,7 @@ const LandingPage = ({ update }) => {
   const intl = useIntl()
   const updateCacheSuccess = intl.formatMessage({ id: 'update_cache_success_text' })
   const [storedValue, setValue] = useLocalStorage('baseValues')
+  const [currentCountryInfo, setCurrentCountryInfo] = useLocalStorage('currentCountry')
   const [alertShow, setAlertShow] = useState({ show: false })
   const initialBaseValues = ['RUB', 'USD']
 
@@ -55,8 +56,13 @@ const LandingPage = ({ update }) => {
         dispatch(setBaseSecondaryType('USD'))
         dispatch(setBasePrimaryType(countries[res.data.country.iso]))
         setValue([countries[res.data.country.iso], 'USD'])
+        CountriesAPI.getCountryInfoByName(res.data.country.name_en).then(res => {
+          dispatch(setAuthCountryInfo(res.data[0]))
+          setCurrentCountryInfo(res.data[0])
+        })
       })
     } else {
+      dispatch(setAuthCountryInfo(currentCountryInfo))
       dispatch(setBasePrimaryType(storedValue[0]))
       dispatch(setBaseSecondaryType(storedValue[1]))
     }

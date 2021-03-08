@@ -8,7 +8,7 @@ export default styled.div`
   margin: 45px 0 0 0;
 
   .leaflet-container {
-    height: 500px;
+    height: 510px;
     width: 100%;
   }
 
@@ -48,6 +48,7 @@ export default styled.div`
       li {
         width: 200px;
         text-align: center;
+        color: #cccccc;
 
         h1 {
           font-size: 13px;
