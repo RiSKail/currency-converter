@@ -35,6 +35,14 @@ export default styled.div`
       margin: 0 0 20px 0;
       width: 100%;
     }
+
+    .red-border {
+      border: 2px solid red;
+    }
+
+    button {
+      width: 110%;
+    }
   }
 
   .btn-switch{

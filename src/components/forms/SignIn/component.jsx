@@ -5,6 +5,7 @@ import Styles from './styles'
 import { Form, Field } from 'react-final-form'
 import Button from './../../blocks/global/Button'
 import { Link } from 'react-router-dom'
+import { required, composeValidators } from './../validations'
 
 const SignInForm = ({ onSubmit, onSwap }) => {
   const intl = useIntl()
@@ -15,40 +16,22 @@ const SignInForm = ({ onSubmit, onSwap }) => {
     <Styles>
       <Form
         onSubmit={onSubmit}
-        validate={values => {
-          const errors = {}
-          if (!values.email) {
-            errors.email = 'Required'
-          }
-          if (!values.password) {
-            errors.password = 'Required'
-          }
-          return errors
-        }}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Field name="email">
+            <Field name="email" validate={composeValidators(required)}>
               {({ input, meta }) => (
-                <>
-                  {meta.error && meta.touched ? <input
-                    {...input} style={{ border: '2px solid red' }} type="text" placeholder={emailPlaceholder} />
-                    : <input {...input} type="text" placeholder={emailPlaceholder} />}
-                </>
+                <input
+                  {...input} className={(meta.error && meta.touched) ? 'red-border' : null} type="text" placeholder={emailPlaceholder} />
               )}
             </Field>
-            <Field name="password">
+            <Field name="password" validate={composeValidators(required)}>
               {({ input, meta }) => (
-                <>
-                  {meta.error && meta.touched ? <input
-                    {...input} style={{ border: '2px solid red' }} type="password"
-                    placeholder={passwordPlaceholder} autoComplete="on" />
-                    : <input {...input} type="password" placeholder={passwordPlaceholder} autoComplete="on" />}
-                </>
+                <input
+                  {...input} className={(meta.error && meta.touched) ? 'red-border' : null} type="password"
+                  placeholder={passwordPlaceholder} autoComplete="on" />
               )}
             </Field>
-            <Button
-              type="Primary" style={{ width: '110%' }}
-            ><FormattedMessage id="signin_btn_text" />
+            <Button type="Primary"><FormattedMessage id="signin_btn_text" />
             </Button>
           </form>
         )} />
