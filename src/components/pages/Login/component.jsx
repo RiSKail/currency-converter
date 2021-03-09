@@ -10,6 +10,7 @@ import SignInForm from '../../forms/SignIn'
 import SignUpForm from '../../forms/SignUp'
 import { signIn, signUp, clearErrors } from './../../../actions/authActions'
 import Alert from '../../blocks/global/Alert'
+import { CONVERTER_PAGE_PATH } from '@/constants'
 
 const Converter = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ const LoginPage = () => {
     }
   }, [error, dispatch, clearErrorsAction])
 
-  if (auth.uid) return <Redirect to="/converter" />
+  if (auth.uid) return <Redirect to={CONVERTER_PAGE_PATH} />
 
   return (
     <StandardLayout>

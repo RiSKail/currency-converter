@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import StandardLayout from '@/components/layouts/Standard'
-import Map from './../../blocks/Map'
-import { CountriesAPI } from '../../../api/api'
-import { updateCountriesData } from '../../../actions/countries'
-import SearchCountryBlock from '../../blocks/SearchCountry'
+import Map from '@/components/blocks/Map'
+import { CountriesAPI } from '@/api/api'
+import { updateCountriesData } from '@/actions/countries'
+import SearchCountryBlock from '@/components/blocks/SearchCountry'
 import Style from './styles'
-import Loader from './../../blocks/global/Loader'
+import Loader from '@/components/blocks/global/Loader'
 
 const MapPage = () => {
   const dispatch = useDispatch()

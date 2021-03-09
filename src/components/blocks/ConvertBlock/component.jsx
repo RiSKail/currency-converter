@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import ReactFlagsSelect from 'react-flags-select'
 
 import ConvertBlockStyle from './styles'
-import { setBasePrimaryType, setBaseSecondaryType, setBasePrimaryValue, setBaseSecondaryValue } from '../../../actions'
-import { countries } from './../../../constants/countries'
+import { setBasePrimaryType, setBaseSecondaryType, setBasePrimaryValue, setBaseSecondaryValue } from '@/actions'
+import { countries } from '@/constants'
 
 const ConvertBlock = ({ type, storedValue, setValue }) => {
   const intl = useIntl()

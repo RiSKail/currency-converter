@@ -7,8 +7,8 @@ import { useSelector } from 'react-redux'
 import { MapContainer, TileLayer, GeoJSON, useMap, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import MapBlockStyle from './styles'
-import mapData from './../../../data/countries.json'
-import { MAP_THEME_URL } from '../../../constants/endpoints'
+import mapData from '@/data/countries.json'
+import { MAP_THEME_URL } from '@/constants'
 
 Leaflet.Icon.Default.imagePath = '../node_modules/leaflet'
 
