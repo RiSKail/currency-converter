@@ -9,6 +9,7 @@ export default {
   },
   colors: {
     background: 'linear-gradient(262.85deg, #192038 0%, #2E3A59 100%)',
+    backgroundMobile: '#192038',
     backgroundDark: '#f9f9f9',
     backgroundLight: 'rgba(255, 255, 255, 0.17)',
     primary: '#0384C6',
@@ -20,6 +21,7 @@ export default {
   },
   fontSizes: {
     werySmall: '12px',
+    middleSmall: '13px',
     small: '14px',
     normal: '16px',
     big: '20px',

@@ -3,14 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Loader from '@/components/blocks/global/Loader'
 import SecuredRoute from '@/components/wrappers/SecuredRoute'
-import {
-  successStrategyExample,
-  failureStrategyExample,
-} from '@/routerPermissions'
 
-import { LANDING_PAGE_PATH } from '@/constants'
+import { CONVERTER_PAGE_PATH, HOME_PAGE_PATH, LOGIN_PAGE_PATH, MAP_PAGE_PATH } from '@/constants'
 
-const LandingPage = React.lazy(() => import('@/components/pages/Landing'))
+const ConverterPage = React.lazy(() => import('@/components/pages/Converter'))
+const MapPage = React.lazy(() => import('@/components/pages/Map'))
+const LoginPage = React.lazy(() => import('@/components/pages/Login'))
 const NotFoundPage = React.lazy(() => import('@/components/pages/NotFound'))
 
 export default props => (
@@ -19,18 +17,23 @@ export default props => (
       <Switch>
         <Route
           exact
-          path={LANDING_PAGE_PATH}
-          render={() => <LandingPage {...props} />} />
+          path={LOGIN_PAGE_PATH}
+          render={() => <LoginPage {...props} />} />
 
         <SecuredRoute
-          path="/success"
-          component={LandingPage}
-          strategy={successStrategyExample} />
+          exact
+          path={HOME_PAGE_PATH}
+          render={() => <ConverterPage {...props} />} />
 
         <SecuredRoute
-          path="/failure"
-          component={LandingPage}
-          strategy={failureStrategyExample} />
+          exact
+          path={CONVERTER_PAGE_PATH}
+          render={() => <ConverterPage {...props} />} />
+
+        <SecuredRoute
+          exact
+          path={MAP_PAGE_PATH}
+          render={() => <MapPage {...props} />} />
 
         <Route path="*" component={NotFoundPage} />
       </Switch>

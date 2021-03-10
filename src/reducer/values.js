@@ -3,11 +3,11 @@ import { SET_BASE_PRIMARY_TYPE, SET_BASE_SECONDARY_TYPE, UPDATE_BASE_PRIMARY_VAL
 const initialState = {
   primary: {
     type: 'RUB',
-    value: '0',
+    value: '0.0000',
   },
   secondary: {
     type: 'USD',
-    value: '0',
+    value: '0.0000',
   },
 }
 
@@ -54,7 +54,7 @@ export default function (state = initialState, action) {
         ...state.secondary,
         type: state.primary.type,
       },
-    } 
+    }
 
     default: return state
   }

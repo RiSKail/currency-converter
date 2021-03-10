@@ -15,9 +15,29 @@ export default styled.header`
   justify-content: space-between;
   flex-direction: column;
 
+  .is-active{
+    color: ${props => props.theme.colors.secondaryLight};
+  }
+
   @media ${device.tablet} {
     height: 48px;
     flex-direction: row;
+  }
+
+  a {
+    text-decoration: none;
+    color: ${props => props.theme.colors.fontLight};
+    display: flex;
+    align-items: center;
+
+    img {
+      width: ${props => props.theme.unit.double};
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: ${props => props.theme.colors.secondaryLight};
+    }
   }
 
   ul {
@@ -32,7 +52,7 @@ export default styled.header`
   ul li {
     font-family: Arial;
     font-weight: ${props => props.theme.fontWeights.bold};
-    font-size: ${props => props.theme.fontSizes.werySmall};
+    font-size: ${props => props.theme.fontSizes.middleSmall};
     display: flex;
     align-items: center;
     justify-content: space-between;

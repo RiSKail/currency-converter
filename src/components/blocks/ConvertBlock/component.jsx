@@ -6,17 +6,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import ReactFlagsSelect from 'react-flags-select'
 
 import ConvertBlockStyle from './styles'
-import { setBasePrimaryType, setBaseSecondaryType, setBasePrimaryValue, setBaseSecondaryValue } from '../../../actions'
-import { countries } from './../../../constants/countries'
+import { setBasePrimaryType, setBaseSecondaryType, setBasePrimaryValue, setBaseSecondaryValue } from '@/actions'
+import { countries } from '@/constants'
 
 const ConvertBlock = ({ type, storedValue, setValue }) => {
   const intl = useIntl()
   const inputPlaceholder = intl.formatMessage({ id: 'convert_block_input_placeholder' })
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
   const dispatch = useDispatch()
-  const baseValue = useSelector(state => state.baseValues[type].type)
-  const inputValue = useSelector(state => state.baseValues[type].value)
-  const [key] = Object.entries(countries).find(([, name]) => baseValue === name)
+  const valueType = useSelector(state => state.values[type].type)
+  const valueData = useSelector(state => state.values[type].value)
+  const [key] = Object.entries(countries).find(([, name]) => valueType === name)
 
   const onChangeInput = ({ target: { value } }) => {
     switch (type) {
@@ -61,7 +61,7 @@ const ConvertBlock = ({ type, storedValue, setValue }) => {
         searchable />
       <input
         type="text"
-        value={inputValue}
+        value={valueData}
         onChange={onChangeInput}
         placeholder={inputPlaceholder} />
     </ConvertBlockStyle>

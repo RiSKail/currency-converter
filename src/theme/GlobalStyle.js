@@ -9,8 +9,14 @@ export default createGlobalStyle`
 
   body {
     margin: 0;
-    background: url(${bg}) fixed no-repeat bottom right, ${props => props.theme.colors.background};
+    background: ${props => props.theme.colors.background};
     background-size: cover;
+
+    @media ${device.tablet} {
+      background: url(${bg}) fixed no-repeat bottom right, ${props => props.theme.colors.background};
+      background-size: cover;
+    }
+
     color: ${props => props.theme.colors.font};
     font-weight: ${props => props.theme.fontWeights.normal};
     font-family: ${props => props.theme.fontFamily}
@@ -34,6 +40,7 @@ export default createGlobalStyle`
       color: #FFFFFF;
       display: flex;
       align-items: center;
+      justify-content: center;
       text-align: center;
 
       &::after, &::before{
