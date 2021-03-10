@@ -6,10 +6,10 @@ import { Redirect } from 'react-router-dom'
 import StandardLayout from '@/components/layouts/Standard'
 import styled from 'styled-components'
 
-import SignInForm from '../../forms/SignIn'
-import SignUpForm from '../../forms/SignUp'
-import { signIn, signUp, clearErrors } from './../../../actions/authActions'
-import Alert from '../../blocks/global/Alert'
+import SignInForm from '@/components/forms/SignIn'
+import SignUpForm from '@/components/forms/SignUp'
+import { signIn, signUp, clearErrors } from '@/actions'
+import Alert from '@/components/blocks/global/Alert'
 import { CONVERTER_PAGE_PATH } from '@/constants'
 
 const Converter = styled.div`

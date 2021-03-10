@@ -4,13 +4,13 @@ import { FormattedMessage } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { CONVERTER_PAGE_PATH, MAP_PAGE_PATH } from '../../../../constants/paths'
+import { CONVERTER_PAGE_PATH, MAP_PAGE_PATH } from '@/constants/paths'
 import SetLocale from '@/components/blocks/global/SetLocale'
 import Header from './styles'
 import versionImg from './img/version-icon.svg'
 import logoutImg from './img/logout.svg'
 import authorImg from './img/author-icon.svg'
-import { signOut } from './../../../../actions/authActions'
+import { signOut } from '@/actions'
 
 export default () => {
   const uid = useSelector(state => state.firebase.auth.uid)

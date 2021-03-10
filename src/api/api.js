@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BASE_API_URL, GEO_API_URL, GET_COURSE_LIST, GET_COUNTRY_INFO_BY_NAME, GET_DATA_LIST_BY_BASE, GET_CURRENT_COUNTRY, COUNTRIES_API_URL, GET_ALL_COUNTRIES_INFO } from './../constants/endpoints'
+import { BASE_API_URL, GEO_API_URL, GET_COUNTRY_INFO_BY_NAME, GET_DATA_LIST_BY_USD, GET_CURRENT_COUNTRY, COUNTRIES_API_URL, GET_ALL_COUNTRIES_INFO } from '@/constants/endpoints'
 
 const baseInstance = axios.create({
   baseURL: BASE_API_URL,
@@ -14,12 +14,8 @@ const countriesInstance = axios.create({
 })
 
 export const CurrenciesAPI = {
-  getCourseList () {
-    return baseInstance.get(GET_COURSE_LIST)
-  },
-
-  getDataListByBase (base) {
-    return baseInstance.get(GET_DATA_LIST_BY_BASE + base)
+  getDataList () {
+    return baseInstance.get(GET_DATA_LIST_BY_USD)
   },
 }
 

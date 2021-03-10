@@ -31,6 +31,6 @@ export const updateBasePrimaryValue = value => ({
   payload: value,
 })
 
-export const swapBaseValues = () => ({
+export const swapValues = () => ({
   type: SWAP_BASE_VALUES,
 })

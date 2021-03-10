@@ -14,6 +14,7 @@ export default styled.div`
 
   .leaflet-interactive{
     stroke-width: 1;
+    transition: 0.3s;
   }
 
   .leaflet-popup-content-wrapper, .leaflet-popup-tip {

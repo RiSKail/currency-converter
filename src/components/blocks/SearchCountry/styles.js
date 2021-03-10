@@ -38,7 +38,8 @@ export default styled.div`
       display: flex;
       border-radius: 4px;
       align-items: center;
-
+      transition: 0.3s;
+      
       img {
         width: 40px;
         margin: 0 10px 0 0;

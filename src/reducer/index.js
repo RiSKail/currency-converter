@@ -2,16 +2,16 @@ import { combineReducers } from 'redux'
 import { firebaseReducer } from 'react-redux-firebase'
 
 import internalization from './internalization'
-import baseValues from './baseValues'
-import dataList from './dataList'
-import authReducer from './authReducer'
+import values from './values'
+import currencies from './currencies'
+import auth from './auth'
 import countries from './countries'
 
 export default combineReducers({
   internalization,
-  baseValues,
-  dataList,
+  values,
+  currencies,
   countries,
-  auth: authReducer,
+  auth,
   firebase: firebaseReducer,
 })
