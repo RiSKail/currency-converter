@@ -1,8 +1,8 @@
 import firebase from '@/firebase'
 import { call, put, select, takeEvery } from 'redux-saga/effects'
-import { SET_BASE_PRIMARY_TYPE, SET_BASE_PRIMARY_VALUE, SET_BASE_SECONDARY_VALUE, SWAP_BASE_VALUES, SET_BASE_SECONDARY_TYPE, CACHE_ALL_DATA_LIST, SIGNIN, SIGNUP, SIGNOUT, FIREBASE_LOGIN } from '@/constants/actions'
+import { SET_BASE_PRIMARY_TYPE, SET_BASE_PRIMARY_VALUE, SET_BASE_SECONDARY_VALUE, UPDATE_DATA_LIST_VALUES, SWAP_BASE_VALUES, SET_BASE_SECONDARY_TYPE, CACHE_ALL_DATA_LIST, SIGNIN, SIGNUP, SIGNOUT, FIREBASE_LOGIN } from '@/constants/actions'
 import { CurrenciesAPI } from '@/api/api'
-import { loginSuccess, loginError, signUpSuccess, signUpError, signOutSuccess, signInUserData, updateDataListValues, updateBasePrimaryValue, updateBaseSecondaryValue } from '@/actions'
+import { loginSuccess, loginError, signUpSuccess, signUpError, signOutSuccess, signInUserData, setDataListValues, updateBasePrimaryValue, updateBaseSecondaryValue } from '@/actions'
 
 export default function * () {
   yield takeEvery(SET_BASE_PRIMARY_TYPE, getDataListWorker)
@@ -10,7 +10,8 @@ export default function * () {
   yield takeEvery(SET_BASE_PRIMARY_VALUE, calculateSecondaryWorker)
   yield takeEvery(SET_BASE_SECONDARY_VALUE, calculatePrimaryWorker)
   yield takeEvery(SWAP_BASE_VALUES, swapValuesWorker)
-  yield takeEvery(CACHE_ALL_DATA_LIST, updateDataListWorker)
+  yield takeEvery(CACHE_ALL_DATA_LIST, cacheDataListWorker)
+  yield takeEvery(UPDATE_DATA_LIST_VALUES, updateDataListWorker)
   yield takeEvery(SIGNIN, signInWorker)
   yield takeEvery(SIGNUP, signUpWorker)
   yield takeEvery(SIGNOUT, signOutWorker)
@@ -19,13 +20,19 @@ export default function * () {
 
 function * getDataListWorker () {
   const data = yield call(getDataListFetch)
-  yield put(updateDataListValues(data))
+  yield put(setDataListValues(data))
   const currentValue = yield select(state => state.values.primary.value)
   yield call(calculateSecondaryWorker, { payload: currentValue })
 }
 
-function * updateDataListWorker () {
+function * cacheDataListWorker () {
   yield call(getDataListFetch)
+}
+
+function * updateDataListWorker ({ payload }) {
+  yield localStorage.setItem('data', JSON.stringify(payload))
+  yield put(setDataListValues(payload))
+  yield call(updateSecondaryValueWorker)
 }
 
 function * updateSecondaryValueWorker () {

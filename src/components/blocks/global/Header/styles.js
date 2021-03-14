@@ -58,6 +58,15 @@ export default styled.header`
     justify-content: space-between;
     margin: 0 0 0 35px;
     text-align: center;
+
+    .profile-avatar {
+      opacity: 1;
+      border-radius: 100px;
+      width: 32px;
+      height: 32px;
+      padding: 00;
+      margin: 0 10px 0 0;
+    }
   }
 
   ul li:first-child{

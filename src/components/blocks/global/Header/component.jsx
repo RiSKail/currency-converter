@@ -8,12 +8,14 @@ import { CONVERTER_PAGE_PATH, MAP_PAGE_PATH } from '@/constants/paths'
 import SetLocale from '@/components/blocks/global/SetLocale'
 import Header from './styles'
 import versionImg from './img/version-icon.svg'
+import avatarImg from './img/generic-avatar.jpg'
 import logoutImg from './img/logout.svg'
 import authorImg from './img/author-icon.svg'
 import { signOut } from '@/actions'
 
 export default () => {
   const uid = useSelector(state => state.firebase.auth.uid)
+  const photo = useSelector(state => state.firebase.auth.photoURL)
   const authData = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
@@ -29,9 +31,18 @@ export default () => {
         {uid && <li><NavLink activeClassName="is-active" to={MAP_PAGE_PATH}><FormattedMessage id="header_map_link" /></NavLink></li>}
       </ul>
       <ul>
-        {uid ? <li>{(authData.firstName || '') + ' ' + (authData.lastName || '')}</li>
+        {uid ?
+          <li>
+            {photo ? <img src={photo} alt="Avatar" className="profile-avatar" /> : <img src={avatarImg} alt="Avatar" className="profile-avatar" />}
+            {(authData.firstName || '') + ' ' + (authData.lastName || '')}
+          </li>
           : <li><img src={versionImg} alt="Version" /><FormattedMessage id="headerVersion" /></li>}
-        {uid ? <li><NavLink to="#" onClick={onSignOutHandler}><img src={logoutImg} alt="Logout" /><FormattedMessage id="sign_out_text" /></NavLink></li>
+        {uid ?
+          <li>
+            <NavLink to="#" onClick={onSignOutHandler}>
+              <img src={logoutImg} alt="Logout" /><FormattedMessage id="sign_out_text" />
+            </NavLink>
+          </li>
           : <li><img src={authorImg} alt="Author" /><FormattedMessage id="headerAuthor" /></li>}
       </ul>
     </Header>
