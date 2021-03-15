@@ -12,7 +12,7 @@ const Modal = ({ callback, children }) => {
   return (
     <ModalStyle>
       <ModalContent>
-        <span className="closebtn" onClick={onToggleModal}>&times;</span>
+        <span className="close-btn" onClick={onToggleModal}>&times;</span>
         {children}
       </ModalContent>
     </ModalStyle>

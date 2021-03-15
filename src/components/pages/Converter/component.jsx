@@ -50,9 +50,9 @@ const LandingPage = ({ update }) => {
       const obj = Object.fromEntries(data.map(m => [m[0], parseFloat(m[1])]).filter(e => JSON.stringify(e) !== JSON.stringify(['', undefined])))
       dispatch(updateDataListValues(obj))
       setAlertShow({ show: true, type: 'success', text: updateRatesSuccess, time: 3000 })
-      setModalShow({ show: false })
     } catch (e) {
       setAlertShow({ show: true, type: 'error', text: e.message, time: 3000 })
+    } finally {
       setModalShow({ show: false })
     }
   }

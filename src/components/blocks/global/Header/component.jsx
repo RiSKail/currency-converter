@@ -25,26 +25,34 @@ export default () => {
 
   return (
     <Header>
-      <ul>
-        <SetLocale />
-        {uid && <li><NavLink activeClassName="is-active" to={CONVERTER_PAGE_PATH}><FormattedMessage id="header_converter_link" /></NavLink></li>}
-        {uid && <li><NavLink activeClassName="is-active" to={MAP_PAGE_PATH}><FormattedMessage id="header_map_link" /></NavLink></li>}
-      </ul>
-      <ul>
-        {uid ?
-          <li>
-            {photo ? <img src={photo} alt="Avatar" className="profile-avatar" /> : <img src={avatarImg} alt="Avatar" className="profile-avatar" />}
-            {(authData.firstName || '') + ' ' + (authData.lastName || '')}
-          </li>
-          : <li><img src={versionImg} alt="Version" /><FormattedMessage id="headerVersion" /></li>}
-        {uid ?
-          <li>
-            <NavLink to="#" onClick={onSignOutHandler}>
-              <img src={logoutImg} alt="Logout" /><FormattedMessage id="sign_out_text" />
-            </NavLink>
-          </li>
-          : <li><img src={authorImg} alt="Author" /><FormattedMessage id="headerAuthor" /></li>}
-      </ul>
+      {uid ?
+        <>
+          <ul>
+            <SetLocale />
+            <li><NavLink activeClassName="is-active" to={CONVERTER_PAGE_PATH}><FormattedMessage id="header_converter_link" /></NavLink></li>
+            <li><NavLink activeClassName="is-active" to={MAP_PAGE_PATH}><FormattedMessage id="header_map_link" /></NavLink></li>
+          </ul>
+          <ul>
+            <li>
+              {photo ? <img src={photo} alt="Avatar" className="profile-avatar" /> : <img src={avatarImg} alt="Avatar" className="profile-avatar" />}
+              {(authData.firstName || '') + ' ' + (authData.lastName || '')}
+            </li>
+            <li>
+              <NavLink to="#" onClick={onSignOutHandler}>
+                <img src={logoutImg} alt="Logout" /><FormattedMessage id="sign_out_text" />
+              </NavLink>
+            </li>
+          </ul>
+        </>
+        : <>
+          <ul>
+            <SetLocale />
+          </ul>
+          <ul>
+            <li><img src={versionImg} alt="Version" /><FormattedMessage id="headerVersion" /></li>
+            <li><img src={authorImg} alt="Author" /><FormattedMessage id="headerAuthor" /></li>
+          </ul>
+        </>}
     </Header>
   )
 }

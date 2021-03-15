@@ -5,7 +5,7 @@ export default styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 70px 0 90px 0;
+  margin: 60px 0 80px 0;
   flex-direction: column;
 
   @media ${device.laptop} {
@@ -25,14 +25,14 @@ export const CSVBtns = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 50px 0 0 0;
+  margin: 40px 0 0 0;
   flex-direction: column;
 
   @media ${device.laptop} {
     flex-direction: row;
 
     button {
-      margin: 0 0 0 30px;
+      margin: 0 0 0 26px;
 
       &:first-child {
         margin: 0 !important;
@@ -42,10 +42,10 @@ export const CSVBtns = styled.div`
 
   button {
     background: transparent;
-    border: 1px solid #fff;
+    border: 1px solid ${props => props.theme.colors.fontLight};
 
     &:first-child {
-      margin: 0 0 30px 0;
+      margin: 0 0 26px 0;
     }
   }
 `

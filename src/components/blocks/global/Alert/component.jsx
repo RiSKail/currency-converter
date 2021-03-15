@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import pt from 'prop-types'
 
-import AlertStyle from './styles'
+import AlertStyle, { Colors } from './styles'
 
 const Alert = ({ type, text, time, callback }) => {
   const intl = useIntl()
@@ -23,15 +23,15 @@ const Alert = ({ type, text, time, callback }) => {
       typeText = alertError
       break
     case 'warning':
-      style = { backgroundColor: '#ff9800' }
+      style = 'warning'
       typeText = alertWarning
       break
     case 'info':
-      style = { backgroundColor: '#2196F3' }
+      style = 'info'
       typeText = alertInfo
       break
     case 'success':
-      style = { backgroundColor: '#4CAF50' }
+      style = 'success'
       typeText = alertSuccess
       break
     default:
@@ -52,10 +52,12 @@ const Alert = ({ type, text, time, callback }) => {
   }, [timerID])
 
   return (
-    <AlertStyle style={style}>
-      <span className="closebtn" onClick={onToggleAlert}>&times;</span>
-      <strong>{typeText}!</strong> {text}
-    </AlertStyle>
+    <Colors>
+      <AlertStyle className={style}>
+        <span className="close-btn" onClick={onToggleAlert}>&times;</span>
+        <strong>{typeText}!</strong> {text}
+      </AlertStyle>
+    </Colors>
   )
 }
 

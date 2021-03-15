@@ -7,35 +7,34 @@ export default styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: #00000087;
+  background: ${props => props.theme.colors.backgroundTransparentBlack};
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .closebtn {
-    margin-left: 15px;
-    color: #7b7b7b;
-    font-weight: bold;
+  .close-btn {
+    color: ${props => props.theme.colors.fontGray};
+    font-weight: ${props => props.theme.fontWeights.bold};
     float: right;
-    font-size: 22px;
+    font-size: ${props => props.theme.fontSizes.tripleBig};
     line-height: 20px;
     cursor: pointer;
     transition: 0.3s;
 
     &:hover {
-      color: black;
+      color: ${props => props.theme.colors.fontDark};
     }
   }
 `
 
 export const ModalContent = styled.div`
   padding: 20px;
-  background-color: #ffffff;
-  color: black;
+  background-color: ${props => props.theme.colors.fontLight};
+  color: ${props => props.theme.colors.fontDark};
   opacity: 1;
   transition: opacity 0.6s;
-  margin-bottom: 15px;
-  border-radius: 5px;
+  margin-bottom: ${props => props.theme.unit.double};
+  border-radius: ${props => props.theme.unit.half};
 
   input {
     outline: none;

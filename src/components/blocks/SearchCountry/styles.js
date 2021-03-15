@@ -4,7 +4,7 @@ import { device } from '../../../constants/devices'
 export default styled.div`
   background: ${props => props.theme.colors.backgroundLight};
   border-radius: ${props => props.theme.unit.single};
-  padding: 36px;
+  padding: ${props => props.theme.unit.quadriple};
   width: 90%;
   margin: 45px 0 0 0;
   display: flex;
@@ -19,10 +19,10 @@ export default styled.div`
 
   input {
     box-shadow: 0px 4px 4px rgb(51 51 51 / 4%), 0px 4px 16px rgb(51 51 51 / 8%);
-    border-radius: 4px;
+    border-radius: ${props => props.theme.unit.half};
     border: none;
     outline: none;
-    padding: 14px;
+    padding: ${props => props.theme.unit.double};
   }
 
   ul {
@@ -32,11 +32,11 @@ export default styled.div`
 
     li {
       list-style: none;
-      background: #ffff;
-      padding: 20px;
+      background: ${props => props.theme.colors.fontLight};
+      padding: ${props => props.theme.unit.double};
       margin: 0 10px 10px 0;
       display: flex;
-      border-radius: 4px;
+      border-radius: ${props => props.theme.unit.half};
       align-items: center;
       transition: 0.3s;
       
@@ -47,7 +47,7 @@ export default styled.div`
 
       &:hover {
         cursor: pointer;
-        background: #cccccc;
+        background: ${props => props.theme.colors.backgroundLight};
       }
     }
   }

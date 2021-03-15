@@ -4,20 +4,12 @@ import { FormattedMessage } from 'react-intl'
 import { Redirect } from 'react-router-dom'
 
 import StandardLayout from '@/components/layouts/Standard'
-import styled from 'styled-components'
-
 import SignInForm from '@/components/forms/SignIn'
 import SignUpForm from '@/components/forms/SignUp'
 import { signIn, signUp, clearErrors } from '@/actions'
 import Alert from '@/components/blocks/global/Alert'
 import { CONVERTER_PAGE_PATH } from '@/constants'
-
-const Converter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 50px 0 90px 0;
-`
+import Converter from './styles'
 
 const LoginPage = () => {
   const dispatch = useDispatch()

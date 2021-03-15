@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { device } from '../../../../constants/devices'
 
 export default styled.header`
-  height: 75px;
+  height: 78px;
   color: ${props => props.theme.colors.backgroundDark};
   font-size: ${props => props.theme.fontSizes.weryBig};
   padding-left: ${props => props.theme.unit.quadriple};
@@ -56,7 +56,7 @@ export default styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 0 0 35px;
+    margin: 0 0 0 32px;
     text-align: center;
 
     .profile-avatar {
@@ -65,7 +65,7 @@ export default styled.header`
       width: 32px;
       height: 32px;
       padding: 00;
-      margin: 0 10px 0 0;
+      margin: 0 8px 0 0;
     }
   }
 
@@ -80,7 +80,7 @@ export default styled.header`
     width: 1px;
     background: #FFFFFF;
     opacity: 0.3;
-    margin: 0 0 0 35px;
+    margin: 0 0 0 32px;
   }
 
   ul img {
