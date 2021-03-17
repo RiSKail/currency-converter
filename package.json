@@ -1,12 +1,19 @@
 {
-  "homepage": "https://currency-converter-390b0.web.app",
-  "name": "ig-react-starter",
+  "homepage": "./",
+  "name": "currency-converter",
+  "main": "public/electron.js",
+  "description": "Currency converter project",
+  "author": "Egor Malishevski <egor29200125@gmail.com>",
+  "license": "MIT",
   "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@medipass/react-service-worker": "^1.0.4",
     "@react-firebase/auth": "^0.2.10",
     "axios": "^0.21.1",
+    "cross-env": "^7.0.3",
+    "electron-is-dev": "^2.0.0",
+    "electron-log": "^4.3.2",
     "final-form": "^4.20.1",
     "firebase": "^8.2.9",
     "leaflet": "^1.7.1",
@@ -31,15 +38,28 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.5",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "update-electron-app": "^2.0.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "eject": "react-app-rewired eject"
+    "react-start": "react-app-rewired start",
+    "react-build": "react-app-rewired build",
+    "react-test": "react-app-rewired test",
+    "react-predeploy": "npm run build",
+    "react-deploy": "gh-pages -d build",
+    "react-eject": "react-app-rewired eject",
+    "electron-build": "electron-builder --dir",
+    "electron-pack": "build --em.main=build/electron.js",
+    "release": "yarn react-build && electron-builder --publish=always",
+    "build": "yarn react-build && yarn electron-build",
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
+  },
+  "build": {
+    "appId": "com.example.currency-converter",
+    "files": ["**/*", "build/**/*"],
+    "directories": {
+      "buildResources": "static"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -64,6 +84,9 @@
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "concurrently": "^6.0.0",
+    "electron": "^12.0.1",
+    "electron-builder": "^22.10.5",
     "eslint-config-standard": "^14.0.1",
     "eslint-config-standard-react": "^9.0.0",
     "eslint-plugin-node": "^9.1.0",
@@ -80,7 +103,8 @@
     "react-hot-loader": "^4.12.12",
     "stylelint-config-recommended": "^2.2.0",
     "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.8.0"
+    "stylelint-processor-styled-components": "^1.8.0",
+    "wait-on": "^5.2.1"
   },
   "jest": {
     "setupFilesAfterEnv": [

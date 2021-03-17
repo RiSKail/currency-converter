@@ -30,6 +30,9 @@ const LoginPage = () => {
   const onSwapType = () => {
     setType(!type)
   }
+  const alertCallbackFunc = () => {
+    setAlertShow({ show: false })
+  }
 
   useEffect(() => {
     if (error) {
@@ -45,7 +48,7 @@ const LoginPage = () => {
       {alertShow.show && <Alert
         text={alertShow.text}
         type={alertShow.type}
-        callback={() => setAlertShow({ show: false })} />}
+        callback={alertCallbackFunc} />}
       <h1>{type ? <FormattedMessage id="sign_in_title" /> : <FormattedMessage id="sign_up_title" />}</h1>
       <Converter>
         {type ? <SignInForm onSubmit={onSignInHandler} onSwap={onSwapType} /> : <SignUpForm onSubmit={onSignUpHandler} onSwap={onSwapType} />}

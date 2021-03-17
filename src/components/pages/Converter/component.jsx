@@ -57,6 +57,14 @@ const LandingPage = ({ update }) => {
     }
   }
 
+  const alertCallbackFunc = () => {
+    setAlertShow({ show: false })
+  }
+
+  const modalCallbackFunc = () => {
+    setModalShow({ show: false })
+  }
+
   useDidMount(() => {
     GeoAPI.getCurrentCountry().then(res => {
       if (!storedValue) {
@@ -79,9 +87,9 @@ const LandingPage = ({ update }) => {
 
   return (
     <StandardLayout>
-      {alertShow.show && <Alert {...alertShow} callback={() => setAlertShow({ show: false })} />}
+      {alertShow.show && <Alert {...alertShow} callback={alertCallbackFunc} />}
       {modalShow.show &&
-        <Modal callback={() => setModalShow({ show: false })}>
+        <Modal callback={modalCallbackFunc}>
           <CSVReader onFileLoaded={onFileLoadedHandle} />
         </Modal>}
       <h1><FormattedMessage id="converter_page_title" /></h1>
