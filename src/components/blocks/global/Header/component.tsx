@@ -44,7 +44,8 @@ export default () => {
             </li>
           </ul>
         </>
-        : <>
+        :
+        <>
           <ul>
             <SetLocale />
           </ul>

@@ -9,16 +9,22 @@ import ConvertBlockStyle from './styles'
 import { setBasePrimaryType, setBaseSecondaryType, setBasePrimaryValue, setBaseSecondaryValue } from '@/actions'
 import { countries } from '@/constants'
 
-const ConvertBlock = ({ type, storedValue, setValue }) => {
+interface Props {
+  setValue(): void,
+  type: string,
+  storedValue: any[]
+}
+
+const ConvertBlock: React.FC<Props> = ({ type, storedValue, setValue }) => {
   const intl = useIntl()
   const inputPlaceholder = intl.formatMessage({ id: 'convert_block_input_placeholder' })
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
   const dispatch = useDispatch()
-  const valueType = useSelector(state => state.values[type].type)
-  const valueData = useSelector(state => state.values[type].value)
-  const [key] = Object.entries(countries).find(([, name]) => valueType === name)
+  const valueType = useSelector((state: any) => state.values[type].type)
+  const valueData = useSelector((state: any) => state.values[type].value)
+  const key = Object.entries(countries).find(([, name]) => valueType === name)
 
-  const onChangeInput = ({ target: { value } }) => {
+  const onChangeInput = ({ target: { value } }: {target: any}) => {
     switch (type) {
       case 'primary':
         dispatch(setBasePrimaryValue(value))
@@ -32,7 +38,7 @@ const ConvertBlock = ({ type, storedValue, setValue }) => {
     }
   }
 
-  const onChangeSelect = value => {
+  const onChangeSelect = (value: string) => {
     switch (type) {
       case 'primary':
         setValue([value, storedValue[1]])
@@ -51,7 +57,7 @@ const ConvertBlock = ({ type, storedValue, setValue }) => {
   return (
     <ConvertBlockStyle>
       <ReactFlagsSelect
-        selected={key}
+        selected={key[0]}
         onSelect={code => onChangeSelect(countries[code])}
         customLabels={countries}
         countries={[...Object.keys(countries).map(elem => elem)]}
@@ -68,10 +74,10 @@ const ConvertBlock = ({ type, storedValue, setValue }) => {
   )
 }
 
-ConvertBlock.propTypes = {
-  setValue: pt.func.isRequired,
-  type: pt.string.isRequired,
-  storedValue: pt.array.isRequired,
-}
+// ConvertBlock.propTypes = {
+//   setValue: pt.func.isRequired,
+//   type: pt.string.isRequired,
+//   storedValue: pt.array.isRequired,
+// }
 
 export default ConvertBlock

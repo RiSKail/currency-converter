@@ -30,7 +30,7 @@ export const CountriesAPI = {
     return countriesInstance.get(GET_ALL_COUNTRIES_INFO)
   },
 
-  getCountryInfoByName (name) {
+  getCountryInfoByName (name: string) {
     return countriesInstance.get(GET_COUNTRY_INFO_BY_NAME + name)
   },
 }

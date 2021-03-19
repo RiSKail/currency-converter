@@ -36,7 +36,6 @@ const ChangeView = ({ center, zoom }) => {
 }
 
 const MapBlock = ({ currentCountryData, mapData }) => {
-
   const countriesData = useSelector(state => state.countries)
   const initial = {
     values: { currencies: [{ code: 'EUR', name: 'Euro' }] },

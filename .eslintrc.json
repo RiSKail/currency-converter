@@ -48,14 +48,7 @@
         "when": "always"
       }
     ],
-    "react/jsx-filename-extension": [
-      2,
-      {
-        "extensions": [
-          ".jsx"
-        ]
-      }
-    ],
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "jsx-quotes": [
       "error",
       "prefer-double"
@@ -77,7 +70,7 @@
   },
   "overrides": [
     {
-      "files":["src/index.js"],
+      "files":["src/index.tsx"],
       "rules": {
         "react/jsx-filename-extension": "off"
       }

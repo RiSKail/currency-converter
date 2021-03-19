@@ -3,7 +3,7 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/database'
 
-var config = {
+const config = {
   apiKey: 'AIzaSyCeo1Ej6MynM-kSMlru41CtAkWvmVxiEUI',
   authDomain: 'currency-converter-390b0.firebaseapp.com',
   projectId: 'currency-converter-390b0',

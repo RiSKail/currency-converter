@@ -17,17 +17,22 @@ const rrfProps = {
   dispatch: getStore().dispatch,
 }
 
-function App () {
+interface Props {
+  update: any,
+  language: any
+}
+
+const App: React.FC<Props> = () => {
   return (
     <Provider store={getStore()}>
       <ReactReduxFirebaseProvider {...rrfProps}>
         <WithServiceWorker
-          onError={err => console.log(`An error occured: ${err}`)}
+          onError={(err: any) => console.log(`An error occured: ${err}`)}
           onInstalled={() => console.log('Service worker installed')}
           onUpdated={() => console.log('Service worker updated')}
           publicServiceWorkerDest="./service-worker.js"
         >
-          {({ update }) => (
+          {({ update }: Props) => (
             <HttpsRedirect>
               <Internalization>
                 <ThemeProviderWrapper>

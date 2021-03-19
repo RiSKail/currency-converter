@@ -3,9 +3,9 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import pt from 'prop-types'
 import Styles from './styles'
 import { Form, Field } from 'react-final-form'
-import Button from './../../blocks/global/Button'
+import Button from '../../blocks/global/Button'
 import { Link } from 'react-router-dom'
-import { required, composeValidators } from './../validations'
+import { required, composeValidators } from '../validations'
 
 const SignInForm = ({ onSubmit, onSwap }) => {
   const intl = useIntl()
