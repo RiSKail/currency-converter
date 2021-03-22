@@ -1,26 +1,44 @@
 import styled from 'styled-components'
 
 export default styled.div`
-  padding: 20px;
-  background-color: #f44336;
-  color: white;
+  padding: ${props => props.theme.unit.triple};
+  background-color: ${props => props.theme.colors.error};
+  color: ${props => props.theme.colors.fontLight};
   opacity: 1;
   transition: opacity 0.6s;
-  margin-bottom: 15px;
-  border-radius: 5px;
+  margin-bottom: ${props => props.theme.unit.double};
+  border-radius: ${props => props.theme.unit.half};
   
-  .closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
+  .close-btn {
+    margin-left: ${props => props.theme.unit.double};
+    color: ${props => props.theme.colors.fontLight};
+    font-weight: ${props => props.theme.fontWeights.bold};
     float: right;
-    font-size: 22px;
-    line-height: 20px;
+    font-size: ${props => props.theme.fontSizes.tripleBig};
+    line-height: ${props => props.theme.unit.triple};
     cursor: pointer;
     transition: 0.3s;
 
     &:hover {
-      color: black;
+      color: ${props => props.theme.colors.fontDark};
     }
+  }
+`
+
+export const Colors = styled.div`
+  .warning {
+    background-color: ${props => props.theme.colors.warning} !important;
+  }
+
+  .success {
+    background-color: ${props => props.theme.colors.success} !important;
+  }
+
+  .info {
+    background-color: ${props => props.theme.colors.info} !important;
+  }
+
+  .error {
+    background-color: ${props => props.theme.colors.error} !important;
   }
 `

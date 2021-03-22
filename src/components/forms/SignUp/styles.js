@@ -17,7 +17,7 @@ export default styled.div`
 
   .selectBtn {
     height: 45px;
-    background: #ffff;
+    background: ${props => props.theme.colors.fontLight};
   }
 
   form {
@@ -31,13 +31,13 @@ export default styled.div`
       border-radius: ${props => props.theme.unit.half};
       border: none;
       outline: none;
-      padding: 14px;
+      padding: ${props => props.theme.unit.double};
       margin: 0 0 20px 0;
       width: 100%;
     }
 
     .red-border {
-      border: 2px solid red;
+      border: 2px solid ${props => props.theme.colors.error};
     }
 
     button {
@@ -46,16 +46,16 @@ export default styled.div`
   }
 
   .btn-switch{
-    color: #6ab7de;
+    color: ${props => props.theme.colors.fontBlue};
 
     &:hover {
-      color: #98cde8;
+      color: ${props => props.theme.colors.fontBlueLight};
       cursor: pointer;
     }
   }
 
   p {
-      color: #ffff;
+      color:${props => props.theme.colors.fontLight};
       display: flex;
       align-items: center;
       justify-content: space-between;

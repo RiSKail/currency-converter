@@ -19,7 +19,11 @@ export default createGlobalStyle`
 
     color: ${props => props.theme.colors.font};
     font-weight: ${props => props.theme.fontWeights.normal};
-    font-family: ${props => props.theme.fontFamily}
+    font-family: ${props => props.theme.fontFamily};
+
+    a {
+      text-decoration: none;
+    }
   }
 
   main {
@@ -37,7 +41,7 @@ export default createGlobalStyle`
       text-transform: uppercase;
       font-size: ${props => props.theme.fontSizes.weryBig};
       font-weight: ${props => props.theme.fontWeights.middle};
-      color: #FFFFFF;
+      color: ${props => props.theme.colors.fontLight};
       display: flex;
       align-items: center;
       justify-content: center;
@@ -47,7 +51,7 @@ export default createGlobalStyle`
         display: inline-block;
         content: '';
         height: 1px;
-        width: 64px
+        width: 64px;
         background: #DDDDDD;
 
         @media ${device.tablet} {

@@ -1,8 +1,18 @@
 import firebase from '@/firebase'
 import { call, put, select, takeEvery } from 'redux-saga/effects'
-import { SET_BASE_PRIMARY_TYPE, SET_BASE_PRIMARY_VALUE, SET_BASE_SECONDARY_VALUE, SWAP_BASE_VALUES, SET_BASE_SECONDARY_TYPE, CACHE_ALL_DATA_LIST, SIGNIN, SIGNUP, SIGNOUT, FIREBASE_LOGIN } from '@/constants/actions'
+import { SET_BASE_PRIMARY_TYPE, SET_BASE_PRIMARY_VALUE, SET_BASE_SECONDARY_VALUE, UPDATE_DATA_LIST_VALUES, SWAP_BASE_VALUES, SET_BASE_SECONDARY_TYPE, CACHE_ALL_DATA_LIST, SIGN_IN, SIGN_UP, SIGN_OUT, FIREBASE_LOGIN } from '@/constants/actions'
 import { CurrenciesAPI } from '@/api/api'
-import { loginSuccess, loginError, signUpSuccess, signUpError, signOutSuccess, signInUserData, updateDataListValues, updateBasePrimaryValue, updateBaseSecondaryValue } from '@/actions'
+import { loginSuccess, loginError, signUpSuccess, signUpError, signOutSuccess, signInUserData, setDataListValues, updateBasePrimaryValue, updateBaseSecondaryValue } from '@/actions'
+
+function tryStringifyJSON (jsonString) {
+  try {
+    if (jsonString && jsonString !== undefined) {
+      return JSON.stringify(jsonString)
+    }
+  } catch (e) { console.error(e) }
+
+  return JSON.stringify(null)
+}
 
 export default function * () {
   yield takeEvery(SET_BASE_PRIMARY_TYPE, getDataListWorker)
@@ -10,22 +20,29 @@ export default function * () {
   yield takeEvery(SET_BASE_PRIMARY_VALUE, calculateSecondaryWorker)
   yield takeEvery(SET_BASE_SECONDARY_VALUE, calculatePrimaryWorker)
   yield takeEvery(SWAP_BASE_VALUES, swapValuesWorker)
-  yield takeEvery(CACHE_ALL_DATA_LIST, updateDataListWorker)
-  yield takeEvery(SIGNIN, signInWorker)
-  yield takeEvery(SIGNUP, signUpWorker)
-  yield takeEvery(SIGNOUT, signOutWorker)
+  yield takeEvery(CACHE_ALL_DATA_LIST, cacheDataListWorker)
+  yield takeEvery(UPDATE_DATA_LIST_VALUES, updateDataListWorker)
+  yield takeEvery(SIGN_IN, signInWorker)
+  yield takeEvery(SIGN_UP, signUpWorker)
+  yield takeEvery(SIGN_OUT, signOutWorker)
   yield takeEvery(FIREBASE_LOGIN, getAuthUserDataWorker)
 }
 
 function * getDataListWorker () {
   const data = yield call(getDataListFetch)
-  yield put(updateDataListValues(data))
+  yield put(setDataListValues(data))
   const currentValue = yield select(state => state.values.primary.value)
   yield call(calculateSecondaryWorker, { payload: currentValue })
 }
 
-function * updateDataListWorker () {
+function * cacheDataListWorker () {
   yield call(getDataListFetch)
+}
+
+function * updateDataListWorker ({ payload }) {
+  yield localStorage.setItem('data', tryStringifyJSON(payload))
+  yield put(setDataListValues(payload))
+  yield call(updateSecondaryValueWorker)
 }
 
 function * updateSecondaryValueWorker () {
@@ -117,7 +134,7 @@ async function signUpFunc ({ email, password, firstName, lastName }) {
 async function getDataListFetch () {
   if (JSON.parse(localStorage.getItem('data')) == null) {
     const data = await CurrenciesAPI.getDataList().then(res => {
-      localStorage.setItem('data', JSON.stringify(res.data.rates))
+      localStorage.setItem('data', tryStringifyJSON(res.data.rates))
       return res.data.rates
     }).catch(() => JSON.parse(localStorage.getItem('data')))
     return data

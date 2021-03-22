@@ -19,7 +19,7 @@ export default styled.div`
 
   .leaflet-popup-content-wrapper, .leaflet-popup-tip {
     background: #41485b;
-    color: #fff;
+    color:  ${props => props.theme.colors.fontLight};
   }
 
   .leaflet-popup-tip-container {
@@ -36,7 +36,7 @@ export default styled.div`
 
     img {
       width: 70px;
-      border: 2px solid #DDDDDD;
+      border: 2px solid  ${props => props.theme.colors.backgroundDark};
     }
 
     ul {
@@ -49,10 +49,10 @@ export default styled.div`
       li {
         width: 200px;
         text-align: center;
-        color: #cccccc;
+        color: ${props => props.theme.colors.fontLightGray};
 
         h1 {
-          font-size: 13px;
+          font-size: ${props => props.theme.fontSizes.middleSmall};
           
           &::after, &::before {
             width: 30px;
