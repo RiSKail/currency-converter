@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export default styled.div`
+interface IProps {
+  props?: any
+}
+
+export default styled.div < IProps > `
   padding: ${props => props.theme.unit.triple};
   background-color: ${props => props.theme.colors.error};
   color: ${props => props.theme.colors.fontLight};

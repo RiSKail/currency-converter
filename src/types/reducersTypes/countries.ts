@@ -1,0 +1,1 @@
+export type ICountriesState = any

@@ -4,8 +4,14 @@ import pt from 'prop-types'
 import Select from '@/components/controls/Select'
 import { languages } from '@/internalization'
 
-const SetLocale = ({ active, onSetLocale }) => {
-  const onChange = ({ target: { value } }) => {
+interface IProps {
+  active?: string,
+  onSetLocale: (value: any) => void,
+  props?: any
+}
+
+const SetLocale: React.FC<IProps> = ({ active, onSetLocale }) => {
+  const onChange = ({ target: { value } }: any) => {
     onSetLocale(value)
   }
 

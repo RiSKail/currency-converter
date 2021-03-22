@@ -4,7 +4,12 @@ import Header from '@/components/blocks/global/Header'
 
 import { childrenPropType } from '@/prop-types'
 
-const StandardLayout = ({ children }) => (
+interface IProps {
+  props?: any,
+  children?: any
+}
+
+const StandardLayout = ({ children }: IProps) => (
   <>
     <Header />
     <main>{children}</main>

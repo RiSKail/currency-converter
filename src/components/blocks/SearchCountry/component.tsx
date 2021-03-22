@@ -4,12 +4,19 @@ import pt from 'prop-types'
 import { useIntl } from 'react-intl'
 import SearchCountryStyle from './styles'
 
-const SearchCountryBlock = ({ countriesData, onClickHandleCreator }) => {
+interface IProps {
+  onClickHandleCreator: any,
+  countriesData: any,
+  children?: any,
+  props?: any
+}
+
+const SearchCountryBlock = ({ countriesData, onClickHandleCreator }: IProps) => {
   const intl = useIntl()
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
   const [inputValue, setInputValue] = useState('')
 
-  const onChangeInput = ({ target: { value } }) => {
+  const onChangeInput = ({ target: { value } }: {target: any}) => {
     setInputValue(value.toLowerCase())
   }
 
@@ -17,9 +24,15 @@ const SearchCountryBlock = ({ countriesData, onClickHandleCreator }) => {
     <SearchCountryStyle>
       <input placeholder={selectPlaceholder} value={inputValue} onChange={onChangeInput} />
       <ul>
-        {countriesData && Object.values(countriesData).filter(elem => elem.name.toLowerCase().includes(inputValue)).map((el, index) => {
-          return (<li key={index} onClick={onClickHandleCreator(el)} alt={el.name}><img src={el.flag} alt={el.name} />{el.name}</li>)
-        })}
+        {countriesData && Object.values(countriesData)
+          .filter((elem: any) => elem.name.toLowerCase().includes(inputValue))
+          .map((el: any, index: number) => {
+            return (
+              <li key={index} onClick={onClickHandleCreator(el)}>
+                <img src={el.flag} alt={el.name} />{el.name}
+              </li>
+            )
+          })}
       </ul>
     </SearchCountryStyle>
   )

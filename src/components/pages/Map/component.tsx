@@ -10,10 +10,14 @@ import Style from './styles'
 import Loader from '@/components/blocks/global/Loader'
 import mapData from '@/data/countries.json'
 
-const MapPage = () => {
+interface IProps {
+  update: () => void
+}
+
+const MapPage: React.FC<IProps> = () => {
   const dispatch = useDispatch()
-  const countriesData = useSelector(state => state.countries)
-  const authData = useSelector(state => state.auth.country)
+  const countriesData = useSelector((state: any) => state.countries)
+  const authData = useSelector((state: any) => state.auth.country)
   const [currentCountryData, setCurrentCountryData] = useState(authData)
 
   useEffect(() => {
@@ -22,7 +26,7 @@ const MapPage = () => {
     })
   }, [dispatch])
 
-  const onClickHandleCreator = data => {
+  const onClickHandleCreator = (data: any) => {
     return () => {
       setCurrentCountryData(data)
     }
@@ -32,8 +36,14 @@ const MapPage = () => {
     <StandardLayout>
       <h1><FormattedMessage id="map_page_title" /></h1>
       <Style>
-        {(countriesData) && <SearchCountryBlock countriesData={countriesData} onClickHandleCreator={onClickHandleCreator} />}
-        {(countriesData && mapData && currentCountryData) && <Map currentCountryData={currentCountryData} mapData={mapData} />}
+        {(countriesData) &&
+          <SearchCountryBlock
+            countriesData={countriesData}
+            onClickHandleCreator={onClickHandleCreator} />}
+        {(countriesData && mapData && currentCountryData) &&
+          <Map
+            currentCountryData={currentCountryData}
+            mapData={mapData} />}
         {(!countriesData) && <Loader />}
       </Style>
     </StandardLayout>

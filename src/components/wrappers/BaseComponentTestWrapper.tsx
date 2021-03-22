@@ -7,7 +7,12 @@ import Internalization from '@/components/wrappers/Internalization'
 import ThemeProviderWrapper from '@/components/wrappers/ThemeProvider'
 import { childrenPropType } from '@/prop-types'
 
-const BaseComponentTestWrapper = ({ children }) => (
+interface IProps {
+  children?: any,
+  props?: any
+}
+
+const BaseComponentTestWrapper: React.FC<IProps> = ({ children }) => (
   <Provider store={getStore()}>
     <Internalization>
       <ThemeProviderWrapper>

@@ -15,21 +15,28 @@ import swapIcon from './img/swap-icon.svg'
 import downloadIcon from './img/download-icon.svg'
 import { setBasePrimaryType, setBaseSecondaryType, swapValues, updateDataListValues, cacheAllDataListValues, setAuthCountryInfo } from '@/actions'
 import { countries } from '@/constants/countries'
-import { useLocalStorage } from '@/localStorage'
-import useDidMount from '@/useDidMountHook'
+import { useLocalStorage } from '@/utils/localStorage'
+import useDidMount from '@/utils/useDidMountHook'
 import Converter, { CSVBtns } from './styles'
 import Modal from '../../blocks/global/Modal/component'
 
-const LandingPage = ({ update }) => {
+interface IProps {
+  props?: any,
+  children?: any,
+  update: () => void
+}
+
+const LandingPage: React.FC<IProps> = ({ update }) => {
   const CSVFilename = 'rates.csv'
   const dispatch = useDispatch()
   const intl = useIntl()
-  const currenciesData = useSelector(state => Object.entries(state.currencies).map(elem => elem.map((elem, index) => (index === 1) ? `${elem};` : elem)))
+  const currenciesData = useSelector((state: any) => Object.entries(state.currencies)
+    .map((elem: any) => elem.map((elem: any, index: number) => (index === 1) ? `${elem};` : elem)))
   const updateCacheSuccess = intl.formatMessage({ id: 'update_cache_success_text' })
   const updateRatesSuccess = intl.formatMessage({ id: 'update_rates_success_text' })
   const [storedValue, setValue] = useLocalStorage('values')
-  const [alertShow, setAlertShow] = useState({ show: false })
-  const [modalShow, setModalShow] = useState({ show: false })
+  const [alertShow, setAlertShow] = useState<any>({ show: false })
+  const [modalShow, setModalShow] = useState<any>({ show: false })
   const initialValues = ['RUB', 'USD']
 
   const onSwapHandle = () => {
@@ -45,9 +52,10 @@ const LandingPage = ({ update }) => {
 
   const onImportRateHandle = () => { setModalShow({ show: true }) }
 
-  const onFileLoadedHandle = data => {
+  const onFileLoadedHandle = (data: any) => {
     try {
-      const obj = Object.fromEntries(data.map(m => [m[0], parseFloat(m[1])]).filter(e => JSON.stringify(e) !== JSON.stringify(['', undefined])))
+      const obj = Object.fromEntries(data.map((m: any) => [m[0], parseFloat(m[1])])
+        .filter((e: any) => JSON.stringify(e) !== JSON.stringify(['', undefined])))
       dispatch(updateDataListValues(obj))
       setAlertShow({ show: true, type: 'success', text: updateRatesSuccess, time: 3000 })
     } catch (e) {
@@ -94,7 +102,10 @@ const LandingPage = ({ update }) => {
         </Modal>}
       <h1><FormattedMessage id="converter_page_title" /></h1>
       <Converter>
-        <ConvertBlock type="primary" setValue={setValue} storedValue={storedValue || initialValues} />
+        <ConvertBlock
+          type="primary"
+          setValue={setValue}
+          storedValue={storedValue || initialValues} />
         <Button type="Circle" onClick={onSwapHandle}>
           <img
             src={swapIcon}
@@ -102,7 +113,10 @@ const LandingPage = ({ update }) => {
             height={23}
             alt="Swap-icon" />
         </Button>
-        <ConvertBlock type="secondary" setValue={setValue} storedValue={storedValue || initialValues} />
+        <ConvertBlock
+          type="secondary"
+          setValue={setValue}
+          storedValue={storedValue || initialValues} />
       </Converter>
       <Button type="Primary" onClick={onUpdateCacheHandle}>
         <img

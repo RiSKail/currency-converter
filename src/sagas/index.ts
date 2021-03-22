@@ -3,8 +3,9 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 import { SET_BASE_PRIMARY_TYPE, SET_BASE_PRIMARY_VALUE, SET_BASE_SECONDARY_VALUE, UPDATE_DATA_LIST_VALUES, SWAP_BASE_VALUES, SET_BASE_SECONDARY_TYPE, CACHE_ALL_DATA_LIST, SIGN_IN, SIGN_UP, SIGN_OUT, FIREBASE_LOGIN } from '@/constants/actions'
 import { CurrenciesAPI } from '@/api/api'
 import { loginSuccess, loginError, signUpSuccess, signUpError, signOutSuccess, signInUserData, setDataListValues, updateBasePrimaryValue, updateBaseSecondaryValue } from '@/actions'
+import { AuthActionTypes } from '@/types/actionTypes'
 
-function tryStringifyJSON (jsonString) {
+function tryStringifyJSON (jsonString: any) {
   try {
     if (jsonString && jsonString !== undefined) {
       return JSON.stringify(jsonString)
@@ -29,9 +30,9 @@ export default function * () {
 }
 
 function * getDataListWorker () {
-  const data = yield call(getDataListFetch)
+  const data: Object = yield call(getDataListFetch)
   yield put(setDataListValues(data))
-  const currentValue = yield select(state => state.values.primary.value)
+  const currentValue: String = yield select((state: any): String => state.values.primary.value)
   yield call(calculateSecondaryWorker, { payload: currentValue })
 }
 
@@ -39,66 +40,71 @@ function * cacheDataListWorker () {
   yield call(getDataListFetch)
 }
 
-function * updateDataListWorker ({ payload }) {
+function * updateDataListWorker ({ payload }: any) {
   yield localStorage.setItem('data', tryStringifyJSON(payload))
   yield put(setDataListValues(payload))
   yield call(updateSecondaryValueWorker)
 }
 
 function * updateSecondaryValueWorker () {
-  const currentValue = yield select(state => state.values.primary.value)
+  const currentValue: String = yield select((state: any): String => state.values.primary.value)
   yield call(calculateSecondaryWorker, { payload: currentValue })
 }
 
 function * swapValuesWorker () {
-  const primaryValue = yield select(state => state.values.primary.value)
+  const primaryValue: string = yield select((state: any): string => state.values.primary.value)
   yield call(calculateSecondaryWorker, { payload: primaryValue })
 }
 
-function * calculateSecondaryWorker ({ payload }) {
+function * calculateSecondaryWorker ({ payload }: any) {
   yield put(updateBasePrimaryValue(payload))
-  const baseCoefficient = yield getBaseCoefficient()
-  yield put(updateBaseSecondaryValue(String(((+payload / baseCoefficient[0]) * baseCoefficient[1]).toFixed(4))))
+  const baseCoefficient: number[] = yield getBaseCoefficient()
+  const value: string = String(((+payload / baseCoefficient[0]) * baseCoefficient[1]).toFixed(4))
+  yield put(updateBaseSecondaryValue(value))
 }
 
-function * calculatePrimaryWorker ({ payload }) {
+function * calculatePrimaryWorker ({ payload }: any) {
   yield put(updateBaseSecondaryValue(payload))
-  const baseCoefficient = yield getBaseCoefficient()
-  yield put(updateBasePrimaryValue(String(((+payload / baseCoefficient[1]) * baseCoefficient[0]).toFixed(4))))
+  const baseCoefficient: number[] = yield getBaseCoefficient()
+  const value: string = String(((+payload / baseCoefficient[1]) * baseCoefficient[0]).toFixed(4))
+  yield put(updateBasePrimaryValue(value))
 }
 
 function * getBaseCoefficient () {
-  const primaryType = yield select(state => state.values.primary.type)
-  const secondaryType = yield select(state => state.values.secondary.type)
-  const primaryCoefficient = yield select(state => state.currencies[primaryType] || 1)
-  const secondaryCoefficient = yield select(state => state.currencies[secondaryType] || 1)
+  const primaryType: string = yield select((state: any): string => state.values.primary.type)
+  const secondaryType: string = yield select((state: any): string => state.values.secondary.type)
+  const primaryCoefficient:
+  number = yield select((state: any): number => state.currencies[primaryType] || 1)
+  const secondaryCoefficient:
+  number = yield select((state: any): number => state.currencies[secondaryType] || 1)
   return [primaryCoefficient, secondaryCoefficient]
 }
 
-function * signInWorker ({ payload }) {
-  const actionSignIn = yield call(signInFunc, payload)
+function * signInWorker ({ payload }: any) {
+  const actionSignIn: AuthActionTypes = yield call(signInFunc, payload)
   yield put(actionSignIn)
   yield getAuthUserDataWorker()
 }
 
 function * getAuthUserDataWorker () {
-  const uid = yield select(state => state.firebase.auth.uid)
-  const actionUserData = yield call(getAuthUserData, uid)
+  const uid: string = yield select((state: any): string => state.firebase.auth.uid)
+  const actionUserData: AuthActionTypes = yield call(getAuthUserData, uid)
   yield put(actionUserData)
 }
 
-function * signUpWorker ({ payload }) {
-  const action = yield call(signUpFunc, payload)
+function * signUpWorker ({ payload }: any) {
+  const action: AuthActionTypes = yield call(signUpFunc, payload)
   yield put(action)
 }
 
 function * signOutWorker () {
-  const action = yield call(signOutFunc)
+  const action: AuthActionTypes = yield call(signOutFunc)
   yield put(action)
 }
 
-async function getAuthUserData (uid) {
-  const action = await firebase.firestore().collection('users').doc(uid).get().then(res => signInUserData(res.data()))
+async function getAuthUserData (uid: string) {
+  const action = await firebase.firestore()
+    .collection('users').doc(uid).get().then((res: any) => signInUserData(res.data()))
   return action
 }
 
@@ -107,38 +113,37 @@ async function signOutFunc () {
   return action
 }
 
-async function signInFunc ({ email, password }) {
+async function signInFunc ({ email, password }: any) {
   const action = await firebase.auth().signInWithEmailAndPassword(
     email,
     password,
   ).then(() => loginSuccess(),
-  ).catch(err => loginError(err))
+  ).catch((err: any) => loginError(err))
   return action
 }
 
-async function signUpFunc ({ email, password, firstName, lastName }) {
+async function signUpFunc ({ email, password, firstName, lastName }: any) {
   const action = await firebase.auth().createUserWithEmailAndPassword(
     email,
     password,
-  ).then(resp => {
+  ).then((resp: any) => {
     return firebase.firestore().collection('users').doc(resp.user.uid).set({
       firstName,
       lastName,
       initials: firstName[0] + lastName[0],
     })
   }).then(() => signUpSuccess(),
-  ).catch(err => signUpError(err))
+  ).catch((err: any) => signUpError(err))
   return action
 }
 
-async function getDataListFetch () {
-  if (JSON.parse(localStorage.getItem('data')) == null) {
+async function getDataListFetch (): Promise<Object> {
+  if (JSON.parse(localStorage.getItem('data') || '{}') == null) {
     const data = await CurrenciesAPI.getDataList().then(res => {
       localStorage.setItem('data', tryStringifyJSON(res.data.rates))
       return res.data.rates
-    }).catch(() => JSON.parse(localStorage.getItem('data')))
+    }).catch(() => JSON.parse(localStorage.getItem('data') || '{}'))
     return data
   }
-
-  return JSON.parse(localStorage.getItem('data'))
+  return JSON.parse(localStorage.getItem('data') || '{}')
 }

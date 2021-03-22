@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import { device } from '@/constants/devices'
 
-export default styled.div`
+interface IProps {
+  props?: any
+}
+
+export default styled.div < IProps > `
   display: flex;
   width: 100%;
   align-items: center;

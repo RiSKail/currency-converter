@@ -1,6 +1,9 @@
 import styled from 'styled-components'
+interface IProps {
+  props?: any
+}
 
-export default styled.div`
+export default styled.div < IProps > `
   z-index: 9999;
   position: fixed;
   top: 0;
@@ -27,7 +30,7 @@ export default styled.div`
   }
 `
 
-export const ModalContent = styled.div`
+export const ModalContent = styled.div < IProps > `
   padding: 20px;
   background-color: ${props => props.theme.colors.fontLight};
   color: ${props => props.theme.colors.fontDark};

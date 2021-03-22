@@ -11,19 +11,25 @@ import Alert from '@/components/blocks/global/Alert'
 import { CONVERTER_PAGE_PATH } from '@/constants'
 import Converter from './styles'
 
-const LoginPage = () => {
+interface IProps {
+  props?: any,
+  children?: any,
+  update: () => void
+}
+
+const LoginPage: React.FC<IProps> = () => {
   const dispatch = useDispatch()
-  const auth = useSelector(state => state.firebase.auth)
-  const error = useSelector(state => state.auth.authError)
-  const [alertShow, setAlertShow] = useState({ show: false })
-  const [type, setType] = useState(true)
+  const auth = useSelector((state: any) => state.firebase.auth)
+  const error = useSelector((state: any) => state.auth.authError)
+  const [alertShow, setAlertShow] = useState<any>({ show: false })
+  const [type, setType] = useState<boolean>(true)
   const clearErrorsAction = clearErrors()
 
-  const onSignInHandler = e => {
+  const onSignInHandler = (e: any) => {
     dispatch(signIn(e))
   }
 
-  const onSignUpHandler = e => {
+  const onSignUpHandler = (e: any) => {
     dispatch(signUp(e))
   }
 
@@ -49,9 +55,13 @@ const LoginPage = () => {
         text={alertShow.text}
         type={alertShow.type}
         callback={alertCallbackFunc} />}
-      <h1>{type ? <FormattedMessage id="sign_in_title" /> : <FormattedMessage id="sign_up_title" />}</h1>
+      <h1>
+        {type ? <FormattedMessage id="sign_in_title" /> : <FormattedMessage id="sign_up_title" />}
+      </h1>
       <Converter>
-        {type ? <SignInForm onSubmit={onSignInHandler} onSwap={onSwapType} /> : <SignUpForm onSubmit={onSignUpHandler} onSwap={onSwapType} />}
+        {type ? <SignInForm
+          onSubmit={onSignInHandler}
+          onSwap={onSwapType} /> : <SignUpForm onSubmit={onSignUpHandler} onSwap={onSwapType} />}
       </Converter>
     </StandardLayout>
   )

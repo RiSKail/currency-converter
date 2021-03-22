@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export default styled.footer`
+interface IProps {
+  props?: any
+}
+
+export default styled.footer < IProps > `
   background-color: ${props => props.theme.colors.backgroundDark};
   color: ${props => props.theme.colors.font};
   padding-left: ${props => props.theme.unit.double};

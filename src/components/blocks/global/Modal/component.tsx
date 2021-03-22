@@ -4,7 +4,12 @@ import { childrenPropType } from '@/prop-types'
 
 import ModalStyle, { ModalContent } from './styles'
 
-const Modal = ({ callback, children }) => {
+interface IProps {
+  callback(): void,
+  children?: any
+}
+
+const Modal: React.FC<IProps> = ({ callback, children }) => {
   const onToggleModal = () => {
     callback()
   }

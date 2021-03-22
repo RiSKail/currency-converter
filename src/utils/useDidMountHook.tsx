@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
-export default function useDidMount (callback) {
-  const didMount = useRef(null)
+const useDidMount = (callback: () => void) => {
+  const didMount = useRef<boolean | null>(null)
 
   useEffect(() => {
     if (callback && !didMount.current) {
@@ -10,3 +10,5 @@ export default function useDidMount (callback) {
     }
   })
 }
+
+export default useDidMount

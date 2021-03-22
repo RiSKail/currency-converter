@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import { device } from '../../../../constants/devices'
 
-export default styled.header`
+interface IProps {
+  props?: any
+}
+
+export default styled.header < IProps > `
   height: 78px;
   color: ${props => props.theme.colors.backgroundDark};
   font-size: ${props => props.theme.fontSizes.weryBig};

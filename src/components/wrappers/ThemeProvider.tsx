@@ -5,7 +5,12 @@ import GlobalStyle from '@/theme/GlobalStyle'
 import theme from '@/theme'
 import { childrenPropType } from '@/prop-types'
 
-const ThemeProviderWrapper = ({ children }) => (
+interface IProps {
+  children?: any,
+  props?: any
+}
+
+const ThemeProviderWrapper: React.FC<IProps> = ({ children }) => (
   <ThemeProvider theme={theme}>
     <>
       <GlobalStyle />

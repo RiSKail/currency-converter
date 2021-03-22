@@ -2,7 +2,12 @@ import { createGlobalStyle } from 'styled-components'
 import bg from './img/bg.jpg'
 import { device } from '../constants/devices'
 
-export default createGlobalStyle`
+interface IProps {
+  props?: any,
+  theme: any
+}
+
+export default createGlobalStyle < IProps > `
   @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap');
   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
   @import url('https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap');
@@ -13,7 +18,8 @@ export default createGlobalStyle`
     background-size: cover;
 
     @media ${device.tablet} {
-      background: url(${bg}) fixed no-repeat bottom right, ${props => props.theme.colors.background};
+      background: url(${bg}) fixed no-repeat bottom right, 
+      ${props => props.theme.colors.background};
       background-size: cover;
     }
 

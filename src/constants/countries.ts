@@ -1,4 +1,8 @@
-export const countries = {
+interface ICountries {
+  [key: string]: string
+}
+
+export const countries: ICountries = {
   RU: 'RUB',
   US: 'USD',
   AU: 'AUD',

@@ -11,32 +11,46 @@ import { MAP_THEME_URL } from '@/constants'
 
 Leaflet.Icon.Default.imagePath = '../node_modules/leaflet'
 
-delete Leaflet.Icon.Default.prototype._getIconUrl
-
 Leaflet.Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 })
 
-const popupCreator = currentCountry => (
+interface IProps {
+  currentCountryData?: any,
+  mapData?: any,
+  props?: any,
+  children?: any,
+}
+
+interface IChangeViewProps {
+  center?: any,
+  zoom?: any
+}
+
+const popupCreator = (currentCountry?: any) => (
   <>
-    {(currentCountry.flag) && <img src={currentCountry.flag} width={30} alt={currentCountry.name} />}
+    {(currentCountry.flag) && <img
+      src={currentCountry.flag}
+      width={30}
+      alt={currentCountry.name} />}
     <ul>
       <li><h1>{currentCountry.name}</h1></li>
-      {currentCountry.currencies.map((elem, index) => <li key={index}>{elem.code} - {elem.name}</li>)}
+      {currentCountry.currencies
+        .map((elem: any, index: number) => <li key={index}>{elem.code} - {elem.name}</li>)}
     </ul>
   </>
 )
 
-const ChangeView = ({ center, zoom }) => {
+const ChangeView = ({ center, zoom }: IChangeViewProps) => {
   const map = useMap()
   map.setView(center, zoom)
   return null
 }
 
-const MapBlock = ({ currentCountryData, mapData }) => {
-  const countriesData = useSelector(state => state.countries)
+const MapBlock: React.FC<IProps> = ({ currentCountryData, mapData }) => {
+  const countriesData = useSelector((state: any) => state.countries)
   const initial = {
     values: { currencies: [{ code: 'EUR', name: 'Euro' }] },
     center: [0, 0],
@@ -45,19 +59,20 @@ const MapBlock = ({ currentCountryData, mapData }) => {
     zoom: 5,
   }
 
-  const onEachFeature = (country, layer) => {
-    const data = Object.values(countriesData).find(elem => (elem.alpha3Code === country.properties.adm0_a3))
+  const onEachFeature = (country: any, layer?: any) => {
+    const data = Object.values(countriesData)
+      .find((elem: any) => (elem.alpha3Code === country.properties.adm0_a3))
 
     layer.bindPopup(ReactDOMServer.renderToString(popupCreator(data || initial.values)))
 
     layer.on({
-      mousemove: event => {
+      mousemove: (event: any) => {
         event.target.setStyle({
           fillColor: '#1a2239',
           fillOpacity: '0.2',
         })
       },
-      mouseout: event => {
+      mouseout: (event: any) => {
         event.target.setStyle({ fillColor: null, fillOpacity: '0' })
       },
     })
@@ -66,10 +81,22 @@ const MapBlock = ({ currentCountryData, mapData }) => {
   return (
     <MapBlockStyle>
       <MapContainer minZoom={initial.minZoom} worldCopyJump>
-        <ChangeView center={(currentCountryData.latlng.length !== 0) ? currentCountryData.latlng : initial.center} zoom={initial.zoom} />
+        <ChangeView
+          center={
+            (currentCountryData.latlng.length !== 0) ? currentCountryData.latlng : initial.center
+          }
+          zoom={initial.zoom} />
         <TileLayer url={MAP_THEME_URL} />
-        <GeoJSON key="my-geojson" data={mapData} onEachFeature={onEachFeature} pathOptions={initial.pathOptions} />
-        <Popup position={(currentCountryData.latlng.length !== 0) ? currentCountryData.latlng : initial.center}>
+        <GeoJSON
+          key="my-geojson"
+          data={mapData}
+          onEachFeature={onEachFeature}
+          pathOptions={initial.pathOptions} />
+        <Popup
+          position={
+            (currentCountryData.latlng.length !== 0) ? currentCountryData.latlng : initial.center
+          }
+        >
           {popupCreator(currentCountryData)}
         </Popup>
       </MapContainer>

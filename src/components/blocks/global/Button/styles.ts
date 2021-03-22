@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 
-export default styled.button`
+interface IProps {
+  borderRadius?: string,
+  padding?: string,
+  props?: any
+}
+
+export default styled.button < IProps > `
     padding: ${props => props.padding || props.theme.unit.triple};
     font-family: Arial;
     font-weight: ${props => props.theme.fontWeights.normal};

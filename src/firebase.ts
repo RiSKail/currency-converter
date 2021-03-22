@@ -12,7 +12,10 @@ const config = {
   appId: '1:120270600197:web:f7162eca0bd4b6b383046c',
   measurementId: 'G-85M3SWTZRH',
 }
+
+const settings: any = { timestampsInSnapshots: true }
+
 firebase.initializeApp(config)
-firebase.firestore().settings({ timestampsInSnapshots: true })
+firebase.firestore().settings(settings)
 
 export default firebase

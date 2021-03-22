@@ -7,7 +7,14 @@ import Button from '../../blocks/global/Button'
 import { Link } from 'react-router-dom'
 import { required, composeValidators } from '../validations'
 
-const SignUpForm = ({ onSubmit, onSwap }) => {
+interface IProps {
+  onSubmit: (e: any) => void,
+  onSwap: () => void,
+  children?: any,
+  props?: any
+}
+
+const SignUpForm = ({ onSubmit, onSwap }: IProps) => {
   const intl = useIntl()
   const firstNamePlaceholder = intl.formatMessage({ id: 'signup_firstName_placeholder' })
   const lastNamePlaceholder = intl.formatMessage({ id: 'signup_lastName_placeholder' })
@@ -19,8 +26,8 @@ const SignUpForm = ({ onSubmit, onSwap }) => {
     <Styles>
       <Form
         onSubmit={onSubmit}
-        validate={values => {
-          const errors = {}
+        validate={(values: any) => {
+          const errors: any = {}
 
           if (values.confirm !== values.password) {
             errors.confirm = 'Must match'
@@ -28,35 +35,53 @@ const SignUpForm = ({ onSubmit, onSwap }) => {
 
           return errors
         }}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit }: {handleSubmit: any}) => (
           <form onSubmit={handleSubmit}>
             <Field name="firstName" validate={composeValidators(required)}>
-              {({ input, meta }) => (
-                <input {...input} className={(meta.error && meta.touched) ? 'red-border' : null} type="text" placeholder={firstNamePlaceholder} />
+              {({ input, meta }: {input: any, meta: any}) => (
+                <input
+                  {...input}
+                  className={(meta.error && meta.touched) ? 'red-border' : null}
+                  type="text"
+                  placeholder={firstNamePlaceholder} />
               )}
             </Field>
             <Field name="lastName" validate={composeValidators(required)}>
-              {({ input, meta }) => (
-                <input {...input} className={(meta.error && meta.touched) ? 'red-border' : null} type="text" placeholder={lastNamePlaceholder} />
+              {({ input, meta }: {input: any, meta: any}) => (
+                <input
+                  {...input}
+                  className={(meta.error && meta.touched) ? 'red-border' : null}
+                  type="text"
+                  placeholder={lastNamePlaceholder} />
               )}
             </Field>
             <Field name="email" validate={composeValidators(required)}>
-              {({ input, meta }) => (
-                <input {...input} className={(meta.error && meta.touched) ? 'red-border' : null} type="text" placeholder={emailPlaceholder} />
+              {({ input, meta }: {input: any, meta: any}) => (
+                <input
+                  {...input}
+                  className={(meta.error && meta.touched) ? 'red-border' : null}
+                  type="text"
+                  placeholder={emailPlaceholder} />
               )}
             </Field>
             <Field name="password" validate={composeValidators(required)}>
-              {({ input, meta }) => (
+              {({ input, meta }: {input: any, meta: any}) => (
                 <input
-                  {...input} className={(meta.error && meta.touched) ? 'red-border' : null} type="password" placeholder={passwordPlaceholder}
+                  {...input}
+                  className={(meta.error && meta.touched) ? 'red-border' : null}
+                  type="password"
+                  placeholder={passwordPlaceholder}
                   autoComplete="on" />
               )}
             </Field>
             <Field name="confirm" validate={composeValidators(required)}>
-              {({ input, meta }) => (
+              {({ input, meta }: {input: any, meta: any}) => (
                 <input
-                  {...input} className={(meta.error && meta.touched) ? 'red-border' : null} type="password"
-                  placeholder={confirmPlaceholder} autoComplete="on" />
+                  {...input}
+                  className={(meta.error && meta.touched) ? 'red-border' : null}
+                  type="password"
+                  placeholder={confirmPlaceholder}
+                  autoComplete="on" />
               )}
             </Field>
             <Button type="Primary"><FormattedMessage id="signup_btn_text" /></Button>

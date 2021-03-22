@@ -7,7 +7,14 @@ import Button from '../../blocks/global/Button'
 import { Link } from 'react-router-dom'
 import { required, composeValidators } from '../validations'
 
-const SignInForm = ({ onSubmit, onSwap }) => {
+interface IProps {
+  onSubmit: (e: any) => void,
+  onSwap: () => void,
+  children?: any,
+  props?: any
+}
+
+const SignInForm = ({ onSubmit, onSwap }: IProps) => {
   const intl = useIntl()
   const emailPlaceholder = intl.formatMessage({ id: 'login_email_placeholder' })
   const passwordPlaceholder = intl.formatMessage({ id: 'login_password_placeholder' })
@@ -16,19 +23,25 @@ const SignInForm = ({ onSubmit, onSwap }) => {
     <Styles>
       <Form
         onSubmit={onSubmit}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit }: {handleSubmit: any}) => (
           <form onSubmit={handleSubmit}>
             <Field name="email" validate={composeValidators(required)}>
-              {({ input, meta }) => (
+              {({ input, meta }: {input: any, meta: any}) => (
                 <input
-                  {...input} className={(meta.error && meta.touched) ? 'red-border' : null} type="text" placeholder={emailPlaceholder} />
+                  {...input}
+                  className={(meta.error && meta.touched) ? 'red-border' : null}
+                  type="text"
+                  placeholder={emailPlaceholder} />
               )}
             </Field>
             <Field name="password" validate={composeValidators(required)}>
-              {({ input, meta }) => (
+              {({ input, meta }: {input: any, meta: any}) => (
                 <input
-                  {...input} className={(meta.error && meta.touched) ? 'red-border' : null} type="password"
-                  placeholder={passwordPlaceholder} autoComplete="on" />
+                  {...input}
+                  className={(meta.error && meta.touched) ? 'red-border' : null}
+                  type="password"
+                  placeholder={passwordPlaceholder}
+                  autoComplete="on" />
               )}
             </Field>
             <Button type="Primary"><FormattedMessage id="signin_btn_text" />

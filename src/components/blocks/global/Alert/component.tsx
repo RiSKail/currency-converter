@@ -4,14 +4,22 @@ import pt from 'prop-types'
 
 import AlertStyle, { Colors } from './styles'
 
-const Alert = ({ type, text, time, callback }) => {
+interface IProps {
+  show?: boolean,
+  type?: string,
+  text?: string,
+  time?: number,
+  callback(): void
+}
+
+const Alert: React.FC<IProps> = ({ type, text, time, callback }) => {
   const intl = useIntl()
   const alertSuccess = intl.formatMessage({ id: 'alert_success_text' })
   const alertInfo = intl.formatMessage({ id: 'alert_info_text' })
   const alertWarning = intl.formatMessage({ id: 'alert_warning_text' })
   const alertError = intl.formatMessage({ id: 'alert_error_text' })
 
-  let style, typeText, timerID
+  let style: string | undefined, typeText, timerID: any
 
   const onToggleAlert = () => {
     callback()
@@ -19,7 +27,7 @@ const Alert = ({ type, text, time, callback }) => {
 
   switch (type) {
     case 'error':
-      style = null
+      style = undefined
       typeText = alertError
       break
     case 'warning':
@@ -35,7 +43,7 @@ const Alert = ({ type, text, time, callback }) => {
       typeText = alertSuccess
       break
     default:
-      style = null
+      style = undefined
       break
   }
 

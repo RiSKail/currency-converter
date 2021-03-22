@@ -5,13 +5,17 @@ const commonSettings = {
   waitUntilNetworkIdle: true,
 }
 
-export const snapshotConfiguration = ({ filename }) => {
+interface IProps{
+  filename?: any
+}
+
+export const snapshotConfiguration = ({ filename }: IProps) => {
   return {
     customSnapshotIdentifier: filename,
   }
 }
 
-export default async (expect, componentName) => {
+export default async (expect: any, componentName: any) => {
   const tests = Object
     .keys(resolutions)
     .map(resolution => ({

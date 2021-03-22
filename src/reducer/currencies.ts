@@ -1,8 +1,13 @@
 import { SET_DATA_LIST_VALUES } from '@/constants'
+import { CurrenciesActionTypes } from '@/types/actionTypes'
+import { ICurrenciesState } from '@/types/reducersTypes'
 
 const initialState = {}
 
-export default function (state = initialState, action) {
+const currenciesReducer = (
+  state = initialState,
+  action: CurrenciesActionTypes,
+): ICurrenciesState => {
   switch (action.type) {
     case SET_DATA_LIST_VALUES: return {
       ...action.payload,
@@ -11,3 +16,5 @@ export default function (state = initialState, action) {
     default: return state
   }
 }
+
+export default currenciesReducer

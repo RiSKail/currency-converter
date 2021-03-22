@@ -1,4 +1,8 @@
-export default {
+interface ICountries {
+  [key: string]: any
+}
+
+const resolutions: ICountries = {
   iPhone8p: {
     viewport: {
       width: 750,
@@ -18,3 +22,5 @@ export default {
     },
   },
 }
+
+export default resolutions

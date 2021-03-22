@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import { device } from '../../../constants/devices'
 
-export default styled.div`
+interface IProps {
+  props?: any
+}
+
+export default styled.div < IProps > `
   background: ${props => props.theme.colors.backgroundLight};
   border-radius: ${props => props.theme.unit.single};
   padding: ${props => props.theme.unit.quadriple};

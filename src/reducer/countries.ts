@@ -1,8 +1,13 @@
 import { UPDATE_COUNTRIES_DATA } from '@/constants'
+import { CountriesActionTypes } from '@/types/actionTypes'
+import { ICountriesState } from '@/types/reducersTypes'
 
 const initialState = null
 
-export default function (state = initialState, action) {
+const countriesReducer = (
+  state = initialState,
+  action: CountriesActionTypes,
+): ICountriesState => {
   switch (action.type) {
     case UPDATE_COUNTRIES_DATA: return {
       ...action.payload,
@@ -11,3 +16,5 @@ export default function (state = initialState, action) {
     default: return state
   }
 }
+
+export default countriesReducer

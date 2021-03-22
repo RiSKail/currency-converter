@@ -5,10 +5,12 @@ export const languages = [
   { label: 'Русский', value: RUSSIAN },
 ]
 
-export default language => {
+const internationalization = (language: string) => {
   switch (language) {
     case ENGLISH:
-    case RUSSIAN: return require(`./${language}.js`).default
+    case RUSSIAN: return require(`./${language}.ts`).default
     default: return {}
   }
 }
+
+export default internationalization

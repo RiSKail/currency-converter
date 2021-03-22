@@ -1,11 +1,16 @@
 import { SIGNIN_USER_DATA, LOGIN_SUCCESS, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR, CLEAR_ERRORS } from '@/constants'
-import { SET_AUTH_COUNTRY_INFO } from '../constants/actions'
+import { SET_AUTH_COUNTRY_INFO } from '@/constants/actions'
+import { AuthActionTypes } from '@/types/actionTypes'
+import { IAuthState } from '@/types/reducersTypes'
 
-const initState = {
+const initialState = {
   authError: null,
 }
 
-const authReducer = (state = initState, action) => {
+const authReducer = (
+  state = initialState,
+  action: AuthActionTypes,
+): IAuthState => {
   switch (action.type) {
     case LOGIN_ERROR:
       return {

@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export default styled.div`
+interface IProps {
+  props?: any
+}
+
+export default styled.div < IProps > `
   height: 128px;
   background-color: ${props => props.theme.colors.primaryDark};
   color: ${props => props.theme.colors.backgroundDark};

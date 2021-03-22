@@ -1,5 +1,5 @@
 import React from 'react'
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Loader from '@/components/blocks/global/Loader'
 import SecuredRoute from '@/components/wrappers/SecuredRoute'
@@ -11,7 +11,7 @@ const MapPage = React.lazy(() => import('@/components/pages/Map'))
 const LoginPage = React.lazy(() => import('@/components/pages/Login'))
 const NotFoundPage = React.lazy(() => import('@/components/pages/NotFound'))
 
-export default props => (
+const Routers = (props: any) => (
   <Router>
     <React.Suspense fallback={<Loader />}>
       <Switch>
@@ -40,3 +40,5 @@ export default props => (
     </React.Suspense>
   </Router>
 )
+
+export default Routers

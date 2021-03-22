@@ -2,7 +2,12 @@ import React from 'react'
 
 import { childrenPropType } from '@/prop-types'
 
-const LightLayout = ({ children }) => (
+interface IProps {
+  props?: any,
+  children?: any
+}
+
+const LightLayout = ({ children }: IProps) => (
   <>
     {children}
   </>

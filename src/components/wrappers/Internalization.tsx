@@ -1,29 +1,22 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { IntlProvider } from 'react-intl'
 import { connect } from 'react-redux'
-import pt from 'prop-types'
-
-import { childrenPropType } from '@/prop-types'
 import getMessages from '@/internalization'
 
-interface Props {
-  children: any,
-  language: string
+interface IProps {
+  children?: ReactNode,
+  language: string,
+  props?: any
 }
 
-const Internalization = ({ children, language }: Props) => (
+const Internalization = ({ children, language }: IProps) => (
   <IntlProvider locale={language} messages={getMessages(language)}>
     {children}
   </IntlProvider>
 )
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   language: state.internalization.active,
 })
 
-// Internalization.propTypes = {
-//   children: childrenPropType,
-//   language: pt.string.isRequired,
-// }
-
-export default connect(mapStateToProps)(Internalization)
+export default connect<IProps>(mapStateToProps)(Internalization)
