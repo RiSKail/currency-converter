@@ -6,7 +6,7 @@ const commonSettings = {
 }
 
 interface IProps{
-  filename?: any
+  filename?: string
 }
 
 export const snapshotConfiguration = ({ filename }: IProps) => {
@@ -15,7 +15,7 @@ export const snapshotConfiguration = ({ filename }: IProps) => {
   }
 }
 
-export default async (expect: any, componentName: any) => {
+export default async (expect: any, componentName: string) => {
   const tests = Object
     .keys(resolutions)
     .map(resolution => ({

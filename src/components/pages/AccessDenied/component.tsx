@@ -8,7 +8,7 @@ import { LOGIN_PAGE_PATH } from '@/constants'
 
 import Wrapper from './styles'
 
-const LandingPage = () => (
+const LandingPage: React.FC = () => (
   <LightLayout>
     <Wrapper>
       <FormattedMessage id="access_denied" />

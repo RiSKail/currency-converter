@@ -4,6 +4,7 @@ interface IValue {
 }
 
 export interface IValuesState {
+  [key: string]: IValue,
   primary: IValue;
   secondary: IValue;
 }

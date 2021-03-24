@@ -5,9 +5,9 @@ import pt from 'prop-types'
 import AlertStyle, { Colors } from './styles'
 
 interface IProps {
-  show?: boolean,
-  type?: string,
-  text?: string,
+  show?: string | boolean | undefined,
+  type?: string | undefined,
+  text?: string | undefined,
   time?: number,
   callback(): void
 }

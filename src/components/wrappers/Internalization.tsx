@@ -1,7 +1,10 @@
 import React, { ReactNode } from 'react'
 import { IntlProvider } from 'react-intl'
 import { connect } from 'react-redux'
+import pt from 'prop-types'
+import { childrenPropType } from '@/prop-types'
 import getMessages from '@/internalization'
+import { IRootState } from '@/types/rootStateTypes'
 
 interface IProps {
   children?: ReactNode,
@@ -9,14 +12,19 @@ interface IProps {
   props?: any
 }
 
-const Internalization = ({ children, language }: IProps) => (
+const Internalization: React.FC<IProps> = ({ children, language }) => (
   <IntlProvider locale={language} messages={getMessages(language)}>
     {children}
   </IntlProvider>
 )
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: IRootState) => ({
   language: state.internalization.active,
 })
 
-export default connect<IProps>(mapStateToProps)(Internalization)
+Internalization.propTypes = {
+  children: childrenPropType,
+  language: pt.string.isRequired,
+}
+
+export default connect(mapStateToProps)(Internalization)

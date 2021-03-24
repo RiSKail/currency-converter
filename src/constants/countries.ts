@@ -1,8 +1,6 @@
-interface ICountries {
-  [key: string]: string
-}
+import { IKeyableObj } from '@/types/otherTypes'
 
-export const countries: ICountries = {
+export const countries: IKeyableObj = {
   RU: 'RUB',
   US: 'USD',
   AU: 'AUD',

@@ -1,6 +1,6 @@
 import { SET_DATA_LIST_VALUES } from '@/constants'
-import { CurrenciesActionTypes } from '@/types/actionTypes'
-import { ICurrenciesState } from '@/types/reducersTypes'
+import { CurrenciesActionTypes } from '@/types/actions'
+import { ICurrenciesState } from '@/types/reducers'
 
 const initialState = {}
 

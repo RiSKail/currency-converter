@@ -1,19 +1,15 @@
 import { connect } from 'react-redux'
-
+import { IRootState } from '@/types/rootStateTypes'
 import { setLocale } from '@/actions'
 
 import SetLocale from './component'
-interface Props {
-  active?: any,
-  onSetLocale?: any
-}
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: IRootState) => ({
   active: store.internalization.active,
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-  onSetLocale: (locale: any) => dispatch(setLocale(locale)),
+  onSetLocale: (locale: string) => dispatch(setLocale(locale)),
 })
 
-export default connect<Props>(mapStateToProps, mapDispatchToProps)(SetLocale)
+export default connect(mapStateToProps, mapDispatchToProps)(SetLocale)

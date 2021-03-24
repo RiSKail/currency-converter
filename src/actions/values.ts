@@ -1,6 +1,6 @@
 
 import { SET_BASE_PRIMARY_TYPE, SET_BASE_SECONDARY_TYPE, SET_BASE_PRIMARY_VALUE, SET_BASE_SECONDARY_VALUE, SWAP_BASE_VALUES, UPDATE_BASE_PRIMARY_VALUE, UPDATE_BASE_SECONDARY_VALUE } from '@/constants'
-import { ValuesActionTypes } from '@/types/actionTypes'
+import { ValuesActionTypes } from '@/types/actions'
 
 export const setBasePrimaryType = (
   value: string,

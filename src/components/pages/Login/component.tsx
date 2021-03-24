@@ -10,7 +10,8 @@ import { signIn, signUp, clearErrors } from '@/actions'
 import Alert from '@/components/blocks/global/Alert'
 import { CONVERTER_PAGE_PATH } from '@/constants'
 import Converter from './styles'
-
+import { IRootState } from '@/types/rootStateTypes'
+import { IKeyableObj, IAlert } from '@/types/otherTypes'
 interface IProps {
   props?: any,
   children?: any,
@@ -19,17 +20,17 @@ interface IProps {
 
 const LoginPage: React.FC<IProps> = () => {
   const dispatch = useDispatch()
-  const auth = useSelector((state: any) => state.firebase.auth)
-  const error = useSelector((state: any) => state.auth.authError)
-  const [alertShow, setAlertShow] = useState<any>({ show: false })
+  const auth = useSelector((state: IRootState) => state.firebase.auth)
+  const error = useSelector((state: IRootState) => state.auth.authError)
+  const [alertShow, setAlertShow] = useState<IAlert>({ show: false })
   const [type, setType] = useState<boolean>(true)
   const clearErrorsAction = clearErrors()
 
-  const onSignInHandler = (e: any) => {
+  const onSignInHandler = (e: IKeyableObj) => {
     dispatch(signIn(e))
   }
 
-  const onSignUpHandler = (e: any) => {
+  const onSignUpHandler = (e: IKeyableObj) => {
     dispatch(signUp(e))
   }
 

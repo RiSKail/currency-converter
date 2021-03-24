@@ -8,7 +8,7 @@ import { CONVERTER_PAGE_PATH } from '@/constants'
 
 import Wrapper from './styles'
 
-const NotFound = () => (
+const NotFound: React.FC = () => (
   <LightLayout>
     <Wrapper>
       <FormattedMessage id="page_not_found" />

@@ -4,17 +4,14 @@ import {
   IInternalizationState,
   ICurrenciesState,
   IValuesState,
-} from './reducersTypes'
+} from './reducers'
+import { IKeyableObj } from '@/types/otherTypes'
 
-export interface IState {
+export interface IRootState {
   internalization: IInternalizationState,
   values: IValuesState,
   currencies: ICurrenciesState,
   countries: ICountriesState;
   auth: IAuthState,
-  firebase?: any
+  firebase: IKeyableObj
 }
-
-export type IRootState =
-  | IState
-  | null

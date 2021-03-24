@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import pt from 'prop-types'
 import Styles from './styles'
@@ -6,15 +6,20 @@ import { Form, Field } from 'react-final-form'
 import Button from '../../blocks/global/Button'
 import { Link } from 'react-router-dom'
 import { required, composeValidators } from '../validations'
-
+import { IKeyableObj } from '@/types/otherTypes'
 interface IProps {
-  onSubmit: (e: any) => void,
+  onSubmit: (e: IKeyableObj) => void,
   onSwap: () => void,
-  children?: any,
+  children?: ReactNode,
   props?: any
 }
 
-const SignInForm = ({ onSubmit, onSwap }: IProps) => {
+interface IFieldProps {
+  meta: IKeyableObj,
+  input: any,
+}
+
+const SignInForm: React.FC<IProps> = ({ onSubmit, onSwap }) => {
   const intl = useIntl()
   const emailPlaceholder = intl.formatMessage({ id: 'login_email_placeholder' })
   const passwordPlaceholder = intl.formatMessage({ id: 'login_password_placeholder' })
@@ -23,10 +28,10 @@ const SignInForm = ({ onSubmit, onSwap }: IProps) => {
     <Styles>
       <Form
         onSubmit={onSubmit}
-        render={({ handleSubmit }: {handleSubmit: any}) => (
+        render={({ handleSubmit }: { handleSubmit: () => void }) => (
           <form onSubmit={handleSubmit}>
             <Field name="email" validate={composeValidators(required)}>
-              {({ input, meta }: {input: any, meta: any}) => (
+              {({ input, meta }: IFieldProps) => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : null}
@@ -35,7 +40,7 @@ const SignInForm = ({ onSubmit, onSwap }: IProps) => {
               )}
             </Field>
             <Field name="password" validate={composeValidators(required)}>
-              {({ input, meta }: {input: any, meta: any}) => (
+              {({ input, meta }: IFieldProps) => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : null}

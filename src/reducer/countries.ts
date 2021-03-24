@@ -1,8 +1,8 @@
 import { UPDATE_COUNTRIES_DATA } from '@/constants'
-import { CountriesActionTypes } from '@/types/actionTypes'
-import { ICountriesState } from '@/types/reducersTypes'
+import { CountriesActionTypes } from '@/types/actions'
+import { ICountriesState } from '@/types/reducers'
 
-const initialState = null
+const initialState = {}
 
 const countriesReducer = (
   state = initialState,

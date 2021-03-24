@@ -9,16 +9,16 @@ import SearchCountryBlock from '@/components/blocks/SearchCountry'
 import Style from './styles'
 import Loader from '@/components/blocks/global/Loader'
 import mapData from '@/data/countries.json'
-
+import { IRootState } from '@/types/rootStateTypes'
 interface IProps {
   update: () => void
 }
 
 const MapPage: React.FC<IProps> = () => {
   const dispatch = useDispatch()
-  const countriesData = useSelector((state: any) => state.countries)
-  const authData = useSelector((state: any) => state.auth.country)
-  const [currentCountryData, setCurrentCountryData] = useState(authData)
+  const countriesData = useSelector((state: IRootState) => state.countries)
+  const authCountry = useSelector((state: IRootState) => state.auth.country)
+  const [currentCountryData, setCurrentCountryData] = useState<any>(authCountry)
 
   useEffect(() => {
     CountriesAPI.getAllCountriesInfo().then(res => {
@@ -26,7 +26,7 @@ const MapPage: React.FC<IProps> = () => {
     })
   }, [dispatch])
 
-  const onClickHandleCreator = (data: any) => {
+  const onClickHandleCreator = (data: Object) => {
     return () => {
       setCurrentCountryData(data)
     }

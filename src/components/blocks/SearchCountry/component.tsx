@@ -1,23 +1,23 @@
 
-import React, { useState } from 'react'
+import React, { useState, ReactNode } from 'react'
 import pt from 'prop-types'
 import { useIntl } from 'react-intl'
 import SearchCountryStyle from './styles'
-
+import { IKeyableObj } from '@/types/otherTypes'
 interface IProps {
-  onClickHandleCreator: any,
-  countriesData: any,
-  children?: any,
+  onClickHandleCreator: (el: Object) => any,
+  countriesData: Object,
+  children?: ReactNode,
   props?: any
 }
 
-const SearchCountryBlock = ({ countriesData, onClickHandleCreator }: IProps) => {
+const SearchCountryBlock: React.FC<IProps> = ({ countriesData, onClickHandleCreator }) => {
   const intl = useIntl()
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState<string>('')
 
-  const onChangeInput = ({ target: { value } }: {target: any}) => {
-    setInputValue(value.toLowerCase())
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value.toLowerCase())
   }
 
   return (
@@ -25,8 +25,8 @@ const SearchCountryBlock = ({ countriesData, onClickHandleCreator }: IProps) => 
       <input placeholder={selectPlaceholder} value={inputValue} onChange={onChangeInput} />
       <ul>
         {countriesData && Object.values(countriesData)
-          .filter((elem: any) => elem.name.toLowerCase().includes(inputValue))
-          .map((el: any, index: number) => {
+          .filter((elem: IKeyableObj) => elem.name.toLowerCase().includes(inputValue))
+          .map((el: IKeyableObj, index: number) => {
             return (
               <li key={index} onClick={onClickHandleCreator(el)}>
                 <img src={el.flag} alt={el.name} />{el.name}

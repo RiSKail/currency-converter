@@ -1,32 +1,30 @@
 import { LOGIN_SUCCESS, SET_AUTH_COUNTRY_INFO, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR, SIGN_IN, SIGN_UP, SIGN_OUT, CLEAR_ERRORS, SIGNIN_USER_DATA } from '@/constants'
-import { AuthActionTypes } from '@/types/actionTypes'
+import { AuthActionTypes } from '@/types/actions'
+import { IKeyableObj } from '@/types/otherTypes'
 
 export const signIn = (
-  value: any,
+  value: IKeyableObj,
 ): AuthActionTypes => ({
   type: SIGN_IN,
   payload: value,
 })
 
 export const signInUserData = (
-  value: any,
+  value: IKeyableObj,
 ): AuthActionTypes => ({
   type: SIGNIN_USER_DATA,
   payload: value,
 })
 
 export const signUp = (
-  value: any,
+  value: IKeyableObj,
 ): AuthActionTypes => ({
   type: SIGN_UP,
   payload: value,
 })
 
-export const signOut = (
-  value?: any,
-): AuthActionTypes => ({
+export const signOut = (): AuthActionTypes => ({
   type: SIGN_OUT,
-  payload: value,
 })
 
 export const loginSuccess = (): AuthActionTypes => ({
@@ -38,7 +36,7 @@ export const clearErrors = (): AuthActionTypes => ({
 })
 
 export const loginError = (
-  value: any,
+  value: Error,
 ): AuthActionTypes => ({
   type: LOGIN_ERROR,
   err: value,
@@ -49,7 +47,7 @@ export const signUpSuccess = (): AuthActionTypes => ({
 })
 
 export const signUpError = (
-  value: any,
+  value: Error,
 ): AuthActionTypes => ({
   type: SIGNUP_ERROR,
   err: value,
@@ -60,7 +58,7 @@ export const signOutSuccess = (): AuthActionTypes => ({
 })
 
 export const setAuthCountryInfo = (
-  data: any,
+  data: IKeyableObj,
 ): AuthActionTypes => ({
   type: SET_AUTH_COUNTRY_INFO,
   payload: data,

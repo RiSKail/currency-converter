@@ -1,6 +1,6 @@
 import { SET_LOCALE, ENGLISH } from '@/constants'
-import { InternalizationActionTypes } from '@/types/actionTypes'
-import { IInternalizationState } from '@/types/reducersTypes'
+import { InternalizationActionTypes } from '@/types/actions'
+import { IInternalizationState } from '@/types/reducers'
 
 const initialState = {
   active: ENGLISH,

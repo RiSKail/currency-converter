@@ -17,7 +17,7 @@ const rrfProps = {
   dispatch: getStore().dispatch,
 }
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Provider store={getStore()}>
       <ReactReduxFirebaseProvider {...rrfProps}>

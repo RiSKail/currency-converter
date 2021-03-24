@@ -5,14 +5,14 @@ import Select from '@/components/controls/Select'
 import { languages } from '@/internalization'
 
 interface IProps {
-  active?: string,
-  onSetLocale: (value: any) => void,
+  active: string,
+  onSetLocale: (value: string) => void,
   props?: any
 }
 
 const SetLocale: React.FC<IProps> = ({ active, onSetLocale }) => {
-  const onChange = ({ target: { value } }: any) => {
-    onSetLocale(value)
+  const onChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    onSetLocale(event.target.value)
   }
 
   return (

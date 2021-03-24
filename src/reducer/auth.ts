@@ -1,7 +1,7 @@
 import { SIGNIN_USER_DATA, LOGIN_SUCCESS, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR, CLEAR_ERRORS } from '@/constants'
 import { SET_AUTH_COUNTRY_INFO } from '@/constants/actions'
-import { AuthActionTypes } from '@/types/actionTypes'
-import { IAuthState } from '@/types/reducersTypes'
+import { AuthActionTypes } from '@/types/actions'
+import { IAuthState } from '@/types/reducers'
 
 const initialState = {
   authError: null,

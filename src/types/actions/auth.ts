@@ -1,23 +1,23 @@
 import { LOGIN_SUCCESS, SET_AUTH_COUNTRY_INFO, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR, SIGN_IN, SIGN_UP, SIGN_OUT, CLEAR_ERRORS, SIGNIN_USER_DATA } from '@/constants'
+import { IKeyableObj } from '@/types/otherTypes'
 
 interface ISignIn {
   type: typeof SIGN_IN,
-  payload: any,
+  payload: IKeyableObj,
 }
 
 interface ISignInUserData {
   type: typeof SIGNIN_USER_DATA,
-  payload: any,
+  payload: IKeyableObj,
 }
 
 interface ISignUp {
   type: typeof SIGN_UP,
-  payload: any,
+  payload: IKeyableObj,
 }
 
 interface ISignOut {
   type: typeof SIGN_OUT,
-  payload?: any,
 }
 
 interface ILoginSuccess {
@@ -30,7 +30,7 @@ interface IClearErrors {
 
 interface ILoginError {
   type: typeof LOGIN_ERROR,
-  err: any,
+  err: Error,
 }
 
 interface ISignUpSuccess {
@@ -39,7 +39,7 @@ interface ISignUpSuccess {
 
 interface ISignUpError {
   type: typeof SIGNUP_ERROR,
-  err: any,
+  err: Error,
 }
 
 interface ISignOutSuccess {
@@ -48,7 +48,7 @@ interface ISignOutSuccess {
 
 interface ISetAuthCountryInfo {
   type: typeof SET_AUTH_COUNTRY_INFO,
-  payload: any,
+  payload: IKeyableObj,
 }
 
 export type AuthActionTypes =

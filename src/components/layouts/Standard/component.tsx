@@ -9,7 +9,7 @@ interface IProps {
   children?: any
 }
 
-const StandardLayout = ({ children }: IProps) => (
+const StandardLayout: React.FC<IProps> = ({ children }) => (
   <>
     <Header />
     <main>{children}</main>

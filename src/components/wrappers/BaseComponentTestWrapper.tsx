@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
@@ -8,7 +8,7 @@ import ThemeProviderWrapper from '@/components/wrappers/ThemeProvider'
 import { childrenPropType } from '@/prop-types'
 
 interface IProps {
-  children?: any,
+  children?: ReactNode,
   props?: any
 }
 

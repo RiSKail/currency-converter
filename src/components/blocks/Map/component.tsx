@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import pt from 'prop-types'
 import ReactDOMServer from 'react-dom/server'
 import Leaflet from 'leaflet'
@@ -8,6 +8,8 @@ import { MapContainer, TileLayer, GeoJSON, useMap, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import MapBlockStyle from './styles'
 import { MAP_THEME_URL } from '@/constants'
+import { IKeyableObj } from '@/types/otherTypes'
+import { IRootState } from '@/types/rootStateTypes'
 
 Leaflet.Icon.Default.imagePath = '../node_modules/leaflet'
 
@@ -18,18 +20,18 @@ Leaflet.Icon.Default.mergeOptions({
 })
 
 interface IProps {
-  currentCountryData?: any,
-  mapData?: any,
+  currentCountryData: IKeyableObj,
+  mapData: any,
   props?: any,
-  children?: any,
+  children?: ReactNode,
 }
 
 interface IChangeViewProps {
-  center?: any,
-  zoom?: any
+  center: Leaflet.LatLngExpression,
+  zoom?: number | undefined
 }
 
-const popupCreator = (currentCountry?: any) => (
+const popupCreator = (currentCountry: IKeyableObj) => (
   <>
     {(currentCountry.flag) && <img
       src={currentCountry.flag}
@@ -38,7 +40,7 @@ const popupCreator = (currentCountry?: any) => (
     <ul>
       <li><h1>{currentCountry.name}</h1></li>
       {currentCountry.currencies
-        .map((elem: any, index: number) => <li key={index}>{elem.code} - {elem.name}</li>)}
+        .map((elem: IKeyableObj, index: number) => <li key={index}>{elem.code} - {elem.name}</li>)}
     </ul>
   </>
 )
@@ -50,8 +52,8 @@ const ChangeView = ({ center, zoom }: IChangeViewProps) => {
 }
 
 const MapBlock: React.FC<IProps> = ({ currentCountryData, mapData }) => {
-  const countriesData = useSelector((state: any) => state.countries)
-  const initial = {
+  const countriesData = useSelector((state: IRootState) => state.countries)
+  const initial: IKeyableObj = {
     values: { currencies: [{ code: 'EUR', name: 'Euro' }] },
     center: [0, 0],
     pathOptions: { fillOpacity: 0 },
@@ -59,20 +61,20 @@ const MapBlock: React.FC<IProps> = ({ currentCountryData, mapData }) => {
     zoom: 5,
   }
 
-  const onEachFeature = (country: any, layer?: any) => {
+  const onEachFeature = (country: IKeyableObj, layer: Leaflet.Layer) => {
     const data = Object.values(countriesData)
       .find((elem: any) => (elem.alpha3Code === country.properties.adm0_a3))
 
     layer.bindPopup(ReactDOMServer.renderToString(popupCreator(data || initial.values)))
 
     layer.on({
-      mousemove: (event: any) => {
+      mousemove: (event: Leaflet.LeafletMouseEvent) => {
         event.target.setStyle({
           fillColor: '#1a2239',
           fillOpacity: '0.2',
         })
       },
-      mouseout: (event: any) => {
+      mouseout: (event: Leaflet.LeafletMouseEvent) => {
         event.target.setStyle({ fillColor: null, fillOpacity: '0' })
       },
     })

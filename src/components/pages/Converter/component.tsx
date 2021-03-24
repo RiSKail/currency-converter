@@ -19,7 +19,8 @@ import { useLocalStorage } from '@/utils/localStorage'
 import useDidMount from '@/utils/useDidMountHook'
 import Converter, { CSVBtns } from './styles'
 import Modal from '../../blocks/global/Modal/component'
-
+import { IRootState } from '@/types/rootStateTypes'
+import { IModal, IAlert } from '@/types/otherTypes'
 interface IProps {
   props?: any,
   children?: any,
@@ -30,13 +31,14 @@ const LandingPage: React.FC<IProps> = ({ update }) => {
   const CSVFilename = 'rates.csv'
   const dispatch = useDispatch()
   const intl = useIntl()
-  const currenciesData = useSelector((state: any) => Object.entries(state.currencies)
-    .map((elem: any) => elem.map((elem: any, index: number) => (index === 1) ? `${elem};` : elem)))
+  const currenciesData = useSelector((state: IRootState) => Object.entries(state.currencies)
+    .map((elem: Array<string>) => elem
+      .map((elem: string, index: number) => (index === 1) ? `${elem};` : elem)))
   const updateCacheSuccess = intl.formatMessage({ id: 'update_cache_success_text' })
   const updateRatesSuccess = intl.formatMessage({ id: 'update_rates_success_text' })
   const [storedValue, setValue] = useLocalStorage('values')
-  const [alertShow, setAlertShow] = useState<any>({ show: false })
-  const [modalShow, setModalShow] = useState<any>({ show: false })
+  const [alertShow, setAlertShow] = useState<IAlert>({ show: false })
+  const [modalShow, setModalShow] = useState<IModal>({ show: false })
   const initialValues = ['RUB', 'USD']
 
   const onSwapHandle = () => {
@@ -52,10 +54,10 @@ const LandingPage: React.FC<IProps> = ({ update }) => {
 
   const onImportRateHandle = () => { setModalShow({ show: true }) }
 
-  const onFileLoadedHandle = (data: any) => {
+  const onFileLoadedHandle = (data: Array<any>) => {
     try {
-      const obj = Object.fromEntries(data.map((m: any) => [m[0], parseFloat(m[1])])
-        .filter((e: any) => JSON.stringify(e) !== JSON.stringify(['', undefined])))
+      const obj = Object.fromEntries(data.map((m: Array<string>) => [m[0], parseFloat(m[1])])
+        .filter((e: Array<any>) => JSON.stringify(e) !== JSON.stringify(['', undefined])))
       dispatch(updateDataListValues(obj))
       setAlertShow({ show: true, type: 'success', text: updateRatesSuccess, time: 3000 })
     } catch (e) {

@@ -8,11 +8,12 @@ import ReactFlagsSelect from 'react-flags-select'
 import ConvertBlockStyle from './styles'
 import { setBasePrimaryType, setBaseSecondaryType, setBasePrimaryValue, setBaseSecondaryValue } from '@/actions'
 import { countries } from '@/constants'
+import { IRootState } from '@/types/rootStateTypes'
 
 interface IProps {
-  setValue(a: any[]): void,
+  setValue(a: string[]): void,
   type: string,
-  storedValue: any[]
+  storedValue: string[]
 }
 
 const ConvertBlock: React.FC<IProps> = ({ type, storedValue, setValue }) => {
@@ -20,20 +21,21 @@ const ConvertBlock: React.FC<IProps> = ({ type, storedValue, setValue }) => {
   const inputPlaceholder = intl.formatMessage({ id: 'convert_block_input_placeholder' })
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
   const dispatch = useDispatch()
-  const valueType = useSelector((state: any) => state.values[type].type)
-  const valueData = useSelector((state: any) => state.values[type].value)
-  const key: any | undefined = Object.entries(countries).find(([, name]) => valueType === name)
+  const valueType = useSelector((state: IRootState) => state.values[type].type)
+  const valueData = useSelector((state: IRootState) => state.values[type].value)
+  const key: Array<string> = Object.entries(countries)
+    .find(([, name]) => valueType === name) || ['USD']
 
-  const onChangeInput = ({ target: { value } }: {target: any}): void => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     switch (type) {
       case 'primary':
-        dispatch(setBasePrimaryValue(value))
+        dispatch(setBasePrimaryValue(event.target.value))
         break
       case 'secondary':
-        dispatch(setBaseSecondaryValue(value))
+        dispatch(setBaseSecondaryValue(event.target.value))
         break
       default:
-        dispatch(setBasePrimaryValue(value))
+        dispatch(setBasePrimaryValue(event.target.value))
         break
     }
   }

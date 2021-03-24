@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import pt from 'prop-types'
 import { childrenPropType } from '@/prop-types'
 
@@ -6,7 +6,7 @@ import ModalStyle, { ModalContent } from './styles'
 
 interface IProps {
   callback(): void,
-  children?: any
+  children?: ReactNode
 }
 
 const Modal: React.FC<IProps> = ({ callback, children }) => {

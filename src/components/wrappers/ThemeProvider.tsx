@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { ThemeProvider } from 'styled-components'
 
 import GlobalStyle from '@/theme/GlobalStyle'
@@ -6,7 +6,7 @@ import theme from '@/theme'
 import { childrenPropType } from '@/prop-types'
 
 interface IProps {
-  children?: any,
+  children?: ReactNode,
   props?: any
 }
 

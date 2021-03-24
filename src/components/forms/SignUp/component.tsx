@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import pt from 'prop-types'
 import Styles from './styles'
@@ -6,15 +6,20 @@ import { Form, Field } from 'react-final-form'
 import Button from '../../blocks/global/Button'
 import { Link } from 'react-router-dom'
 import { required, composeValidators } from '../validations'
-
+import { IKeyableObj } from '@/types/otherTypes'
 interface IProps {
-  onSubmit: (e: any) => void,
+  onSubmit: (e: IKeyableObj) => void,
   onSwap: () => void,
-  children?: any,
+  children?: ReactNode,
   props?: any
 }
 
-const SignUpForm = ({ onSubmit, onSwap }: IProps) => {
+interface IFieldProps {
+  meta: IKeyableObj,
+  input: any,
+}
+
+const SignUpForm: React.FC<IProps> = ({ onSubmit, onSwap }) => {
   const intl = useIntl()
   const firstNamePlaceholder = intl.formatMessage({ id: 'signup_firstName_placeholder' })
   const lastNamePlaceholder = intl.formatMessage({ id: 'signup_lastName_placeholder' })
@@ -26,8 +31,8 @@ const SignUpForm = ({ onSubmit, onSwap }: IProps) => {
     <Styles>
       <Form
         onSubmit={onSubmit}
-        validate={(values: any) => {
-          const errors: any = {}
+        validate={(values: IKeyableObj) => {
+          const errors: IKeyableObj = {}
 
           if (values.confirm !== values.password) {
             errors.confirm = 'Must match'
@@ -35,10 +40,10 @@ const SignUpForm = ({ onSubmit, onSwap }: IProps) => {
 
           return errors
         }}
-        render={({ handleSubmit }: {handleSubmit: any}) => (
+        render={({ handleSubmit }: { handleSubmit: () => void }) => (
           <form onSubmit={handleSubmit}>
             <Field name="firstName" validate={composeValidators(required)}>
-              {({ input, meta }: {input: any, meta: any}) => (
+              {({ input, meta }: IFieldProps) => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : null}
@@ -47,7 +52,7 @@ const SignUpForm = ({ onSubmit, onSwap }: IProps) => {
               )}
             </Field>
             <Field name="lastName" validate={composeValidators(required)}>
-              {({ input, meta }: {input: any, meta: any}) => (
+              {({ input, meta }: IFieldProps) => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : null}
@@ -56,7 +61,7 @@ const SignUpForm = ({ onSubmit, onSwap }: IProps) => {
               )}
             </Field>
             <Field name="email" validate={composeValidators(required)}>
-              {({ input, meta }: {input: any, meta: any}) => (
+              {({ input, meta }: IFieldProps) => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : null}
@@ -65,7 +70,7 @@ const SignUpForm = ({ onSubmit, onSwap }: IProps) => {
               )}
             </Field>
             <Field name="password" validate={composeValidators(required)}>
-              {({ input, meta }: {input: any, meta: any}) => (
+              {({ input, meta }: IFieldProps) => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : null}
@@ -75,7 +80,7 @@ const SignUpForm = ({ onSubmit, onSwap }: IProps) => {
               )}
             </Field>
             <Field name="confirm" validate={composeValidators(required)}>
-              {({ input, meta }: {input: any, meta: any}) => (
+              {({ input, meta }: IFieldProps) => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : null}

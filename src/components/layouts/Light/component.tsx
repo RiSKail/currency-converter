@@ -7,7 +7,7 @@ interface IProps {
   children?: any
 }
 
-const LightLayout = ({ children }: IProps) => (
+const LightLayout: React.FC<IProps> = ({ children }) => (
   <>
     {children}
   </>

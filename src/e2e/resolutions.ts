@@ -1,8 +1,6 @@
-interface ICountries {
-  [key: string]: any
-}
+import { IKeyableObj } from '@/types/otherTypes'
 
-const resolutions: ICountries = {
+const resolutions: IKeyableObj = {
   iPhone8p: {
     viewport: {
       width: 750,

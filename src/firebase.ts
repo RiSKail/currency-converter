@@ -2,18 +2,19 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/database'
+import { IKeyableObj } from '@/types/otherTypes'
 
 const config = {
-  apiKey: 'AIzaSyCeo1Ej6MynM-kSMlru41CtAkWvmVxiEUI',
-  authDomain: 'currency-converter-390b0.firebaseapp.com',
-  projectId: 'currency-converter-390b0',
-  storageBucket: 'currency-converter-390b0.appspot.com',
-  messagingSenderId: '120270600197',
-  appId: '1:120270600197:web:f7162eca0bd4b6b383046c',
-  measurementId: 'G-85M3SWTZRH',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 }
 
-const settings: any = { timestampsInSnapshots: true }
+const settings: IKeyableObj = { timestampsInSnapshots: true }
 
 firebase.initializeApp(config)
 firebase.firestore().settings(settings)

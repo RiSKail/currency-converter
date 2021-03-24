@@ -12,11 +12,12 @@ import avatarImg from './img/generic-avatar.jpg'
 import logoutImg from './img/logout.svg'
 import authorImg from './img/author-icon.svg'
 import { signOut } from '@/actions'
+import { IRootState } from '@/types/rootStateTypes'
 
 export default () => {
-  const uid = useSelector((state: any) => state.firebase.auth.uid)
-  const photo = useSelector((state: any) => state.firebase.auth.photoURL)
-  const authData = useSelector((state: any) => state.auth)
+  const uid = useSelector((state: IRootState) => state.firebase.auth.uid)
+  const photo = useSelector((state: IRootState) => state.firebase.auth.photoURL)
+  const authData = useSelector((state: IRootState) => state.auth)
   const dispatch = useDispatch()
   let photoContent
 

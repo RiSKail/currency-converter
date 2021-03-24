@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
 import bg from './img/bg.jpg'
-import { device } from '../constants/devices'
-
+import { device } from '@/constants/devices'
+import { IKeyableObj } from '@/types/otherTypes'
 interface IProps {
   props?: any,
-  theme: any
+  theme: IKeyableObj
 }
 
 export default createGlobalStyle < IProps > `
