@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { Provider } from 'react-redux'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import HttpsRedirect from 'react-https-redirect'
@@ -22,16 +22,16 @@ const App: React.FC = () => {
     <Provider store={getStore()}>
       <ReactReduxFirebaseProvider {...rrfProps}>
         <WithServiceWorker
-          onError={(err: string) => console.log(`An error occured: ${err}`)}
+          onError={(err: string): void => console.log(`An error occured: ${err}`)}
           onInstalled={(): void => console.log('Service worker installed')}
           onUpdated={(): void => console.log('Service worker updated')}
-          publicServiceWorkerDest="./service-worker.js"
+          publicServiceWorkerDest="/service-worker.js"
         >
-          {({ update }: {update: () => void}) => (
+          {({ update }: { update: () => void} ): ReactNode => (
             <HttpsRedirect>
               <Internalization>
                 <ThemeProviderWrapper>
-                  <Router update={update} />
+                  <Router update={update}/>
                 </ThemeProviderWrapper>
               </Internalization>
             </HttpsRedirect>

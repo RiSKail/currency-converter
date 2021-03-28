@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/database'
-import { IKeyableObj } from '@/types/otherTypes'
+import { IkeyableObj } from '@/types/otherTypes'
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -14,7 +14,7 @@ const config = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 }
 
-const settings: IKeyableObj = { timestampsInSnapshots: true }
+const settings: IkeyableObj = { timestampsInSnapshots: true }
 
 firebase.initializeApp(config)
 firebase.firestore().settings(settings)

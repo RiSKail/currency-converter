@@ -4,13 +4,13 @@ import { childrenPropType } from '@/prop-types'
 
 import ModalStyle, { ModalContent } from './styles'
 
-interface IProps {
-  callback(): void,
-  children?: ReactNode
+interface Iprops {
+  callback(): void;
+  children?: ReactNode;
 }
 
-const Modal: React.FC<IProps> = ({ callback, children }) => {
-  const onToggleModal = () => {
+const Modal: React.FC<Iprops> = ({ callback, children }) => {
+  const onToggleModal = (): void => {
     callback()
   }
 

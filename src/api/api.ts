@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { BASE_API_URL, GEO_API_URL, GET_COUNTRY_INFO_BY_NAME, GET_DATA_LIST_BY_USD, GET_CURRENT_COUNTRY, COUNTRIES_API_URL, GET_ALL_COUNTRIES_INFO } from '@/constants/endpoints'
 
 const baseInstance = axios.create({
@@ -14,23 +14,23 @@ const countriesInstance = axios.create({
 })
 
 export const CurrenciesAPI = {
-  getDataList () {
+  getDataList (): Promise<AxiosResponse> {
     return baseInstance.get(GET_DATA_LIST_BY_USD)
   },
 }
 
 export const GeoAPI = {
-  getCurrentCountry () {
+  getCurrentCountry (): Promise<AxiosResponse> {
     return geoInstance.get(GET_CURRENT_COUNTRY)
   },
 }
 
 export const CountriesAPI = {
-  getAllCountriesInfo () {
+  getAllCountriesInfo (): Promise<AxiosResponse> {
     return countriesInstance.get(GET_ALL_COUNTRIES_INFO)
   },
 
-  getCountryInfoByName (name: string) {
+  getCountryInfoByName (name: string): Promise<AxiosResponse> {
     return countriesInstance.get(GET_COUNTRY_INFO_BY_NAME + name)
   },
 }

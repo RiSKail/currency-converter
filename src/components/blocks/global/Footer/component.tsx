@@ -2,10 +2,12 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import Footer from './styles'
+import FooterStyle from './styles'
 
-export default () => (
-  <Footer>
+const Footer: React.FC = () => (
+  <FooterStyle>
     <FormattedMessage id="footer" />
-  </Footer>
+  </FooterStyle>
 )
+
+export default Footer

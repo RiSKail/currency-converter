@@ -1,30 +1,29 @@
 
 import React from 'react'
-import pt from 'prop-types'
+import ReactFlagsSelect from 'react-flags-select'
 import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
-import ReactFlagsSelect from 'react-flags-select'
-
-import ConvertBlockStyle from './styles'
+import pt from 'prop-types'
 import { setBasePrimaryType, setBaseSecondaryType, setBasePrimaryValue, setBaseSecondaryValue } from '@/actions'
+import { IrootState } from '@/types/rootStateTypes'
 import { countries } from '@/constants'
-import { IRootState } from '@/types/rootStateTypes'
+import ConvertBlockStyle from './styles'
 
-interface IProps {
-  setValue(a: string[]): void,
-  type: string,
-  storedValue: string[]
+interface Iprops {
+  setValue(a: string[]): void;
+  type: string;
+  storedValue: string[];
 }
 
-const ConvertBlock: React.FC<IProps> = ({ type, storedValue, setValue }) => {
+const Convert: React.FC<Iprops> = ({ type, storedValue, setValue }) => {
   const intl = useIntl()
   const inputPlaceholder = intl.formatMessage({ id: 'convert_block_input_placeholder' })
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
   const dispatch = useDispatch()
-  const valueType = useSelector((state: IRootState) => state.values[type].type)
-  const valueData = useSelector((state: IRootState) => state.values[type].value)
-  const key: Array<string> = Object.entries(countries)
-    .find(([, name]) => valueType === name) || ['USD']
+  const valueType = useSelector((state: IrootState) => state.values[type].type)
+  const valueData = useSelector((state: IrootState) => state.values[type].value)
+  const [key]: Array<string> = Object.entries(countries)
+  .find(([, name]) => valueType === name) || ['USD']
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     switch (type) {
@@ -59,8 +58,8 @@ const ConvertBlock: React.FC<IProps> = ({ type, storedValue, setValue }) => {
   return (
     <ConvertBlockStyle>
       <ReactFlagsSelect
-        selected={key[0]}
-        onSelect={(code: string) => onChangeSelect(countries[code])}
+        selected={key}
+        onSelect={(code: string): void => onChangeSelect(countries[code])}
         customLabels={countries}
         countries={[...Object.keys(countries).map(elem => elem)]}
         selectButtonClassName="selectBtn"
@@ -76,10 +75,10 @@ const ConvertBlock: React.FC<IProps> = ({ type, storedValue, setValue }) => {
   )
 }
 
-ConvertBlock.propTypes = {
+Convert.propTypes = {
   setValue: pt.func.isRequired,
   type: pt.string.isRequired,
   storedValue: pt.array.isRequired,
 }
 
-export default ConvertBlock
+export default Convert

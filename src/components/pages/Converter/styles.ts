@@ -1,11 +1,7 @@
 import styled from 'styled-components'
 import { device } from '@/constants/devices'
 
-interface IProps {
-  props?: any
-}
-
-export default styled.div < IProps > `
+export default styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,7 +42,7 @@ export const CSVBtns = styled.div`
 
   button {
     background: transparent;
-    border: 1px solid ${props => props.theme.colors.fontLight};
+    border: 1px solid ${(props): string => props.theme.colors.fontLight};
 
     &:first-child {
       margin: 0 0 26px 0;

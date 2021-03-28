@@ -1,10 +1,10 @@
-interface IValue {
-  type: string,
-  value: string,
+interface Ivalue {
+  type: string;
+  value: string;
 }
 
-export interface IValuesState {
-  [key: string]: IValue,
-  primary: IValue;
-  secondary: IValue;
+export interface IvaluesState {
+  [key: string]: Ivalue;
+  primary: Ivalue;
+  secondary: Ivalue;
 }

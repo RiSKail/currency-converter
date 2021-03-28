@@ -3,14 +3,14 @@ import pt from 'prop-types'
 
 import Select from '@/components/controls/Select'
 import { languages } from '@/internalization'
+import { InternalizationActionTypes } from '@/types/actions'
 
-interface IProps {
-  active: string,
-  onSetLocale: (value: string) => void,
-  props?: any
+interface Iprops {
+  active: string;
+  onSetLocale: (locale: string) => InternalizationActionTypes;
 }
 
-const SetLocale: React.FC<IProps> = ({ active, onSetLocale }) => {
+const SetLocale: React.FC<Iprops> = ({ active, onSetLocale }) => {
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     onSetLocale(event.target.value)
   }

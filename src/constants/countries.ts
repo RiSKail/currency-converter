@@ -1,6 +1,6 @@
-import { IKeyableObj } from '@/types/otherTypes'
+import { IkeyableObj } from '@/types/otherTypes'
 
-export const countries: IKeyableObj = {
+export const countries: IkeyableObj = {
   RU: 'RUB',
   US: 'USD',
   AU: 'AUD',

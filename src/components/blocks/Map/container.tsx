@@ -1,15 +1,15 @@
-
-import React, { ReactNode } from 'react'
+import React, { ReactElement } from 'react'
 import pt from 'prop-types'
 import ReactDOMServer from 'react-dom/server'
 import Leaflet from 'leaflet'
-import { useSelector } from 'react-redux'
-import { MapContainer, TileLayer, GeoJSON, useMap, Popup } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
-import MapBlockStyle from './styles'
+import { MapContainer, TileLayer, useMap, GeoJSON, Popup } from 'react-leaflet'
 import { MAP_THEME_URL } from '@/constants'
-import { IKeyableObj } from '@/types/otherTypes'
-import { IRootState } from '@/types/rootStateTypes'
+import { IkeyableObj } from '@/types/otherTypes'
+import { GeoJsonObject } from 'geojson'
+import MapBlockStyle from './styles'
+import { useSelector } from 'react-redux'
+import 'leaflet/dist/leaflet.css'
+import { IrootState } from '@/types/rootStateTypes'
 
 Leaflet.Icon.Default.imagePath = '../node_modules/leaflet'
 
@@ -19,19 +19,17 @@ Leaflet.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 })
 
-interface IProps {
-  currentCountryData: IKeyableObj,
-  mapData: any,
-  props?: any,
-  children?: ReactNode,
+interface Iprops {
+  currentCountryData: IkeyableObj;
+  mapData: GeoJsonObject;
 }
 
-interface IChangeViewProps {
-  center: Leaflet.LatLngExpression,
-  zoom?: number | undefined
+interface IchangeViewProps {
+  center: Leaflet.LatLngExpression;
+  zoom?: number;
 }
 
-const popupCreator = (currentCountry: IKeyableObj) => (
+const popupCreator = (currentCountry: IkeyableObj): ReactElement => (
   <>
     {(currentCountry.flag) && <img
       src={currentCountry.flag}
@@ -40,32 +38,29 @@ const popupCreator = (currentCountry: IKeyableObj) => (
     <ul>
       <li><h1>{currentCountry.name}</h1></li>
       {currentCountry.currencies
-        .map((elem: IKeyableObj, index: number) => <li key={index}>{elem.code} - {elem.name}</li>)}
+        .map((
+          elem: IkeyableObj, 
+          index: number,
+        ) => <li key={`${index}_${elem.code}`}>{elem.code} - {elem.name}</li>)}
     </ul>
   </>
 )
 
-const ChangeView = ({ center, zoom }: IChangeViewProps) => {
+const ChangeView = ({ center, zoom }: IchangeViewProps): null => {
   const map = useMap()
   map.setView(center, zoom)
   return null
 }
 
-const MapBlock: React.FC<IProps> = ({ currentCountryData, mapData }) => {
-  const countriesData = useSelector((state: IRootState) => state.countries)
-  const initial: IKeyableObj = {
-    values: { currencies: [{ code: 'EUR', name: 'Euro' }] },
-    center: [0, 0],
-    pathOptions: { fillOpacity: 0 },
-    minZoom: 2,
-    zoom: 5,
-  }
+const Map: React.FC<Iprops> = ({ currentCountryData, mapData }) => {
+  const countriesData = useSelector((state: IrootState) => state.countries)
+  const initial = useSelector((state: IrootState) => state.map)
 
-  const onEachFeature = (country: IKeyableObj, layer: Leaflet.Layer) => {
+  const onEachFeature = (country: IkeyableObj, layer: Leaflet.Layer): void => {
     const data = Object.values(countriesData)
-      .find((elem: any) => (elem.alpha3Code === country.properties.adm0_a3))
+      .find((elem: IkeyableObj) => (elem.alpha3Code === country.properties.adm0_a3))
 
-    layer.bindPopup(ReactDOMServer.renderToString(popupCreator(data || initial.values)))
+    if (data) layer.bindPopup(ReactDOMServer.renderToString(popupCreator(data)))
 
     layer.on({
       mousemove: (event: Leaflet.LeafletMouseEvent) => {
@@ -106,9 +101,9 @@ const MapBlock: React.FC<IProps> = ({ currentCountryData, mapData }) => {
   )
 }
 
-MapBlock.propTypes = {
+Map.propTypes = {
   currentCountryData: pt.object.isRequired,
-  mapData: pt.object.isRequired,
+  mapData: pt.any.isRequired,
 }
 
-export default MapBlock
+export default Map

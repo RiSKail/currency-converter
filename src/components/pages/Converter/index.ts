@@ -1,3 +1,3 @@
-import LandingPage from './component'
+import ConverterPage from './container'
 
-export default LandingPage
+export default ConverterPage

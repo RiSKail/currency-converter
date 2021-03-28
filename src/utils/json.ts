@@ -1,4 +1,4 @@
-export function tryStringifyJSON (jsonString: JSON) {
+export function tryStringifyJSON (jsonString: JSON): string {
   try {
     if (jsonString && jsonString !== undefined) {
       return JSON.stringify(jsonString)

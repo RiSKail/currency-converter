@@ -1,13 +1,9 @@
 import styled from 'styled-components'
 
-interface IProps {
-  props?: any
-}
-
-export default styled.div < IProps > `
+export default styled.div`
   display: inline-block;
-  width: ${props => props.theme.unit.eight};
-  height: ${props => props.theme.unit.eight};
+  width: ${(props): string => props.theme.unit.eight};
+  height: ${(props): string  => props.theme.unit.eight};
   position: absolute;
   left: 50%;
   top: 50%;
@@ -19,10 +15,10 @@ export default styled.div < IProps > `
     height: 46px;
     margin: 1px;
     border-radius: 50%;
-    border: 5px solid ${props => props.theme.colors.primary};
+    border: 5px solid ${(props): string  => props.theme.colors.primary};
     border-color:
-      ${props => props.theme.colors.primary} transparent
-      ${props => props.theme.colors.primary} transparent;
+      ${(props): string  => props.theme.colors.primary} transparent
+      ${(props): string  => props.theme.colors.primary} transparent;
     animation: lds-dual-ring 1.2s linear infinite;
   }
 

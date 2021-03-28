@@ -1,6 +1,6 @@
 import { SET_BASE_PRIMARY_TYPE, SET_BASE_SECONDARY_TYPE, UPDATE_BASE_PRIMARY_VALUE, UPDATE_BASE_SECONDARY_VALUE, SWAP_BASE_VALUES } from '@/constants'
 import { ValuesActionTypes } from '@/types/actions'
-import { IValuesState } from '@/types/reducers'
+import { IvaluesState } from '@/types/reducers'
 
 const initialState = {
   primary: {
@@ -16,7 +16,7 @@ const initialState = {
 const valuesReducer = (
   state = initialState,
   action: ValuesActionTypes,
-): IValuesState => {
+): IvaluesState => {
   switch (action.type) {
     case SET_BASE_PRIMARY_TYPE: return {
       ...state,

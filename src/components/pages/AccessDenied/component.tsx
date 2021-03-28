@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import LightLayout from '@/components/layouts/Light'
 
-import { LOGIN_PAGE_PATH } from '@/constants'
+import { SIGN_PAGE_PATH } from '@/constants'
 
 import Wrapper from './styles'
 
@@ -13,7 +13,7 @@ const LandingPage: React.FC = () => (
     <Wrapper>
       <FormattedMessage id="access_denied" />
       <br />
-      <Link to={LOGIN_PAGE_PATH}>
+      <Link to={SIGN_PAGE_PATH}>
         <FormattedMessage id="return_home" />
       </Link>
     </Wrapper>

@@ -1,18 +1,14 @@
 import styled from 'styled-components'
 import { device } from '../../../../constants/devices'
 
-interface IProps {
-  props?: any
-}
-
-export default styled.header < IProps > `
+export default styled.header`
   height: 78px;
-  color: ${props => props.theme.colors.backgroundDark};
-  font-size: ${props => props.theme.fontSizes.weryBig};
-  padding-left: ${props => props.theme.unit.quadriple};
-  padding-right: ${props => props.theme.unit.quadriple};
-  padding-top: ${props => props.theme.unit.double};
-  padding-bottom: ${props => props.theme.unit.double};
+  color: ${(props): string => props.theme.colors.backgroundDark};
+  font-size: ${(props): string => props.theme.fontSizes.weryBig};
+  padding-left: ${(props): string => props.theme.unit.quadriple};
+  padding-right: ${(props): string => props.theme.unit.quadriple};
+  padding-top: ${(props): string => props.theme.unit.double};
+  padding-bottom: ${(props): string => props.theme.unit.double};
 
   display: flex;
   align-items: center;
@@ -20,7 +16,7 @@ export default styled.header < IProps > `
   flex-direction: column;
 
   .is-active{
-    color: ${props => props.theme.colors.secondaryLight};
+    color: ${(props): string => props.theme.colors.secondaryLight};
   }
 
   @media ${device.tablet} {
@@ -30,17 +26,17 @@ export default styled.header < IProps > `
 
   a {
     text-decoration: none;
-    color: ${props => props.theme.colors.fontLight};
+    color: ${(props): string => props.theme.colors.fontLight};
     display: flex;
     align-items: center;
 
     img {
-      width: ${props => props.theme.unit.double};
+      width: ${(props): string => props.theme.unit.double};
     }
 
     &:hover {
       cursor: pointer;
-      color: ${props => props.theme.colors.secondaryLight};
+      color: ${(props): string => props.theme.colors.secondaryLight};
     }
   }
 
@@ -55,8 +51,8 @@ export default styled.header < IProps > `
 
   ul li {
     font-family: Arial;
-    font-weight: ${props => props.theme.fontWeights.bold};
-    font-size: ${props => props.theme.fontSizes.middleSmall};
+    font-weight: ${(props): string => props.theme.fontWeights.bold};
+    font-size: ${(props): string => props.theme.fontSizes.middleSmall};
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { childrenPropType } from '@/prop-types'
 
-interface IProps {
-  props?: any,
-  children?: any
+interface Iprops {
+  children: ReactNode;
 }
 
-const LightLayout: React.FC<IProps> = ({ children }) => (
+const LightLayout: React.FC<Iprops> = ({ children }) => (
   <>
     {children}
   </>

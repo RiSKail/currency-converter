@@ -17,48 +17,49 @@ import { setBasePrimaryType, setBaseSecondaryType, swapValues, updateDataListVal
 import { countries } from '@/constants/countries'
 import { useLocalStorage } from '@/utils/localStorage'
 import useDidMount from '@/utils/useDidMountHook'
-import Converter, { CSVBtns } from './styles'
+import ConverterStyle, { CSVBtns } from './styles'
 import Modal from '../../blocks/global/Modal/component'
-import { IRootState } from '@/types/rootStateTypes'
-import { IModal, IAlert } from '@/types/otherTypes'
-interface IProps {
-  props?: any,
-  children?: any,
-  update: () => void
+import { IrootState } from '@/types/rootStateTypes'
+import { Imodal, Ialert } from '@/types/otherTypes'
+
+interface Iprops {
+  update: () => void;
 }
 
-const LandingPage: React.FC<IProps> = ({ update }) => {
+const ConverterPage: React.FC<Iprops> = ({ update }) => {
   const CSVFilename = 'rates.csv'
   const dispatch = useDispatch()
   const intl = useIntl()
-  const currenciesData = useSelector((state: IRootState) => Object.entries(state.currencies)
+  const authCountry = useSelector((state: IrootState) => state.auth.country)
+  const currenciesData = useSelector((state: IrootState) => Object.entries(state.currencies)
     .map((elem: Array<string>) => elem
       .map((elem: string, index: number) => (index === 1) ? `${elem};` : elem)))
   const updateCacheSuccess = intl.formatMessage({ id: 'update_cache_success_text' })
   const updateRatesSuccess = intl.formatMessage({ id: 'update_rates_success_text' })
   const [storedValue, setValue] = useLocalStorage('values')
-  const [alertShow, setAlertShow] = useState<IAlert>({ show: false })
-  const [modalShow, setModalShow] = useState<IModal>({ show: false })
+  const [alertShow, setAlertShow] = useState<Ialert>({ show: false })
+  const [modalShow, setModalShow] = useState<Imodal>({ show: false })
   const initialValues = ['RUB', 'USD']
 
-  const onSwapHandle = () => {
+  const onSwapHandle = (): void => {
     dispatch(swapValues())
     setValue([...storedValue].reverse())
   }
 
-  const onUpdateCacheHandle = () => {
+  const onUpdateCacheHandle = (): void => {
     dispatch(cacheAllDataListValues(countries))
     update()
     setAlertShow({ show: true, type: 'success', text: updateCacheSuccess, time: 3000 })
   }
 
-  const onImportRateHandle = () => { setModalShow({ show: true }) }
+  const onImportRateHandle = (): void => { setModalShow({ show: true }) }
 
-  const onFileLoadedHandle = (data: Array<any>) => {
+  const onFileLoadedHandle = (data: Array<string[]>): void => {
     try {
-      const obj = Object.fromEntries(data.map((m: Array<string>) => [m[0], parseFloat(m[1])])
-        .filter((e: Array<any>) => JSON.stringify(e) !== JSON.stringify(['', undefined])))
-      dispatch(updateDataListValues(obj))
+      const rateList = Object
+        .fromEntries(data.map((value: string[]) => [value[0], parseFloat(value[1])])
+        .filter((e: (string | number)[]) => JSON.stringify(e) !== JSON.stringify(['', undefined])))
+      dispatch(updateDataListValues(rateList))
       setAlertShow({ show: true, type: 'success', text: updateRatesSuccess, time: 3000 })
     } catch (e) {
       setAlertShow({ show: true, type: 'error', text: e.message, time: 3000 })
@@ -67,16 +68,16 @@ const LandingPage: React.FC<IProps> = ({ update }) => {
     }
   }
 
-  const alertCallbackFunc = () => {
+  const alertCallbackFunc = (): void => {
     setAlertShow({ show: false })
   }
 
-  const modalCallbackFunc = () => {
+  const modalCallbackFunc = (): void => {
     setModalShow({ show: false })
   }
 
   useDidMount(() => {
-    GeoAPI.getCurrentCountry().then(res => {
+    if (!authCountry) GeoAPI.getCurrentCountry().then(res => {
       if (!storedValue) {
         if (countries[res.data.country.iso] == null) {
           dispatch(setBasePrimaryType(initialValues[0]))
@@ -103,7 +104,7 @@ const LandingPage: React.FC<IProps> = ({ update }) => {
           <CSVReader onFileLoaded={onFileLoadedHandle} />
         </Modal>}
       <h1><FormattedMessage id="converter_page_title" /></h1>
-      <Converter>
+      <ConverterStyle>
         <ConvertBlock
           type="primary"
           setValue={setValue}
@@ -119,7 +120,7 @@ const LandingPage: React.FC<IProps> = ({ update }) => {
           type="secondary"
           setValue={setValue}
           storedValue={storedValue || initialValues} />
-      </Converter>
+      </ConverterStyle>
       <Button type="Primary" onClick={onUpdateCacheHandle}>
         <img
           src={downloadIcon}
@@ -139,8 +140,8 @@ const LandingPage: React.FC<IProps> = ({ update }) => {
   )
 }
 
-LandingPage.propTypes = {
+ConverterPage.propTypes = {
   update: pt.func.isRequired,
 }
 
-export default LandingPage
+export default ConverterPage

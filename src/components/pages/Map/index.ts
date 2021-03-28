@@ -1,3 +1,3 @@
-import Map from './component'
+import Map from './container'
 
 export default Map

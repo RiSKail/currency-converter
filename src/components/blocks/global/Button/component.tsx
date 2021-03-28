@@ -1,17 +1,16 @@
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import pt from 'prop-types'
 
 import ButtonStyle from './styles'
 
-interface IProps {
-  onClick?: () => void,
-  type: string,
-  children?: any,
-  props?: any,
+interface Iprops {
+  onClick?: () => void;
+  type: string;
+  children?: ReactNode;
 }
 
-const Button: React.FC<IProps> = ({ type, children, ...props }) => {
+const Button: React.FC<Iprops> = ({ type, children, ...props }) => {
   switch (type) {
     case 'Primary':
       return <ButtonStyle borderRadius="8px" padding="13px 20px" {...props}>{children}</ButtonStyle>

@@ -4,21 +4,24 @@ import { connect } from 'react-redux'
 import pt from 'prop-types'
 import { childrenPropType } from '@/prop-types'
 import getMessages from '@/internalization'
-import { IRootState } from '@/types/rootStateTypes'
+import { IrootState } from '@/types/rootStateTypes'
 
-interface IProps {
-  children?: ReactNode,
-  language: string,
-  props?: any
+interface IstateProps {
+  language: string;
 }
 
-const Internalization: React.FC<IProps> = ({ children, language }) => (
+interface Iprops extends IstateProps {
+  children: ReactNode;
+}
+
+
+const Internalization: React.FC<Iprops> = ({ children, language }) => (
   <IntlProvider locale={language} messages={getMessages(language)}>
     {children}
   </IntlProvider>
 )
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: IrootState): IstateProps => ({
   language: state.internalization.active,
 })
 

@@ -1,22 +1,22 @@
 import { UPDATE_DATA_LIST_VALUES, SET_DATA_LIST_VALUES, CACHE_ALL_DATA_LIST } from '@/constants'
-import { IKeyableObj } from '@/types/otherTypes'
+import { IkeyableObj } from '@/types/otherTypes'
 
-interface IUpdateDataListValues {
+interface IupdateDataListValues {
   type: typeof UPDATE_DATA_LIST_VALUES;
-  payload: IKeyableObj;
+  payload: IkeyableObj;
 }
 
-interface ISetDataListValues {
+interface IsetDataListValues {
   type: typeof SET_DATA_LIST_VALUES;
-  payload: IKeyableObj;
+  payload: IkeyableObj;
 }
 
-interface ICacheAllDataListValues {
+interface IcacheAllDataListValues {
   type: typeof CACHE_ALL_DATA_LIST;
-  payload: IKeyableObj;
+  payload: IkeyableObj;
 }
 
 export type CurrenciesActionTypes =
-  | IUpdateDataListValues
-  | ISetDataListValues
-  | ICacheAllDataListValues
+  | IupdateDataListValues
+  | IsetDataListValues
+  | IcacheAllDataListValues

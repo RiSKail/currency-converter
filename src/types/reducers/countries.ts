@@ -1,3 +1,3 @@
-import { IKeyableObj } from '@/types/otherTypes'
+import { IkeyableObj } from '@/types/otherTypes'
 
-export type ICountriesState = IKeyableObj
+export type IcountriesState = IkeyableObj

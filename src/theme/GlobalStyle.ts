@@ -1,31 +1,30 @@
 import { createGlobalStyle } from 'styled-components'
 import bg from './img/bg.jpg'
 import { device } from '@/constants/devices'
-import { IKeyableObj } from '@/types/otherTypes'
-interface IProps {
-  props?: any,
-  theme: IKeyableObj
+import { IkeyableObj } from '@/types/otherTypes'
+interface Iprops {
+  theme: IkeyableObj;
 }
 
-export default createGlobalStyle < IProps > `
+export default createGlobalStyle < Iprops >`
   @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap');
   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
   @import url('https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap');
 
   body {
     margin: 0;
-    background: ${props => props.theme.colors.background};
+    background: ${(props): string => props.theme.colors.background};
     background-size: cover;
 
     @media ${device.tablet} {
       background: url(${bg}) fixed no-repeat bottom right, 
-      ${props => props.theme.colors.background};
+      ${(props): string => props.theme.colors.background};
       background-size: cover;
     }
 
-    color: ${props => props.theme.colors.font};
-    font-weight: ${props => props.theme.fontWeights.normal};
-    font-family: ${props => props.theme.fontFamily};
+    color: ${(props): string => props.theme.colors.font};
+    font-weight: ${(props): string => props.theme.fontWeights.normal};
+    font-family: ${(props): string => props.theme.fontFamily};
 
     a {
       text-decoration: none;
@@ -33,10 +32,10 @@ export default createGlobalStyle < IProps > `
   }
 
   main {
-    padding-left: ${props => props.theme.unit.double};
-    padding-right: ${props => props.theme.unit.double};
-    padding-top: ${props => props.theme.unit.quadriple};
-    padding-bottom: ${props => props.theme.unit.quadriple};
+    padding-left: ${(props): string => props.theme.unit.double};
+    padding-right: ${(props): string => props.theme.unit.double};
+    padding-top: ${(props): string => props.theme.unit.quadriple};
+    padding-bottom: ${(props): string => props.theme.unit.quadriple};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,9 +44,9 @@ export default createGlobalStyle < IProps > `
     h1 {
       font-family: Roboto;
       text-transform: uppercase;
-      font-size: ${props => props.theme.fontSizes.weryBig};
-      font-weight: ${props => props.theme.fontWeights.middle};
-      color: ${props => props.theme.colors.fontLight};
+      font-size: ${(props): string => props.theme.fontSizes.weryBig};
+      font-weight: ${(props): string => props.theme.fontWeights.middle};
+      color: ${(props): string => props.theme.colors.fontLight};
       display: flex;
       align-items: center;
       justify-content: center;

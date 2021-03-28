@@ -1,3 +1,3 @@
-import Alert from './component'
+import Alert from './container'
 
 export default Alert

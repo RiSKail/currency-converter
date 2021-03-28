@@ -6,6 +6,7 @@ import values from './values'
 import currencies from './currencies'
 import auth from './auth'
 import countries from './countries'
+import map from './map'
 
 export default combineReducers({
   internalization,
@@ -13,5 +14,6 @@ export default combineReducers({
   currencies,
   countries,
   auth,
+  map,
   firebase: firebaseReducer,
 })

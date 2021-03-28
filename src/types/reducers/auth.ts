@@ -1,10 +1,10 @@
 
-import { IKeyableObj } from '@/types/otherTypes'
+import { IkeyableObj } from '@/types/otherTypes'
 
-export interface IAuthState {
-  authError: string | null,
-  country?: IKeyableObj,
-  lastName?: string,
-  firstName?: string,
-  initials?: string,
+export interface IauthState {
+  authError: string | null;
+  country?: IkeyableObj;
+  lastName?: string;
+  firstName?: string;
+  initials?: string;
 }

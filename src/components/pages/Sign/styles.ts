@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 
-interface IProps {
-  props?: any
-}
-
-export default styled.div < IProps > `
+export default styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

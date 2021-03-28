@@ -1,13 +1,13 @@
-export interface IKeyableObj {
-  [key: string]: any,
+export interface IkeyableObj {
+  [key: string]: any;
 }
 
-export interface IModal {
-  show: string | boolean | undefined,
-  type?: string | undefined,
-  text?: string | undefined,
+export interface Imodal {
+  show: string | boolean | undefined;
+  type?: string | undefined;
+  text?: string | undefined;
 }
 
-export interface IAlert extends IModal {
-  time?: number,
+export interface Ialert extends Imodal {
+  time?: number;
 }

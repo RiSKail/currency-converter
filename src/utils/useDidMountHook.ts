@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const useDidMount = (callback: () => void) => {
+const useDidMount = (callback: () => void): void => {
   const didMount = useRef<boolean | null>(null)
 
   useEffect(() => {

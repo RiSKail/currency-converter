@@ -1,9 +1,9 @@
 import { UPDATE_COUNTRIES_DATA } from '@/constants'
-import { IKeyableObj } from '@/types/otherTypes'
+import { IkeyableObj } from '@/types/otherTypes'
 
-interface IUpdateCountriesData {
-  type: typeof UPDATE_COUNTRIES_DATA,
-  payload: IKeyableObj,
+interface IupdateCountriesData {
+  type: typeof UPDATE_COUNTRIES_DATA;
+  payload: IkeyableObj;
 }
 
-export type CountriesActionTypes = IUpdateCountriesData
+export type CountriesActionTypes = IupdateCountriesData

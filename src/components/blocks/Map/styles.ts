@@ -1,11 +1,16 @@
 import styled from 'styled-components'
 
 export default styled.div`
-  background: ${props => props.theme.colors.backgroundLight};
-  border-radius: ${props => props.theme.unit.single};
+  background: ${(props): string => props.theme.colors.backgroundLight};
+  border-radius: ${(props): string => props.theme.unit.single};
   padding: 36px;
   width: 90%;
   margin: 45px 0 0 0;
+
+  .active-country {
+    color: '#1a2239';
+    opacity: '0.2';
+  }
 
   .leaflet-container {
     height: 510px;
@@ -19,7 +24,7 @@ export default styled.div`
 
   .leaflet-popup-content-wrapper, .leaflet-popup-tip {
     background: #41485b;
-    color:  ${props => props.theme.colors.fontLight};
+    color:  ${(props): string => props.theme.colors.fontLight};
   }
 
   .leaflet-popup-tip-container {
@@ -36,7 +41,7 @@ export default styled.div`
 
     img {
       width: 70px;
-      border: 2px solid  ${props => props.theme.colors.backgroundDark};
+      border: 2px solid  ${(props): string => props.theme.colors.backgroundDark};
     }
 
     ul {
@@ -49,10 +54,10 @@ export default styled.div`
       li {
         width: 200px;
         text-align: center;
-        color: ${props => props.theme.colors.fontLightGray};
+        color: ${(props): string => props.theme.colors.fontLightGray};
 
         h1 {
-          font-size: ${props => props.theme.fontSizes.middleSmall};
+          font-size: ${(props): string => props.theme.fontSizes.middleSmall};
           
           &::after, &::before {
             width: 30px;

@@ -1,7 +1,7 @@
-import { SIGNIN_USER_DATA, LOGIN_SUCCESS, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR, CLEAR_ERRORS } from '@/constants'
+import { SIGNIN_USER_DATA, SIGN_SUCCESS, SIGN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, CLEAR_ERRORS } from '@/constants'
 import { SET_AUTH_COUNTRY_INFO } from '@/constants/actions'
 import { AuthActionTypes } from '@/types/actions'
-import { IAuthState } from '@/types/reducers'
+import { IauthState } from '@/types/reducers'
 
 const initialState = {
   authError: null,
@@ -10,15 +10,15 @@ const initialState = {
 const authReducer = (
   state = initialState,
   action: AuthActionTypes,
-): IAuthState => {
+): IauthState => {
   switch (action.type) {
-    case LOGIN_ERROR:
+    case SIGN_ERROR:
       return {
         ...state,
         authError: action.err.message,
       }
 
-    case LOGIN_SUCCESS:
+    case SIGN_SUCCESS:
       return {
         ...state,
         authError: null,
@@ -33,12 +33,6 @@ const authReducer = (
       return {
         ...state,
         authError: null,
-      }
-
-    case SIGNUP_ERROR:
-      return {
-        ...state,
-        authError: action.err.message,
       }
 
     case CLEAR_ERRORS:

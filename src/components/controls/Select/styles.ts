@@ -1,12 +1,8 @@
 import styled from 'styled-components'
 
-interface IProps {
-  props?: any
-}
-
-export default styled.select < IProps > `
+export default styled.select`
   outline: none;
   border-radius: 0;
-  padding: ${props => props.theme.unit.half} ${props => props.theme.unit.double};
-  font-size: ${props => props.theme.fontSizes.normal};
+  padding: ${(props): string => props.theme.unit.half + ' ' + props.theme.unit.double};
+  font-size: ${(props): string => props.theme.fontSizes.normal};
 `

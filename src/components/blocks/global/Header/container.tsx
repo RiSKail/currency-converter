@@ -1,38 +1,32 @@
 
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-
+import { useDispatch, useSelector } from 'react-redux'
+import avatarImg from './img/generic-avatar.jpg'
+import { signOut } from '@/actions'
+import { IrootState } from '@/types/rootStateTypes'
 import { CONVERTER_PAGE_PATH, MAP_PAGE_PATH } from '@/constants/paths'
 import SetLocale from '@/components/blocks/global/SetLocale'
-import Header from './styles'
+import HeaderStyle from './styles'
 import versionImg from './img/version-icon.svg'
-import avatarImg from './img/generic-avatar.jpg'
 import logoutImg from './img/logout.svg'
 import authorImg from './img/author-icon.svg'
-import { signOut } from '@/actions'
-import { IRootState } from '@/types/rootStateTypes'
 
-export default () => {
-  const uid = useSelector((state: IRootState) => state.firebase.auth.uid)
-  const photo = useSelector((state: IRootState) => state.firebase.auth.photoURL)
-  const authData = useSelector((state: IRootState) => state.auth)
+const Header: React.FC = () => {
+  const uid = useSelector((state: IrootState) => state.firebase.auth.uid)
+  const photo = useSelector((state: IrootState) => state.firebase.auth.photoURL)
+  const authData = useSelector((state: IrootState) => state.auth)
   const dispatch = useDispatch()
-  let photoContent
+  const photoContent = 
+    <img src={(photo) ? photo : avatarImg} alt="Avatar" className="profile-avatar" /> 
 
-  const onSignOutHandler = () => {
+  const handleSignOut = (): void => {
     dispatch(signOut())
   }
 
-  if (photo) {
-    photoContent = (<img src={photo} alt="Avatar" className="profile-avatar" />)
-  } else {
-    photoContent = (<img src={avatarImg} alt="Avatar" className="profile-avatar" />)
-  }
-
   return (
-    <Header>
+    <HeaderStyle>
       {uid ? (
         <>
           <ul>
@@ -54,7 +48,7 @@ export default () => {
               {(authData.firstName || '') + ' ' + (authData.lastName || '')}
             </li>
             <li>
-              <NavLink to="#" onClick={onSignOutHandler}>
+              <NavLink to="#" onClick={handleSignOut}>
                 <img src={logoutImg} alt="Logout" /><FormattedMessage id="sign_out_text" />
               </NavLink>
             </li>
@@ -71,6 +65,8 @@ export default () => {
           </ul>
         </>
       )}
-    </Header>
+    </HeaderStyle>
   )
 }
+
+export default Header

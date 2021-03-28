@@ -1,65 +1,59 @@
-import { LOGIN_SUCCESS, SET_AUTH_COUNTRY_INFO, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR, SIGN_IN, SIGN_UP, SIGN_OUT, CLEAR_ERRORS, SIGNIN_USER_DATA } from '@/constants'
-import { IKeyableObj } from '@/types/otherTypes'
+import { SIGN_SUCCESS, SET_AUTH_COUNTRY_INFO, SIGN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGN_IN, SIGN_UP, SIGN_OUT, CLEAR_ERRORS, SIGNIN_USER_DATA } from '@/constants'
+import { IkeyableObj } from '@/types/otherTypes'
 
-interface ISignIn {
-  type: typeof SIGN_IN,
-  payload: IKeyableObj,
+interface IsignIn {
+  type: typeof SIGN_IN;
+  payload: IkeyableObj;
 }
 
-interface ISignInUserData {
-  type: typeof SIGNIN_USER_DATA,
-  payload: IKeyableObj,
+interface IsignInUserData {
+  type: typeof SIGNIN_USER_DATA;
+  payload: IkeyableObj;
 }
 
-interface ISignUp {
-  type: typeof SIGN_UP,
-  payload: IKeyableObj,
+interface IsignUp {
+  type: typeof SIGN_UP;
+  payload: IkeyableObj;
 }
 
-interface ISignOut {
-  type: typeof SIGN_OUT,
+interface IsignOut {
+  type: typeof SIGN_OUT;
 }
 
-interface ILoginSuccess {
-  type: typeof LOGIN_SUCCESS,
+interface IsignInSuccess {
+  type: typeof SIGN_SUCCESS;
 }
 
-interface IClearErrors {
-  type: typeof CLEAR_ERRORS,
+interface IclearErrors {
+  type: typeof CLEAR_ERRORS;
 }
 
-interface ILoginError {
-  type: typeof LOGIN_ERROR,
-  err: Error,
+interface IsignError {
+  type: typeof SIGN_ERROR;
+  err: Error;
 }
 
-interface ISignUpSuccess {
-  type: typeof SIGNUP_SUCCESS,
+interface IsignUpSuccess {
+  type: typeof SIGNUP_SUCCESS;
 }
 
-interface ISignUpError {
-  type: typeof SIGNUP_ERROR,
-  err: Error,
+interface IsignOutSuccess {
+  type: typeof SIGNOUT_SUCCESS;
 }
 
-interface ISignOutSuccess {
-  type: typeof SIGNOUT_SUCCESS,
-}
-
-interface ISetAuthCountryInfo {
-  type: typeof SET_AUTH_COUNTRY_INFO,
-  payload: IKeyableObj,
+interface IsetAuthCountryInfo {
+  type: typeof SET_AUTH_COUNTRY_INFO;
+  payload: IkeyableObj;
 }
 
 export type AuthActionTypes =
-  | ISignIn
-  | ISignInUserData
-  | ISignUp
-  | ISignOut
-  | ILoginSuccess
-  | IClearErrors
-  | ILoginError
-  | ISignUpSuccess
-  | ISignUpError
-  | ISignOutSuccess
-  | ISetAuthCountryInfo
+  | IsignIn
+  | IsignInUserData
+  | IsignUp
+  | IsignOut
+  | IsignInSuccess
+  | IclearErrors
+  | IsignError
+  | IsignUpSuccess
+  | IsignOutSuccess
+  | IsetAuthCountryInfo

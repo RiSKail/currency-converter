@@ -1,14 +1,10 @@
 import styled from 'styled-components'
-import { device } from '../../../constants/devices'
+import { device } from '@/constants/devices'
 
-interface IProps {
-  props?: any
-}
-
-export default styled.div < IProps > `
-  color: ${props => props.theme.colors.font};
-  background: ${props => props.theme.colors.backgroundLight};
-  border-radius: ${props => props.theme.unit.single};
+export default styled.div `
+  color: ${(props): string => props.theme.colors.font};
+  background: ${(props): string => props.theme.colors.backgroundLight};
+  border-radius: ${(props): string => props.theme.unit.single};
   padding: 46px;
   display: flex;
   flex-direction: column;
@@ -21,7 +17,7 @@ export default styled.div < IProps > `
 
   .selectBtn {
     height: 45px;
-    background: ${props => props.theme.colors.fontLight};
+    background: ${(props): string => props.theme.colors.fontLight};
   }
 
   form {
@@ -32,16 +28,16 @@ export default styled.div < IProps > `
 
     input, select, .selectBtn  {
       box-shadow: 0px 4px 4px rgba(51, 51, 51, 0.04), 0px 4px 16px rgba(51, 51, 51, 0.08);
-      border-radius: ${props => props.theme.unit.half};
+      border-radius: ${(props): string => props.theme.unit.half};
       border: none;
       outline: none;
-      padding: ${props => props.theme.unit.double};
+      padding: ${(props): string => props.theme.unit.double};
       margin: 0 0 20px 0;
       width: 100%;
     }
 
     .red-border {
-      border: 2px solid ${props => props.theme.colors.error};
+      border: 2px solid ${(props): string => props.theme.colors.error};
     }
 
     button {
@@ -50,16 +46,16 @@ export default styled.div < IProps > `
   }
 
   .btn-switch{
-    color: ${props => props.theme.colors.fontBlue};
+    color: ${(props): string => props.theme.colors.fontBlue};
 
     &:hover {
-      color: ${props => props.theme.colors.fontBlueLight};
+      color: ${(props): string => props.theme.colors.fontBlueLight};
       cursor: pointer;
     }
   }
 
   p {
-      color:${props => props.theme.colors.fontLight};
+      color:${(props): string => props.theme.colors.fontLight};
       display: flex;
       align-items: center;
       justify-content: space-between;

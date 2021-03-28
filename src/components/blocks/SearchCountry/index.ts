@@ -1,3 +1,3 @@
-import SearchCountryBlock from './component'
+import SearchCountryBlock from './container'
 
 export default SearchCountryBlock

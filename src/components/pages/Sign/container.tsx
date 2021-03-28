@@ -9,35 +9,34 @@ import SignUpForm from '@/components/forms/SignUp'
 import { signIn, signUp, clearErrors } from '@/actions'
 import Alert from '@/components/blocks/global/Alert'
 import { CONVERTER_PAGE_PATH } from '@/constants'
-import Converter from './styles'
-import { IRootState } from '@/types/rootStateTypes'
-import { IKeyableObj, IAlert } from '@/types/otherTypes'
-interface IProps {
-  props?: any,
-  children?: any,
-  update: () => void
+import Sign from './styles'
+import { IrootState } from '@/types/rootStateTypes'
+import { IkeyableObj, Ialert } from '@/types/otherTypes'
+
+interface Iprops {
+  update: () => void;
 }
 
-const LoginPage: React.FC<IProps> = () => {
+const SignPage: React.FC<Iprops> = () => {
   const dispatch = useDispatch()
-  const auth = useSelector((state: IRootState) => state.firebase.auth)
-  const error = useSelector((state: IRootState) => state.auth.authError)
-  const [alertShow, setAlertShow] = useState<IAlert>({ show: false })
+  const auth = useSelector((state: IrootState) => state.firebase.auth)
+  const error = useSelector((state: IrootState) => state.auth.authError)
+  const [alertShow, setAlertShow] = useState<Ialert>({ show: false })
   const [type, setType] = useState<boolean>(true)
   const clearErrorsAction = clearErrors()
 
-  const onSignInHandler = (e: IKeyableObj) => {
+  const onSignInHandler = (e: IkeyableObj): void => {
     dispatch(signIn(e))
   }
 
-  const onSignUpHandler = (e: IKeyableObj) => {
+  const onSignUpHandler = (e: IkeyableObj): void => {
     dispatch(signUp(e))
   }
 
-  const onSwapType = () => {
+  const onSwitchType = (): void => {
     setType(!type)
   }
-  const alertCallbackFunc = () => {
+  const alertCallbackFunc = (): void => {
     setAlertShow({ show: false })
   }
 
@@ -45,6 +44,7 @@ const LoginPage: React.FC<IProps> = () => {
     if (error) {
       setAlertShow({ show: true, type: 'error', text: error })
       dispatch(clearErrorsAction)
+
     }
   }, [error, dispatch, clearErrorsAction])
 
@@ -59,13 +59,15 @@ const LoginPage: React.FC<IProps> = () => {
       <h1>
         {type ? <FormattedMessage id="sign_in_title" /> : <FormattedMessage id="sign_up_title" />}
       </h1>
-      <Converter>
+      <Sign>
         {type ? <SignInForm
           onSubmit={onSignInHandler}
-          onSwap={onSwapType} /> : <SignUpForm onSubmit={onSignUpHandler} onSwap={onSwapType} />}
-      </Converter>
+          onSwitch={onSwitchType} /> : <SignUpForm 
+          onSubmit={onSignUpHandler} 
+          onSwitch={onSwitchType} />}
+      </Sign>
     </StandardLayout>
   )
 }
 
-export default LoginPage
+export default SignPage

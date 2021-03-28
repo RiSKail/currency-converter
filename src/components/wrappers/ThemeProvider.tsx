@@ -5,12 +5,11 @@ import GlobalStyle from '@/theme/GlobalStyle'
 import theme from '@/theme'
 import { childrenPropType } from '@/prop-types'
 
-interface IProps {
-  children?: ReactNode,
-  props?: any
+interface Iprops {
+  children: ReactNode;
 }
 
-const ThemeProviderWrapper: React.FC<IProps> = ({ children }) => (
+const ThemeProviderWrapper: React.FC<Iprops> = ({ children }) => (
   <ThemeProvider theme={theme}>
     <>
       <GlobalStyle />
