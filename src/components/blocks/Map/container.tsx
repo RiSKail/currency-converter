@@ -7,6 +7,7 @@ import { MAP_THEME_URL } from '@/constants'
 import { IkeyableObj } from '@/types/otherTypes'
 import { GeoJsonObject } from 'geojson'
 import MapBlockStyle from './styles'
+import theme from '@/theme'
 import { useSelector } from 'react-redux'
 import 'leaflet/dist/leaflet.css'
 import { IrootState } from '@/types/rootStateTypes'
@@ -20,7 +21,7 @@ Leaflet.Icon.Default.mergeOptions({
 })
 
 interface Iprops {
-  currentCountryData: IkeyableObj;
+  currentCountryData?: IkeyableObj;
   mapData: GeoJsonObject;
 }
 
@@ -65,7 +66,7 @@ const Map: React.FC<Iprops> = ({ currentCountryData, mapData }) => {
     layer.on({
       mousemove: (event: Leaflet.LeafletMouseEvent) => {
         event.target.setStyle({
-          fillColor: '#1a2239',
+          fillColor: theme.colors.backgroundTransparentBlack,
           fillOpacity: '0.2',
         })
       },
@@ -80,7 +81,8 @@ const Map: React.FC<Iprops> = ({ currentCountryData, mapData }) => {
       <MapContainer minZoom={initial.minZoom} worldCopyJump>
         <ChangeView
           center={
-            (currentCountryData.latlng.length !== 0) ? currentCountryData.latlng : initial.center
+            (currentCountryData && 
+            currentCountryData.latlng.length !== 0) ? currentCountryData.latlng : initial.center
           }
           zoom={initial.zoom} />
         <TileLayer url={MAP_THEME_URL} />
@@ -91,10 +93,11 @@ const Map: React.FC<Iprops> = ({ currentCountryData, mapData }) => {
           pathOptions={initial.pathOptions} />
         <Popup
           position={
-            (currentCountryData.latlng.length !== 0) ? currentCountryData.latlng : initial.center
+            (currentCountryData && 
+            currentCountryData.latlng.length !== 0) ? currentCountryData.latlng : initial.center
           }
         >
-          {popupCreator(currentCountryData)}
+          {currentCountryData && popupCreator(currentCountryData)}
         </Popup>
       </MapContainer>
     </MapBlockStyle>
@@ -102,7 +105,7 @@ const Map: React.FC<Iprops> = ({ currentCountryData, mapData }) => {
 }
 
 Map.propTypes = {
-  currentCountryData: pt.object.isRequired,
+  currentCountryData: pt.object,
   mapData: pt.any.isRequired,
 }
 

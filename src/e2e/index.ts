@@ -12,7 +12,7 @@ interface Iprops{
 
 export const snapshotConfiguration = ({ 
   filename, 
-}: Iprops): MatchImageSnapshotOptions | undefined => {
+}: Iprops): MatchImageSnapshotOptions => {
   return {
     customSnapshotIdentifier: filename,
   }

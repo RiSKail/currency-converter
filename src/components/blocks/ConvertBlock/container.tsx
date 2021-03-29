@@ -11,7 +11,7 @@ import ConvertBlockStyle from './styles'
 
 interface Iprops {
   setValue(a: string[]): void;
-  type: string;
+  type?: string;
   storedValue: string[];
 }
 
@@ -20,8 +20,8 @@ const Convert: React.FC<Iprops> = ({ type, storedValue, setValue }) => {
   const inputPlaceholder = intl.formatMessage({ id: 'convert_block_input_placeholder' })
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
   const dispatch = useDispatch()
-  const valueType = useSelector((state: IrootState) => state.values[type].type)
-  const valueData = useSelector((state: IrootState) => state.values[type].value)
+  const valueType = useSelector((state: IrootState) => state.values[type || 'primary'].type)
+  const valueData = useSelector((state: IrootState) => state.values[type || 'primary'].value)
   const [key]: Array<string> = Object.entries(countries)
   .find(([, name]) => valueType === name) || ['USD']
 
@@ -77,7 +77,7 @@ const Convert: React.FC<Iprops> = ({ type, storedValue, setValue }) => {
 
 Convert.propTypes = {
   setValue: pt.func.isRequired,
-  type: pt.string.isRequired,
+  type: pt.string,
   storedValue: pt.array.isRequired,
 }
 
