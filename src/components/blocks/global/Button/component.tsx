@@ -8,6 +8,7 @@ interface Iprops {
   onClick?: () => void;
   type?: string;
   children?: ReactNode;
+  [x: string]: unknown;
 }
 
 const Button: React.FC<Iprops> = ({ type, children, ...props }) => {

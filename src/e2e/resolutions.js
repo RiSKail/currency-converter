@@ -1,6 +1,5 @@
-import { IkeyableObj } from '@/types/otherTypes'
-
-const resolutions: IkeyableObj = {
+  
+export default {
   iPhone8p: {
     viewport: {
       width: 750,
@@ -20,5 +19,3 @@ const resolutions: IkeyableObj = {
     },
   },
 }
-
-export default resolutions
