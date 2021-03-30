@@ -7,7 +7,7 @@ import Button from '../../blocks/global/Button'
 import { Link } from 'react-router-dom'
 import { required } from '../validations'
 import { IkeyableObj } from '@/types/otherTypes'
-import { FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, CONFIRM, SIGNUP } from '@/constants'
+import { FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, CONFIRM, SIGNUP, SIGN_SWAP } from '@/constants'
 interface Iprops {
   onSubmit: (e: IkeyableObj) => void;
   onSwitch: () => void;
@@ -105,7 +105,7 @@ const SignUpForm: React.FC<Iprops> = ({ onSubmit, onSwitch }) => {
 
       <p>
         <FormattedMessage id="signup_swap_text" />
-        <Link onClick={onSwitch} to="#" className="btn-switch">
+        <Link onClick={onSwitch} to="#" className="btn-switch" data-testid={SIGN_SWAP}>
           <FormattedMessage id="signin_btn_text" />
         </Link>
       </p>

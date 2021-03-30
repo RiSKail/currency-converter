@@ -68,6 +68,7 @@ const Convert: React.FC<Iprops> = ({ type, storedValue, setValue }) => {
         searchable />
       <input
         type="text"
+        data-testid={type + '-converter-input'}
         value={valueData}
         onChange={onChangeInput}
         placeholder={inputPlaceholder} />

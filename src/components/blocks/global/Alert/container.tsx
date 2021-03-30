@@ -62,10 +62,10 @@ const Alert: React.FC<Iprops> = ({ type, text, time, callback }) => {
 
   return (
     <Colors>
-      <AlertStyle className={style}>
+    <AlertStyle className={style} data-testid={type}>
         <span className="close-btn" onClick={onToggleAlert}>&times;</span>
         <strong>{typeText}!</strong> {text}
-      </AlertStyle>
+    </AlertStyle>
     </Colors>
   )
 }
