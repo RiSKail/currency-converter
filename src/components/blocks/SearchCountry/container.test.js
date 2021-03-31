@@ -21,25 +21,26 @@ describe('SearchCountry tests', () => {
   it('SearchCountry is render with props', () => {
     render(
       <BaseComponentTestWrapper>
-        <SearchCountry 
-        onClickHandleCreator={(e) => console.log(e)} 
-        countriesData={{
-          0:{
-            currencies: [
-              {
-                code: 'AFN',
-                name: 'Afghan afghani',
-                symbol: '؋',
-              },
-            ],
-            flag: 'https://restcountries.eu/data/afg.svg',
-            name: 'Afghanistan',
-            alpha3Code: 'AFG',
-            latlng: [
-              33,
-              65,
-            ],
-          }}}/>
+        <SearchCountry
+          onClickHandleCreator={(e) => console.log(e)}
+          countriesData={{
+            0: {
+              currencies: [
+                {
+                  code: 'AFN',
+                  name: 'Afghan afghani',
+                  symbol: '؋',
+                },
+              ],
+              flag: 'https://restcountries.eu/data/afg.svg',
+              name: 'Afghanistan',
+              alpha3Code: 'AFG',
+              latlng: [
+                33,
+                65,
+              ],
+            }
+          }} />
       </BaseComponentTestWrapper>,
       container
     )

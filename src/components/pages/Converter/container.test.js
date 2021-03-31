@@ -9,7 +9,7 @@ import Converter from './container'
 it('Converter page is render', () => {
   render(
     <BaseComponentTestWrapper>
-      <Converter update={() => console.log(true)}/>
+      <Converter update={() => console.log(true)} />
     </BaseComponentTestWrapper>
   )
 })

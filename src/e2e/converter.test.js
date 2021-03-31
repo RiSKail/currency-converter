@@ -18,15 +18,15 @@ describe('Converter page', () => {
   }, timeout)
 
   test('Should be finded initial converter field', async () => {
-      const primaryField = await page.$('[data-testid=primary-converter-input')
-      const secondaryField = await page.$('[data-testid=secondary-converter-input')
-      expect(primaryField).not.toBeNull()
-      expect(secondaryField).not.toBeNull()
+    const primaryField = await page.$('[data-testid=primary-converter-input')
+    const secondaryField = await page.$('[data-testid=secondary-converter-input')
+    expect(primaryField).not.toBeNull()
+    expect(secondaryField).not.toBeNull()
   }, timeout)
 
   test('Should be finded select converter field', async () => {
-      const converterSelect = await page.$('[data-testid=rfs-btn]')
-      expect(converterSelect).not.toBeNull()
+    const converterSelect = await page.$('[data-testid=rfs-btn]')
+    expect(converterSelect).not.toBeNull()
   }, timeout)
 
   test('Should be converted currency after input new value', async () => {

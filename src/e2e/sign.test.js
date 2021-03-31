@@ -47,27 +47,27 @@ describe('Sign page tests', () => {
   }, timeout)
 
   test("Page has sign up validation", async () => {
-      await page.click(`[data-testid=${SIGN_SWAP}]`)
-      await page.click(`[data-testid=${FIRST_NAME}]`, { clickCount: 3 })
-      await page.keyboard.type('test')
-      await page.click(`[data-testid=${LAST_NAME}]`, { clickCount: 3 })
-      await page.keyboard.type('test')
-      await page.click(`[data-testid=${EMAIL}]`, { clickCount: 3 })
-      await page.keyboard.type('test@gmail.com')
-      await page.click(`[data-testid=${EMAIL}]`, { clickCount: 3 })
-      await page.keyboard.type('test@gmail.com')
-      await page.click(`[data-testid=${PASSWORD}]`, { clickCount: 3 })
-      await page.keyboard.type('12345')
-      await page.click(`[data-testid=${CONFIRM}]`, { clickCount: 3 })
-      await page.keyboard.type('12345')
-      await page.click(`[data-testid=${SIGNUP}]`)
-      await page.waitForSelector('[data-testid=error]', { visible: true })
-      const error = await page.$eval(
-        '[data-testid=error]',
-        element => element.textContent
-      )
+    await page.click(`[data-testid=${SIGN_SWAP}]`)
+    await page.click(`[data-testid=${FIRST_NAME}]`, { clickCount: 3 })
+    await page.keyboard.type('test')
+    await page.click(`[data-testid=${LAST_NAME}]`, { clickCount: 3 })
+    await page.keyboard.type('test')
+    await page.click(`[data-testid=${EMAIL}]`, { clickCount: 3 })
+    await page.keyboard.type('test@gmail.com')
+    await page.click(`[data-testid=${EMAIL}]`, { clickCount: 3 })
+    await page.keyboard.type('test@gmail.com')
+    await page.click(`[data-testid=${PASSWORD}]`, { clickCount: 3 })
+    await page.keyboard.type('12345')
+    await page.click(`[data-testid=${CONFIRM}]`, { clickCount: 3 })
+    await page.keyboard.type('12345')
+    await page.click(`[data-testid=${SIGNUP}]`)
+    await page.waitForSelector('[data-testid=error]', { visible: true })
+    const error = await page.$eval(
+      '[data-testid=error]',
+      element => element.textContent
+    )
 
-      expect(error).toBe('×Error! The email address is badly formatted.')
+    expect(error).toBe('×Error! The email address is badly formatted.')
   }, timeout)
 
   test('Sign in with valid credentials', async () => {

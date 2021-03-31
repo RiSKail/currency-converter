@@ -31,24 +31,24 @@ describe('Map tests', () => {
   it('Map is render with currentCountryData', () => {
     render(
       <BaseComponentTestWrapper>
-        <Map 
-        mapData={mapData} 
-        currentCountryData={{
-          currencies: [
-            {
-              code: 'AFN',
-              name: 'Afghan afghani',
-              symbol: '؋',
-            },
-          ],
-          flag: 'https://restcountries.eu/data/afg.svg',
-          name: 'Afghanistan',
-          alpha3Code: 'AFG',
-          latlng: [
-            33,
-            65,
-          ],
-        }}/>
+        <Map
+          mapData={mapData}
+          currentCountryData={{
+            currencies: [
+              {
+                code: 'AFN',
+                name: 'Afghan afghani',
+                symbol: '؋',
+              },
+            ],
+            flag: 'https://restcountries.eu/data/afg.svg',
+            name: 'Afghanistan',
+            alpha3Code: 'AFG',
+            latlng: [
+              33,
+              65,
+            ],
+          }} />
       </BaseComponentTestWrapper>,
       container
     )

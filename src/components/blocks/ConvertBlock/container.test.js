@@ -41,10 +41,10 @@ it('ConvertBlock primary is render with values', () => {
   act(() => {
     render(
       <BaseComponentTestWrapper mockStore={store}>
-          <ConvertBlock 
-            type="primary" 
-            storedValue={['USD', 'EUR']} 
-            setValue={(a) => console.log(a)} />
+        <ConvertBlock
+          type="primary"
+          storedValue={['USD', 'EUR']}
+          setValue={(a) => console.log(a)} />
       </BaseComponentTestWrapper>,
       container
     )
@@ -57,10 +57,10 @@ it('ConvertBlock secondary is render with values', () => {
   act(() => {
     render(
       <BaseComponentTestWrapper mockStore={store}>
-          <ConvertBlock 
-            type="secondary" 
-            storedValue={['USD', 'EUR']} 
-            setValue={(a) => console.log(a)} />
+        <ConvertBlock
+          type="secondary"
+          storedValue={['USD', 'EUR']}
+          setValue={(a) => console.log(a)} />
       </BaseComponentTestWrapper>,
       container
     )
@@ -74,9 +74,9 @@ it('ConvertBlock is render without type', () => {
   act(() => {
     render(
       <BaseComponentTestWrapper mockStore={store}>
-          <ConvertBlock 
-            storedValue={['USD', 'EUR']} 
-            setValue={(a) => console.log(a)} />
+        <ConvertBlock
+          storedValue={['USD', 'EUR']}
+          setValue={(a) => console.log(a)} />
       </BaseComponentTestWrapper>,
       container
     )
