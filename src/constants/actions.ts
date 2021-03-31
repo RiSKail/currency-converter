@@ -1,5 +1,3 @@
-// Place here Action types constants
-
 export const SET_BASE_PRIMARY_TYPE = 'SET_BASE_PRIMARY_TYPE'
 export const SET_BASE_SECONDARY_TYPE = 'SET_BASE_SECONDARY_TYPE'
 export const SET_BASE_PRIMARY_VALUE = 'SET_BASE_PRIMARY_VALUE'
