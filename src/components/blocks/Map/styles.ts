@@ -7,11 +7,6 @@ export default styled.div`
   width: 90%;
   margin: 45px 0 0 0;
 
-  .active-country {
-    color: '#1a2239';
-    opacity: '0.2';
-  }
-
   .leaflet-container {
     height: 510px;
     width: 100%;
