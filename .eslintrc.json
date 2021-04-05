@@ -1,13 +1,17 @@
 {
   "extends": [
-    "standard",
-    "standard-react"
+    "plugin:react/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "plugins": [
+    "react",
     "prettier",
-    "react-hooks"
+    "react-hooks",
+    "@typescript-eslint"
   ],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "env": {
     "node": true,
     "browser": true,
@@ -19,9 +23,28 @@
     }
   },
   "rules": {
+    "camelcase": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "default",
+        "format": [
+          "camelCase",
+          "strictCamelCase",
+          "PascalCase",
+          "StrictPascalCase",
+          "snake_case",
+          "UPPER_CASE"
+        ],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      }
+    ],
     "arrow-parens": ["error", "as-needed"],
-    "semi":"error",
+    "semi": ["error", "never"],
     "prefer-destructuring":"error",
+    "@typescript-eslint/no-var-requires": 0,
     "max-len": [
       "warn",
       {
@@ -30,7 +53,6 @@
         "ignorePattern": "import"
       }
     ],
-    "no-unused-vars": "warn",
     "operator-linebreak": "warn",
     "react-hooks/rules-of-hooks": "error",
     "react/jsx-closing-tag-location": 2,
@@ -48,14 +70,7 @@
         "when": "always"
       }
     ],
-    "react/jsx-filename-extension": [
-      2,
-      {
-        "extensions": [
-          ".jsx"
-        ]
-      }
-    ],
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "jsx-quotes": [
       "error",
       "prefer-double"
@@ -77,7 +92,7 @@
   },
   "overrides": [
     {
-      "files":["src/index.js"],
+      "files":["src/index.tsx"],
       "rules": {
         "react/jsx-filename-extension": "off"
       }
