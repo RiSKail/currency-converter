@@ -1,5 +1,5 @@
 {
-  "homepage": "https://currency-converter-390b0.web.app",
+  "homepage": "./",
   "name": "currency-converter",
   "main": "public/electron.js",
   "description": "Currency converter project",
