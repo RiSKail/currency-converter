@@ -18,4 +18,3 @@ spec:
           image: 321207815125.dkr.ecr.us-east-2.amazonaws.com/currency-converter2:latest
           ports:
             - containerPort: 3000
-            

@@ -6,7 +6,7 @@ metadata:
 
 vpc:
   id: vpc-0af034d0eb6234a43
-  cidr: '192.168.0.0/16'
+  cidr: "192.168.0.0/16"
   subnets:
     public:
       us-east-2a:
@@ -27,4 +27,3 @@ nodeGroups:
     instanceType: t2.medium
     desiredCapacity: 1
     privateNetworking: true
-    
