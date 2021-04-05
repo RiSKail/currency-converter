@@ -27,3 +27,4 @@ nodeGroups:
     instanceType: t2.medium
     desiredCapacity: 1
     privateNetworking: true
+    
