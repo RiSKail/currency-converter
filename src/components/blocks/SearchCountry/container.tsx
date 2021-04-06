@@ -5,8 +5,8 @@ import { IkeyableObj } from '@/types/otherTypes'
 import SearchCountryStyle from './styles'
 
 interface Iprops {
-  onClickHandleCreator: (el: Record<string, unknown>) => MouseEventHandler<HTMLLIElement>;
-  countriesData: IkeyableObj;
+  onClickHandleCreator?: (el: Record<string, unknown>) => MouseEventHandler<HTMLLIElement>;
+  countriesData?: IkeyableObj;
 }
 
 const SearchCountry: React.FC<Iprops> = ({ countriesData, onClickHandleCreator }) => {
@@ -26,7 +26,7 @@ const SearchCountry: React.FC<Iprops> = ({ countriesData, onClickHandleCreator }
         .filter((elem: IkeyableObj) => elem.name.toLowerCase().includes(inputValue))
         .map((el: IkeyableObj) => {
           return (
-            <li key={el.name} onClick={onClickHandleCreator(el)}>
+            <li key={el.name} onClick={onClickHandleCreator && onClickHandleCreator(el)}>
               <img src={el.flag} alt={el.name} />{el.name}
             </li>
           )
@@ -37,8 +37,8 @@ const SearchCountry: React.FC<Iprops> = ({ countriesData, onClickHandleCreator }
 }
 
 SearchCountry.propTypes = {
-  countriesData: pt.object.isRequired,
-  onClickHandleCreator: pt.func.isRequired,
+  countriesData: pt.object,
+  onClickHandleCreator: pt.func,
 }
 
 export default SearchCountry

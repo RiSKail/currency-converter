@@ -27,11 +27,11 @@ const App: React.FC = () => {
           onUpdated={(): void => console.log('Service worker updated')}
           publicServiceWorkerDest="/service-worker.js"
         >
-          {({ update }: { update: () => void} ): ReactNode => (
+          {({ update }: { update: () => void}): ReactNode => (
             <HttpsRedirect>
               <Internalization>
                 <ThemeProviderWrapper>
-                  <Router update={update}/>
+                  <Router update={update} />
                 </ThemeProviderWrapper>
               </Internalization>
             </HttpsRedirect>

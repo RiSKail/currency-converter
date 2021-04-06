@@ -7,6 +7,7 @@ import Button from '../../blocks/global/Button'
 import { Link } from 'react-router-dom'
 import { required } from '../validations'
 import { IkeyableObj } from '@/types/otherTypes'
+import { FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, CONFIRM, SIGNUP, SIGN_SWAP } from '@/constants'
 interface Iprops {
   onSubmit: (e: IkeyableObj) => void;
   onSwitch: () => void;
@@ -40,61 +41,71 @@ const SignUpForm: React.FC<Iprops> = ({ onSubmit, onSwitch }) => {
         }}
         render={({ handleSubmit }: { handleSubmit: () => void }): ReactElement => (
           <form onSubmit={handleSubmit}>
-            <Field name="firstName" validate={required}>
+            <Field name={FIRST_NAME} validate={required}>
               {({ input, meta }: IfieldProps): ReactElement => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : undefined}
                   type="text"
+                  data-testid={FIRST_NAME}
                   placeholder={firstNamePlaceholder}
                   autoComplete="on" />
               )}
             </Field>
-            <Field name="lastName" validate={required}>
+            <Field name={LAST_NAME} validate={required}>
               {({ input, meta }: IfieldProps): ReactElement => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : undefined}
                   type="text"
+                  data-testid={LAST_NAME}
                   placeholder={lastNamePlaceholder}
                   autoComplete="on" />
               )}
             </Field>
-            <Field name="email" validate={required}>
+            <Field name={EMAIL} validate={required}>
               {({ input, meta }: IfieldProps): ReactElement => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : undefined}
                   type="text"
+                  data-testid={EMAIL}
                   placeholder={emailPlaceholder}
                   autoComplete="on" />
               )}
             </Field>
-            <Field name="password" validate={required}>
+            <Field name={PASSWORD} validate={required}>
               {({ input, meta }: IfieldProps): ReactElement => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : undefined}
                   type="password"
+                  data-testid={PASSWORD}
                   placeholder={passwordPlaceholder} />
               )}
             </Field>
-            <Field name="confirm" validate={required}>
+            <Field name={CONFIRM} validate={required}>
               {({ input, meta }: IfieldProps): ReactElement => (
                 <input
                   {...input}
                   className={(meta.error && meta.touched) ? 'red-border' : undefined}
                   type="password"
+                  data-testid={CONFIRM}
                   placeholder={confirmPlaceholder} />
               )}
             </Field>
-            <Button type="Primary"><FormattedMessage id="signup_btn_text" /></Button>
+            <Button 
+              type="Primary" 
+              data-testid={SIGNUP}
+            >
+              <FormattedMessage id="signup_btn_text" />
+            </Button>
           </form>
         )} />
 
       <p>
         <FormattedMessage id="signup_swap_text" />
-        <Link onClick={onSwitch} to="#" className="btn-switch">
+        <Link onClick={onSwitch} to="#" className="btn-switch" data-testid={SIGN_SWAP}>
           <FormattedMessage id="signin_btn_text" />
         </Link>
       </p>

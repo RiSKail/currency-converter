@@ -4,12 +4,12 @@ import 'jest-styled-components'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
 
-import NotFound from './component'
+import Map from './container'
 
-it('NotFound page is render', () => {
+it('Map page is render', () => {
   render(
     <BaseComponentTestWrapper>
-      <NotFound />
+      <Map />
     </BaseComponentTestWrapper>
   )
 })

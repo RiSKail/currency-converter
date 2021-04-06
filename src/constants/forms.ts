@@ -1,6 +1,8 @@
-// Place here form and field names
-
-export const DEMO_FORM = 'demoForm'
-
-export const FIRST_NAME_FIELD = 'firstName'
-export const LAST_NAME_FIELD = 'lastName'
+export const FIRST_NAME = 'first-name'
+export const LAST_NAME = 'last-name'
+export const EMAIL = 'email'
+export const PASSWORD = 'password'
+export const SIGNIN = 'sign-in'
+export const CONFIRM = 'confirm'
+export const SIGNUP = 'sign-up'
+export const SIGN_SWAP = 'sign-swap'

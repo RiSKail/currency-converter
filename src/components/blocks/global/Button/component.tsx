@@ -6,8 +6,9 @@ import ButtonStyle from './styles'
 
 interface Iprops {
   onClick?: () => void;
-  type: string;
+  type?: string;
   children?: ReactNode;
+  [x: string]: unknown;
 }
 
 const Button: React.FC<Iprops> = ({ type, children, ...props }) => {
@@ -17,13 +18,14 @@ const Button: React.FC<Iprops> = ({ type, children, ...props }) => {
     case 'Circle':
       return <ButtonStyle borderRadius="180px" padding="20px" {...props}>{children}</ButtonStyle>
     default:
-      return <ButtonStyle {...props} />
+      return <ButtonStyle {...props}>{children}</ButtonStyle>
   }
 }
 
 Button.propTypes = {
-  type: pt.string.isRequired,
+  type: pt.string,
   children: pt.any,
+  onClick: pt.func,
 }
 
 export default Button

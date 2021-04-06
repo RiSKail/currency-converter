@@ -31,12 +31,12 @@ const Header: React.FC = () => {
         <>
           <ul>
             <SetLocale />
-            <li>
+            <li data-testid={CONVERTER_PAGE_PATH.substr(1)}>
               <NavLink activeClassName="is-active" to={CONVERTER_PAGE_PATH}>
                 <FormattedMessage id="header_converter_link" />
               </NavLink>
             </li>
-            <li>
+            <li data-testid={MAP_PAGE_PATH.substr(1)}>
               <NavLink activeClassName="is-active" to={MAP_PAGE_PATH}>
                 <FormattedMessage id="header_map_link" />
               </NavLink>
