@@ -1,5 +1,6 @@
 import React from "react"
 import { render, unmountComponentAtNode } from 'react-dom'
+
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
 import SetLocale from './index'
 
@@ -22,4 +23,7 @@ it('SetLocale is render without crashing', () => {
       <SetLocale />
     </BaseComponentTestWrapper>, container
   )
+
+  const select = container.querySelectorAll('select')
+  expect(select.length).not.toBe(0)
 })

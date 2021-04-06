@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { IntlProvider } from 'react-intl'
 import { connect } from 'react-redux'
 import pt from 'prop-types'
+
 import { childrenPropType } from '@/prop-types'
 import getMessages from '@/internalization'
 import { IrootState } from '@/types/rootStateTypes'

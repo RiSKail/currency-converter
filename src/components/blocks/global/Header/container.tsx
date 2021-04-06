@@ -3,15 +3,19 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import avatarImg from './img/generic-avatar.jpg'
+
+import SetLocale from '@/components/blocks/global/SetLocale'
+
 import { signOut } from '@/actions'
 import { IrootState } from '@/types/rootStateTypes'
 import { CONVERTER_PAGE_PATH, MAP_PAGE_PATH } from '@/constants/paths'
-import SetLocale from '@/components/blocks/global/SetLocale'
+
 import HeaderStyle from './styles'
+
 import versionImg from './img/version-icon.svg'
 import logoutImg from './img/logout.svg'
 import authorImg from './img/author-icon.svg'
+import avatarImg from './img/generic-avatar.jpg'
 
 const Header: React.FC = () => {
   const uid = useSelector((state: IrootState) => state.firebase.auth.uid)
@@ -31,12 +35,12 @@ const Header: React.FC = () => {
         <>
           <ul>
             <SetLocale />
-            <li data-testid={CONVERTER_PAGE_PATH.substr(1)}>
+            <li data-testid={CONVERTER_PAGE_PATH}>
               <NavLink activeClassName="is-active" to={CONVERTER_PAGE_PATH}>
                 <FormattedMessage id="header_converter_link" />
               </NavLink>
             </li>
-            <li data-testid={MAP_PAGE_PATH.substr(1)}>
+            <li data-testid={MAP_PAGE_PATH}>
               <NavLink activeClassName="is-active" to={MAP_PAGE_PATH}>
                 <FormattedMessage id="header_map_link" />
               </NavLink>

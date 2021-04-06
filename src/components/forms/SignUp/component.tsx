@@ -1,13 +1,16 @@
 import React, { InputHTMLAttributes, ReactElement } from 'react'
+import { Link } from 'react-router-dom'
 import { FormattedMessage, useIntl } from 'react-intl'
 import pt from 'prop-types'
-import Styles from './styles'
 import { Form, Field } from 'react-final-form'
-import Button from '../../blocks/global/Button'
-import { Link } from 'react-router-dom'
+
+import Button from '@/components/blocks/global/Button'
+
 import { required } from '../validations'
 import { IkeyableObj } from '@/types/otherTypes'
 import { FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, CONFIRM, SIGNUP, SIGN_SWAP } from '@/constants'
+
+import Styles from './styles'
 interface Iprops {
   onSubmit: (e: IkeyableObj) => void;
   onSwitch: () => void;

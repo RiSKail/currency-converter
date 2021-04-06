@@ -1,13 +1,14 @@
 import React from 'react'
 import 'jest-styled-components'
-import { updateCountriesData } from '@/actions'
+
 import countriesReducer from './countries'
+import { updateCountriesData } from '@/actions'
 
 const state = {}
 
 it('Data should be updated', () => {
-  const action = updateCountriesData({ name: "Belarus" })
+  const action = updateCountriesData({ name: 'Belarus' })
   const newState = countriesReducer(state, action)
 
-  expect(newState.name).toBe("Belarus")
+  expect(newState.name).toBe('Belarus')
 })

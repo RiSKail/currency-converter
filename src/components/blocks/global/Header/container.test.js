@@ -1,5 +1,6 @@
 import React from "react"
 import { render, unmountComponentAtNode } from 'react-dom'
+
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
 import Header from './index'
 
@@ -22,4 +23,7 @@ it('Header is render without crashing', () => {
       <Header />
     </BaseComponentTestWrapper>, container
   )
+
+  const ul = container.querySelectorAll('ul')
+  expect(ul.length).not.toBe(0)
 })

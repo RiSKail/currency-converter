@@ -1,4 +1,5 @@
 import { toMatchImageSnapshot } from 'jest-image-snapshot'
+
 import { beforeAllTest, afterAlltest, page, timeout } from './index'
 import { DEFAULT_PORT, EMAIL, PASSWORD, SIGNIN, ADMIN_LOGIN, CONVERTER_PAGE_PATH, ADMIN_PASSWORD, FIRST_NAME, LAST_NAME, SIGN_PAGE_PATH, SIGN_SWAP, SIGNUP, CONFIRM } from '@/constants'
 
@@ -22,7 +23,7 @@ describe('Sign page tests', () => {
     expect(loginField && passwordField).not.toBeNull()
   }, timeout)
 
-  test("Can't sign in without login or password", async () => {
+  test('Can\'t sign in without login or password', async () => {
     const signInBtn = await page.$(`[data-testid=${SIGNIN}]`)
     expect(signInBtn).not.toBeNull()
     await page.click(`[data-testid=${SIGNIN}]`)

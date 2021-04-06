@@ -3,10 +3,12 @@ import { Provider } from 'react-redux'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import HttpsRedirect from 'react-https-redirect'
 import WithServiceWorker from '@medipass/react-service-worker'
-import Router from '@/Router'
-import { getStore } from '@/store'
+
 import ThemeProviderWrapper from '@/components/wrappers/ThemeProvider'
 import Internalization from '@/components/wrappers/Internalization'
+import Routers from '@/Router'
+
+import { getStore } from '@/store'
 import firebase from './firebase'
 
 const rrfConfig = { userProfile: 'users' }
@@ -31,7 +33,7 @@ const App: React.FC = () => {
             <HttpsRedirect>
               <Internalization>
                 <ThemeProviderWrapper>
-                  <Router update={update} />
+                  <Routers update={update} />
                 </ThemeProviderWrapper>
               </Internalization>
             </HttpsRedirect>

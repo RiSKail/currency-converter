@@ -1,6 +1,7 @@
 import React from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
 import 'jest-styled-components'
+import { render, unmountComponentAtNode } from 'react-dom'
+
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
 import SearchCountry from './container'
 
@@ -22,7 +23,7 @@ describe('SearchCountry tests', () => {
     render(
       <BaseComponentTestWrapper>
         <SearchCountry
-          onClickHandleCreator={(e) => console.log(e)}
+          onClickHandleCreator={data => () => data}
           countriesData={{
             0: {
               currencies: [
@@ -39,19 +40,13 @@ describe('SearchCountry tests', () => {
                 33,
                 65,
               ],
-            }
+            },
           }} />
       </BaseComponentTestWrapper>,
       container
     )
-  })
 
-  it('SearchCountry is render without props', () => {
-    render(
-      <BaseComponentTestWrapper>
-        <SearchCountry />
-      </BaseComponentTestWrapper>,
-      container
-    )
+    const li = container.querySelectorAll('li')
+    expect(li.length).toBe(1)
   })
 })

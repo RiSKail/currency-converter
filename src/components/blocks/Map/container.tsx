@@ -1,16 +1,21 @@
 import React, { ReactElement } from 'react'
+import { MapContainer, TileLayer, useMap, GeoJSON, Popup } from 'react-leaflet'
+import { useSelector } from 'react-redux'
 import pt from 'prop-types'
 import ReactDOMServer from 'react-dom/server'
 import Leaflet from 'leaflet'
-import { MapContainer, TileLayer, useMap, GeoJSON, Popup } from 'react-leaflet'
-import { MAP_THEME_URL } from '@/constants'
-import { IkeyableObj } from '@/types/otherTypes'
-import { GeoJsonObject } from 'geojson'
-import MapBlockStyle from './styles'
-import theme from '@/theme'
-import { useSelector } from 'react-redux'
-import 'leaflet/dist/leaflet.css'
+
 import { IrootState } from '@/types/rootStateTypes'
+import { IkeyableObj } from '@/types/otherTypes'
+import { MAP_THEME_URL } from '@/constants'
+
+import theme from '@/theme'
+
+import MapBlockStyle from './styles'
+import 'leaflet/dist/leaflet.css'
+
+import { GeoJsonObject } from 'geojson'
+
 
 Leaflet.Icon.Default.imagePath = '../node_modules/leaflet'
 

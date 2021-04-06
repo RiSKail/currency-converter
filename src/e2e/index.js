@@ -1,6 +1,7 @@
 import { generateImage } from 'jsdom-screenshot'
 import resolutions from './resolutions'
 import puppeteer from 'puppeteer'
+
 import { DEFAULT_PORT, EMAIL, PASSWORD, SIGNIN, ADMIN_LOGIN, ADMIN_PASSWORD } from '@/constants'
 
 export let browser, page

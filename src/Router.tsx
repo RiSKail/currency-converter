@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react'
 import { HashRouter, BrowserRouter, Route, Switch } from 'react-router-dom'
 import pt from 'prop-types'
+
 import Loader from '@/components/blocks/global/Loader'
 import SecuredRoute from '@/components/wrappers/SecuredRoute'
-import { childrenPropType } from '@/prop-types'
 
+import { childrenPropType } from '@/prop-types'
 import { CONVERTER_PAGE_PATH, HOME_PAGE_PATH, SIGN_PAGE_PATH, MAP_PAGE_PATH } from '@/constants'
 
 const ConverterPage = React.lazy(() => import('@/components/pages/Converter'))

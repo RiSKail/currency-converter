@@ -1,10 +1,11 @@
+import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import { IrootState } from '@/types/rootStateTypes'
-import { setLocale } from '@/actions'
 
 import SetLocale from './component'
-import { Dispatch } from 'redux'
+
 import { IrootAction } from '@/types/rootActionTypes'
+import { IrootState } from '@/types/rootStateTypes'
+import { setLocale } from '@/actions'
 import { InternalizationActionTypes } from '@/types/actions'
 
 interface ImapState {

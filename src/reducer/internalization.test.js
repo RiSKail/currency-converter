@@ -1,8 +1,9 @@
 import React from 'react'
-import { ENGLISH, RUSSIAN } from '@/constants'
 import 'jest-styled-components'
-import { setLocale } from '@/actions'
+
 import internalizationReducer from './internalization'
+import { setLocale } from '@/actions'
+import { ENGLISH, RUSSIAN } from '@/constants'
 
 const state = {
   active: ENGLISH,
