@@ -53,15 +53,15 @@
     "redux-saga": "^1.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.3.2",
+    "sw-precache-cra": "^1.0.0",
     "ts-jest": "^26.5.4",
     "typescript": "^4.2.3",
     "update-electron-app": "^2.0.1"
   },
   "scripts": {
     "react-start": "set PORT=3000 && react-app-rewired start",
-    "react-build": "set APP_ENV=react && react-app-rewired build",
+    "react-build": "set APP_ENV=react && react-app-rewired build && sw-precache-cra --config sw-config.js",
     "react-test": "react-app-rewired test",
-    "react-predeploy": "npm run build",
     "react-deploy": "gh-pages -d build",
     "react-eject": "react-app-rewired eject",
     "electron-build": "set APP_ENV=electron && react-app-rewired build && electron-builder --dir",

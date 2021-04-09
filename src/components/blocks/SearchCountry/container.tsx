@@ -9,9 +9,14 @@ import SearchCountryStyle from './styles'
 interface Iprops {
   onClickHandleCreator: (el: Record<string, unknown>) => MouseEventHandler<HTMLLIElement>;
   countriesData: IkeyableObj;
+  currentCountryData: IkeyableObj;
 }
 
-const SearchCountry: React.FC<Iprops> = ({ countriesData, onClickHandleCreator }) => {
+const SearchCountry: React.FC<Iprops> = ({ 
+  currentCountryData, 
+  countriesData, 
+  onClickHandleCreator, 
+}) => {
   const intl = useIntl()
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
   const [inputValue, setInputValue] = useState<string>('')
@@ -24,11 +29,15 @@ const SearchCountry: React.FC<Iprops> = ({ countriesData, onClickHandleCreator }
     .filter((elem: IkeyableObj) => elem.name.toLowerCase().includes(inputValue))
     .map((el: IkeyableObj) => {
       return (
-        <li key={el.name} onClick={onClickHandleCreator(el)}>
+        <li 
+          key={el.name} 
+          onClick={onClickHandleCreator(el)} 
+          className={(currentCountryData.name == el.name) ? 'is-active' : undefined}
+        >
           <img src={el.flag} alt={el.name} />{el.name}
         </li>
       )
-  }), [countriesData, inputValue])
+  }), [countriesData, inputValue, currentCountryData])
 
   return (
     <SearchCountryStyle>
@@ -43,6 +52,7 @@ const SearchCountry: React.FC<Iprops> = ({ countriesData, onClickHandleCreator }
 SearchCountry.propTypes = {
   countriesData: pt.object.isRequired,
   onClickHandleCreator: pt.func.isRequired,
+  currentCountryData: pt.object.isRequired,
 }
 
 export default SearchCountry

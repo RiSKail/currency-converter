@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { device } from '../../../constants/devices'
+import { device } from '@/constants/devices'
+import img from './img/check.svg'
 
 export default styled.div`
   background: ${(props): string => props.theme.colors.backgroundLight};
@@ -30,10 +31,20 @@ export default styled.div`
     overflow-y: auto;
     padding: 0;
 
+    .is-active {
+      background: url( ${img}) ${(props): string => props.theme.colors.backgroundLight} no-repeat right 15px center !important;
+      background-blend-mode: hue;
+      background-size: ${(props): string => props.theme.unit.quadriple} !important;
+    }
+
     li {
       list-style: none;
-      background: ${(props): string => props.theme.colors.fontLight};
-      padding: ${(props): string => props.theme.unit.double};
+      background: ${(props): string => props.theme.colors.fontLight} right 15px center;
+      padding: ${(props): string => 
+        props.theme.unit.double + ' ' + 
+        props.theme.unit.eight + ' ' + 
+        props.theme.unit.double + ' ' + 
+        props.theme.unit.double};
       margin: 0 10px 10px 0;
       display: flex;
       border-radius: ${(props): string => props.theme.unit.half};
@@ -47,7 +58,7 @@ export default styled.div`
 
       &:hover {
         cursor: pointer;
-        background: ${(props): string => props.theme.colors.backgroundLight};
+        background: ${(props): string => props.theme.colors.backgroundLight} right 15px center;
       }
     }
   }

@@ -58,4 +58,5 @@ export const SetMapStyle = styled.div`
   position: absolute;
   z-index: 9999;
   margin: 10px 0 0 0;
+  opacity: 0.8;
 `

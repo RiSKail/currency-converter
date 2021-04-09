@@ -13,6 +13,30 @@ export default createGlobalStyle < Iprops >`
   @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap');
   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
   @import url('https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap');
+    
+  ::-webkit-scrollbar-track {
+    background-color: ${(props): string => props.theme.colors.scrollTrack};
+  }
+    
+  ::-webkit-scrollbar-thumb {
+    border-radius: ${(props): string => props.theme.unit.half};
+    background-color: ${(props): string => props.theme.colors.fontLightGray};
+
+    &:hover{
+      background-color: ${(props): string => props.theme.colors.fontGray};
+    }
+  }
+    
+  ::-webkit-resizer{
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:10px;
+    height:0px
+  }
+    
+  ::-webkit-scrollbar{
+    width: 10px;
+  }
 
   body {
     margin: 0;

@@ -44,6 +44,7 @@ const MapPage: React.FC = () => {
       <MapPageStyle>
         {(!isEmpty(countriesData) && mapData && currentCountryData) &&
           <SearchCountryBlock
+            currentCountryData={currentCountryData}
             countriesData={countriesData}
             onClickHandleCreator={onClickHandleCreator} />}
         {(!isEmpty(countriesData) && mapData && currentCountryData)

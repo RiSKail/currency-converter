@@ -30,6 +30,7 @@ export default {
     info: '#2196F3',
     success: '#4CAF50',
     mapPopup: '#41485b',
+    scrollTrack: '#373f53',
   },
   fontSizes: {
     werySmall: '12px',
