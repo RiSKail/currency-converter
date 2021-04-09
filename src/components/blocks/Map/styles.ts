@@ -1,42 +1,26 @@
 import styled from 'styled-components'
+import theme from '@/theme'
 
-export default styled.div`
+export const MapBlockStyle = styled.div`
   background: ${(props): string => props.theme.colors.backgroundLight};
   border-radius: ${(props): string => props.theme.unit.single};
   padding: 36px;
   width: 90%;
   margin: 45px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
-  .leaflet-container {
-    height: 510px;
-    width: 100%;
-  }
+export const MapPopup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-  .leaflet-interactive{
-    stroke-width: 1;
-    transition: 0.3s;
-  }
-
-  .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    background: #41485b;
-    color:  ${(props): string => props.theme.colors.fontLight};
-  }
-
-  .leaflet-popup-tip-container {
-    width: 65px;
-    height: 30px;
-    margin-left: -33px;
-  }
-
-  .leaflet-popup-content{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    img {
+  img {
       width: 70px;
-      border: 2px solid  ${(props): string => props.theme.colors.backgroundDark};
+      border: 2px solid  ${theme.colors.backgroundDark};
     }
 
     ul {
@@ -49,10 +33,10 @@ export default styled.div`
       li {
         width: 200px;
         text-align: center;
-        color: ${(props): string => props.theme.colors.fontLightGray};
+        color: ${theme.colors.fontLightGray};
 
         h1 {
-          font-size: ${(props): string => props.theme.fontSizes.middleSmall};
+          font-size: ${theme.fontSizes.middleSmall};
           
           &::after, &::before {
             width: 30px;
@@ -68,5 +52,10 @@ export default styled.div`
         }
       }
     }
-  }
+`
+
+export const SetMapStyle = styled.div`
+  position: absolute;
+  z-index: 9999;
+  margin: 10px 0 0 0;
 `

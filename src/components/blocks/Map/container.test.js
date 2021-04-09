@@ -30,7 +30,7 @@ describe('Map tests', () => {
     )
 
     const map = container.querySelectorAll('div')
-    expect(map.length).toEqual(2)
+    expect(map.length).toEqual(4)
   })
 
   it('Map is render with currentCountryData', () => {
@@ -59,6 +59,6 @@ describe('Map tests', () => {
     )
 
     const map = container.querySelectorAll('div')
-    expect(map.length).toEqual(2)
+    expect(map.length).toEqual(4)
   })
 })

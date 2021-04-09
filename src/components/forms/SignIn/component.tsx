@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import pt from 'prop-types'
 import { Form, Field } from 'react-final-form'
 
-import Button from '@/components/blocks/global/Button'
+import Button from '@/components/controls/Button'
 
 import { required } from '../validations'
 import { IkeyableObj } from '@/types/otherTypes'

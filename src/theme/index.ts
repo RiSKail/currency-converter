@@ -24,10 +24,12 @@ export default {
     fontLightGray: '#cccccc',
     fontBlue: '#6ab7de',
     fontBlueLight: '#98cde8',
+    select: '#262f4c',
     error: '#f44336',
     warning: '#ff9800',
     info: '#2196F3',
     success: '#4CAF50',
+    mapPopup: '#41485b',
   },
   fontSizes: {
     werySmall: '12px',

@@ -7,7 +7,7 @@ import CSVReader from 'react-csv-reader'
 
 import StandardLayout from '@/components/layouts/Standard'
 import ConvertBlock from '@/components/blocks/ConvertBlock'
-import Button from '@/components/blocks/global/Button/index'
+import Button from '@/components/controls/Button/index'
 import Alert from '@/components/blocks/global/Alert'
 import Modal from '@/components/blocks/global/Modal/component'
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
-import { GeoJsonObject } from 'geojson'
 
 import StandardLayout from '@/components/layouts/Standard'
 import Map from '@/components/blocks/Map'
@@ -13,10 +12,11 @@ import { updateCountriesData } from '@/actions'
 import { IcountriesState } from '@/types/reducers'
 import { IrootState } from '@/types/rootStateTypes'
 import { IkeyableObj } from '@/types/otherTypes'
+import { GeoJsonObject } from 'geojson'
 import { isEmpty } from '@/utils/object'
 import useDidMount from '@/utils/useDidMountHook'
 
-import Style from './styles'
+import MapPageStyle from './styles'
 
 import mapData from '@/data/countries.json'
 
@@ -41,8 +41,8 @@ const MapPage: React.FC = () => {
   return (
     <StandardLayout>
       <h1><FormattedMessage id="map_page_title" /></h1>
-      <Style>
-        {!isEmpty(countriesData) &&
+      <MapPageStyle>
+        {(!isEmpty(countriesData) && mapData && currentCountryData) &&
           <SearchCountryBlock
             countriesData={countriesData}
             onClickHandleCreator={onClickHandleCreator} />}
@@ -50,7 +50,7 @@ const MapPage: React.FC = () => {
           ? <Map
             currentCountryData={currentCountryData}
             mapData={(mapData as GeoJsonObject)} /> : <Loader />}
-      </Style>
+      </MapPageStyle>
     </StandardLayout>
   )
 }

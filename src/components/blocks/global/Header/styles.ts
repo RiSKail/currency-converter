@@ -4,7 +4,7 @@ import { device } from '../../../../constants/devices'
 export default styled.header`
   height: 78px;
   color: ${(props): string => props.theme.colors.backgroundDark};
-  font-size: ${(props): string => props.theme.fontSizes.weryBig};
+  font-size: ${(props): string => props.theme.fontSizes.small};
   padding-left: ${(props): string => props.theme.unit.quadriple};
   padding-right: ${(props): string => props.theme.unit.quadriple};
   padding-top: ${(props): string => props.theme.unit.double};
@@ -52,7 +52,6 @@ export default styled.header`
   ul li {
     font-family: Arial;
     font-weight: ${(props): string => props.theme.fontWeights.bold};
-    font-size: ${(props): string => props.theme.fontSizes.middleSmall};
     display: flex;
     align-items: center;
     justify-content: space-between;

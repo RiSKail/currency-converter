@@ -23,4 +23,6 @@ export const SIGNIN_USER_DATA = 'SIGNIN_USER_DATA'
 export const FIREBASE_SIGN = '@@reactReduxFirebase/LOGIN'
 export const SET_AUTH_COUNTRY_INFO = 'SET_AUTH_COUNTRY_INFO'
 export const SET_DATA_LIST_VALUES = 'SET_DATA_LIST_VALUES'
+
 export const UPDATE_MAP_OPTIONS = 'UPDATE_MAP_OPTIONS'
+export const SET_MAP_TYPE = 'SET_MAP_TYPE'

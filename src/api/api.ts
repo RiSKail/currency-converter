@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 
 import { BASE_API_URL, GEO_API_URL, GET_COUNTRY_INFO_BY_NAME, GET_DATA_LIST_BY_USD, GET_CURRENT_COUNTRY, COUNTRIES_API_URL, GET_ALL_COUNTRIES_INFO } from '@/constants/endpoints'
 
-const baseInstance = axios.create({
+const currenciesInstance = axios.create({
   baseURL: BASE_API_URL,
 })
 
@@ -16,7 +16,7 @@ const countriesInstance = axios.create({
 
 export const CurrenciesAPI = {
   getDataList (): Promise<AxiosResponse> {
-    return baseInstance.get(GET_DATA_LIST_BY_USD)
+    return currenciesInstance.get(GET_DATA_LIST_BY_USD)
   },
 }
 
