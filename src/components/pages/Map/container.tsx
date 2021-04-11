@@ -1,20 +1,24 @@
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
+import { GeoJsonObject } from 'geojson'
+
 import StandardLayout from '@/components/layouts/Standard'
 import Map from '@/components/blocks/Map'
+import SearchCountryBlock from '@/components/blocks/SearchCountry'
+import Loader from '@/components/blocks/global/Loader'
+
 import { CountriesAPI } from '@/api/api'
 import { updateCountriesData } from '@/actions'
-import SearchCountryBlock from '@/components/blocks/SearchCountry'
-import Style from './styles'
-import Loader from '@/components/blocks/global/Loader'
-import mapData from '@/data/countries.json'
 import { IcountriesState } from '@/types/reducers'
 import { IrootState } from '@/types/rootStateTypes'
 import { IkeyableObj } from '@/types/otherTypes'
-import { GeoJsonObject } from 'geojson'
 import { isEmpty } from '@/utils/object'
 import useDidMount from '@/utils/useDidMountHook'
+
+import Style from './styles'
+
+import mapData from '@/data/countries.json'
 
 const MapPage: React.FC = () => {
   const dispatch = useDispatch()
@@ -38,15 +42,14 @@ const MapPage: React.FC = () => {
     <StandardLayout>
       <h1><FormattedMessage id="map_page_title" /></h1>
       <Style>
-        {(countriesData) &&
+        {!isEmpty(countriesData) &&
           <SearchCountryBlock
             countriesData={countriesData}
             onClickHandleCreator={onClickHandleCreator} />}
-        {(!isEmpty(countriesData) && mapData && currentCountryData) &&
-          <Map
+        {(!isEmpty(countriesData) && mapData && currentCountryData)
+          ? <Map
             currentCountryData={currentCountryData}
-            mapData={(mapData as GeoJsonObject)} />}
-        {(!countriesData) && <Loader />}
+            mapData={(mapData as GeoJsonObject)} /> : <Loader />}
       </Style>
     </StandardLayout>
   )

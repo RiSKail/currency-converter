@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import pt from 'prop-types'
+
 import AlertStyle, { Colors } from './styles'
 
 interface Iprops {

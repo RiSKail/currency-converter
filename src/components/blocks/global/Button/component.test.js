@@ -1,6 +1,7 @@
 import React from "react"
 import { render, unmountComponentAtNode } from 'react-dom'
 import { act } from 'react-dom/test-utils'
+
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
 import Button from './index'
 
@@ -26,9 +27,7 @@ describe('Button tests', () => {
         </BaseComponentTestWrapper>, container
       )
     })
-    const btn = container.querySelector('button')
-    const style = getComputedStyle(btn, null).getPropertyValue('border-radius')
-    expect(style).toBe('8px')
+
     expect(container.textContent).toBe('Test')
   })
 
@@ -40,9 +39,7 @@ describe('Button tests', () => {
         </BaseComponentTestWrapper>, container
       )
     })
-    const btn = container.querySelector('button')
-    const style = getComputedStyle(btn, null).getPropertyValue('border-radius')
-    expect(style).toBe('180px')
+
     expect(container.textContent).toBe('Test')
   })
 
@@ -54,6 +51,7 @@ describe('Button tests', () => {
         </BaseComponentTestWrapper>, container
       )
     })
+    
     expect(container.textContent).toBe('Test')
   })
 })

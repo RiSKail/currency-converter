@@ -1,7 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
-import bg from './img/bg.jpg'
+
 import { device } from '@/constants/devices'
 import { IkeyableObj } from '@/types/otherTypes'
+
+import bg from './img/bg.jpg'
+
 interface Iprops {
   theme: IkeyableObj;
 }

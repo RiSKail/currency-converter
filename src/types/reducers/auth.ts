@@ -1,4 +1,3 @@
-
 import { IkeyableObj } from '@/types/otherTypes'
 
 export interface IauthState {

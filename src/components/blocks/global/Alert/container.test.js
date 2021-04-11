@@ -1,6 +1,7 @@
 import React from "react"
 import { render, unmountComponentAtNode } from 'react-dom'
 import { act } from 'react-dom/test-utils'
+
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
 import Alert from './index'
 
@@ -24,11 +25,12 @@ describe('Alert tests', () => {
         <BaseComponentTestWrapper>
           <Alert
             text="test"
-            callback={() => console.log(true)} />
+            callback={() => true} />
         </BaseComponentTestWrapper>, container
       )
     })
-    expect(container.textContent).toBe("×! test")
+
+    expect(container.textContent).toBe('×! test')
   })
 
   it('Render without text', () => {
@@ -36,10 +38,11 @@ describe('Alert tests', () => {
       render(
         <BaseComponentTestWrapper>
           <Alert
-            callback={() => console.log(true)} />
+            callback={() => true} />
         </BaseComponentTestWrapper>, container
       )
     })
-    expect(container.textContent).toBe("×! ")
+
+    expect(container.textContent).toBe('×! ')
   })
 })

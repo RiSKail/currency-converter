@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import pt from 'prop-types'
 import { useSelector } from 'react-redux'
+
 import { SIGN_PAGE_PATH } from '@/constants'
 import { IrootState } from '@/types/rootStateTypes'
 interface Iprops {

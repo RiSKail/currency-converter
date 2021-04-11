@@ -4,9 +4,11 @@ import ReactFlagsSelect from 'react-flags-select'
 import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import pt from 'prop-types'
+
 import { setBasePrimaryType, setBaseSecondaryType, setBasePrimaryValue, setBaseSecondaryValue } from '@/actions'
 import { IrootState } from '@/types/rootStateTypes'
 import { countries } from '@/constants'
+
 import ConvertBlockStyle from './styles'
 
 interface Iprops {
@@ -17,9 +19,9 @@ interface Iprops {
 
 const Convert: React.FC<Iprops> = ({ type, storedValue, setValue }) => {
   const intl = useIntl()
+  const dispatch = useDispatch()
   const inputPlaceholder = intl.formatMessage({ id: 'convert_block_input_placeholder' })
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
-  const dispatch = useDispatch()
   const valueType = useSelector((state: IrootState) => state.values[type || 'primary'].type)
   const valueData = useSelector((state: IrootState) => state.values[type || 'primary'].value)
   const [key]: Array<string> = Object.entries(countries)

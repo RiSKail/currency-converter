@@ -1,6 +1,7 @@
 import React from 'react'
-import { setBasePrimaryType, setBaseSecondaryType, updateBasePrimaryValue, updateBaseSecondaryValue } from '@/actions'
+
 import valuesReducer from './values'
+import { setBasePrimaryType, setBaseSecondaryType, updateBasePrimaryValue, updateBaseSecondaryValue } from '@/actions'
 
 const state = {
   primary: {
@@ -14,29 +15,29 @@ const state = {
 }
 
 it('Primary type should be updated', () => {
-  const action = setBasePrimaryType("EUR")
+  const action = setBasePrimaryType('EUR')
   const newState = valuesReducer(state, action)
 
-  expect(newState.primary.type).toBe("EUR")
+  expect(newState.primary.type).toBe('EUR')
 })
 
 it('Secondary type should be updated', () => {
-  const action = setBaseSecondaryType("EUR")
+  const action = setBaseSecondaryType('EUR')
   const newState = valuesReducer(state, action)
 
-  expect(newState.secondary.type).toBe("EUR")
+  expect(newState.secondary.type).toBe('EUR')
 })
 
 it('Primary value should be updated', () => {
-  const action = updateBasePrimaryValue("1")
+  const action = updateBasePrimaryValue('1')
   const newState = valuesReducer(state, action)
 
-  expect(newState.primary.value).toBe("1")
+  expect(newState.primary.value).toBe('1')
 })
 
 it('Secondary value should be updated', () => {
-  const action = updateBaseSecondaryValue("1")
+  const action = updateBaseSecondaryValue('1')
   const newState = valuesReducer(state, action)
 
-  expect(newState.secondary.value).toBe("1")
+  expect(newState.secondary.value).toBe('1')
 })

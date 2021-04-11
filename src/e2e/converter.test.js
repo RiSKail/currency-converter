@@ -1,5 +1,6 @@
-import { SignInTest, beforeAllTest, page, afterAlltest, timeout } from './index'
 import { toMatchImageSnapshot } from 'jest-image-snapshot'
+
+import { SignInTest, beforeAllTest, page, afterAlltest, timeout } from './index'
 
 expect.extend({ toMatchImageSnapshot })
 

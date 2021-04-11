@@ -8,19 +8,21 @@ import CSVReader from 'react-csv-reader'
 import StandardLayout from '@/components/layouts/Standard'
 import ConvertBlock from '@/components/blocks/ConvertBlock'
 import Button from '@/components/blocks/global/Button/index'
-import { GeoAPI, CountriesAPI } from '@/api/api'
 import Alert from '@/components/blocks/global/Alert'
+import Modal from '@/components/blocks/global/Modal/component'
 
-import swapIcon from './img/swap-icon.svg'
-import downloadIcon from './img/download-icon.svg'
-import { setBasePrimaryType, setBaseSecondaryType, swapValues, updateDataListValues, cacheAllDataListValues, setAuthCountryInfo } from '@/actions'
+import { GeoAPI, CountriesAPI } from '@/api/api'
 import { countries } from '@/constants/countries'
 import { useLocalStorage } from '@/utils/localStorage'
 import useDidMount from '@/utils/useDidMountHook'
-import ConverterStyle, { CSVBtns } from './styles'
-import Modal from '../../blocks/global/Modal/component'
 import { IrootState } from '@/types/rootStateTypes'
 import { Imodal, Ialert } from '@/types/otherTypes'
+import { setBasePrimaryType, setBaseSecondaryType, swapValues, updateDataListValues, cacheAllDataListValues, setAuthCountryInfo } from '@/actions'
+
+import ConverterStyle, { CSVBtns } from './styles'
+
+import swapIcon from './img/swap-icon.svg'
+import downloadIcon from './img/download-icon.svg'
 
 interface Iprops {
   update: () => void;

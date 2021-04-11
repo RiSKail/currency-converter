@@ -1,9 +1,11 @@
 import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 import 'jest-styled-components'
-import mapData from '@/data/countries.json'
+
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
 import Map from './container'
+
+import mapData from '@/data/countries.json'
 
 let container = null
 
@@ -26,6 +28,9 @@ describe('Map tests', () => {
       </BaseComponentTestWrapper>,
       container
     )
+
+    const map = container.querySelectorAll('div')
+    expect(map.length).toEqual(2)
   })
 
   it('Map is render with currentCountryData', () => {
@@ -52,5 +57,8 @@ describe('Map tests', () => {
       </BaseComponentTestWrapper>,
       container
     )
+
+    const map = container.querySelectorAll('div')
+    expect(map.length).toEqual(2)
   })
 })

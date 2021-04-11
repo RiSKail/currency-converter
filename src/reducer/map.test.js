@@ -1,7 +1,8 @@
 import React from 'react'
 import 'jest-styled-components'
-import { updateMapOptions } from '@/actions'
+
 import mapReducer from './map'
+import { updateMapOptions } from '@/actions'
 
 const state = {
   center: [0, 0],

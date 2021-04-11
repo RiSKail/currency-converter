@@ -1,6 +1,7 @@
 import React from "react"
 import { render, unmountComponentAtNode } from 'react-dom'
 import { act } from 'react-dom/test-utils'
+
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
 import Modal from './index'
 
@@ -22,10 +23,11 @@ describe('Modal tests', () => {
     act(() => {
       render(
         <BaseComponentTestWrapper>
-          <Modal callback={() => console.log(true)}>Test</Modal>
+          <Modal callback={() => true}>Test</Modal>
         </BaseComponentTestWrapper>, container
       )
     })
+
     expect(container.textContent).toBe('×Test')
   })
 
@@ -33,10 +35,11 @@ describe('Modal tests', () => {
     act(() => {
       render(
         <BaseComponentTestWrapper>
-          <Modal callback={() => console.log(true)} />
+          <Modal callback={() => true} />
         </BaseComponentTestWrapper>, container
       )
     })
+
     expect(container.textContent).toBe('×')
   })
 })

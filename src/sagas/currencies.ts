@@ -1,4 +1,5 @@
 import { call, CallEffect, put, PutEffectDescriptor, select, SelectEffectDescriptor, SimpleEffect, takeEvery } from 'redux-saga/effects'
+
 import { CurrenciesAPI } from '@/api/api'
 import { SWAP_BASE_VALUES, CACHE_ALL_DATA_LIST, UPDATE_DATA_LIST_VALUES, SET_BASE_PRIMARY_TYPE, SET_BASE_PRIMARY_VALUE, SET_BASE_SECONDARY_VALUE, SET_BASE_SECONDARY_TYPE } from '@/constants/actions'
 import { setDataListValues, updateBasePrimaryValue, updateBaseSecondaryValue } from '@/actions'

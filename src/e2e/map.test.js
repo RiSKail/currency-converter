@@ -1,5 +1,6 @@
-import { beforeAllTest, afterAlltest, page, SignInTest, timeout } from './index'
 import { toMatchImageSnapshot } from 'jest-image-snapshot'
+
+import { beforeAllTest, afterAlltest, page, SignInTest, timeout } from './index'
 import { MAP_PAGE_PATH } from '@/constants'
 
 expect.extend({ toMatchImageSnapshot })
@@ -13,8 +14,8 @@ describe('Map page', () => {
   afterAll(afterAlltest)
 
   test('Should be rendered', async () => {
-    await page.waitForSelector(`[data-testid=${MAP_PAGE_PATH.substr(1)}]`)
-    await page.click(`[data-testid=${MAP_PAGE_PATH.substr(1)}]`)
+    await page.waitForSelector(`[data-testid=${MAP_PAGE_PATH}]`)
+    await page.click(`[data-testid=${MAP_PAGE_PATH}]`)
 
     const image = await page.screenshot()
 
