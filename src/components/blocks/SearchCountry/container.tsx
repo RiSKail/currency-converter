@@ -1,21 +1,20 @@
 import React, { MouseEventHandler, useMemo, useState } from 'react'
-import pt from 'prop-types'
 import { useIntl } from 'react-intl'
 
-import { IkeyableObj } from '@/types/otherTypes'
+import { KeyableObj } from '@/types/otherTypes'
 
 import SearchCountryStyle from './styles'
 
-interface Iprops {
-  onClickHandleCreator: (el: Record<string, unknown>) => MouseEventHandler<HTMLLIElement>;
-  countriesData: IkeyableObj;
-  currentCountryData: IkeyableObj;
+interface Props {
+  onClickHandleCreator: (el: Record<string, unknown>) => MouseEventHandler<HTMLLIElement>
+  countriesData: KeyableObj
+  selectedCountryData: KeyableObj
 }
 
-const SearchCountry: React.FC<Iprops> = ({ 
-  currentCountryData, 
-  countriesData, 
-  onClickHandleCreator, 
+const SearchCountry: React.FC<Props> = ({
+  selectedCountryData,
+  countriesData,
+  onClickHandleCreator,
 }) => {
   const intl = useIntl()
   const selectPlaceholder = intl.formatMessage({ id: 'convert_block_select_placeholder' })
@@ -24,35 +23,32 @@ const SearchCountry: React.FC<Iprops> = ({
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value.toLowerCase())
   }
-  
-  const countriesList = useMemo(() => Object.values(countriesData)
-    .filter((elem: IkeyableObj) => elem.name.toLowerCase().includes(inputValue))
-    .map((el: IkeyableObj) => {
-      return (
-        <li 
-          key={el.name} 
-          onClick={onClickHandleCreator(el)} 
-          className={(currentCountryData.name == el.name) ? 'is-active' : undefined}
-        >
-          <img src={el.flag} alt={el.name} />{el.name}
-        </li>
-      )
-  }), [countriesData, inputValue, currentCountryData])
+
+  const countriesList = useMemo(
+    () =>
+      Object.values(countriesData)
+        .filter((elem: KeyableObj) => elem.name.toLowerCase().includes(inputValue))
+        .map((el: KeyableObj) => {
+          return (
+            <li
+              key={el.name}
+              onClick={onClickHandleCreator(el)}
+              className={selectedCountryData.name === el.name ? 'is-active' : undefined}
+            >
+              <img src={el.flag} alt={el.name} />
+              {el.name}
+            </li>
+          )
+        }),
+    [countriesData, inputValue, selectedCountryData, onClickHandleCreator]
+  )
 
   return (
     <SearchCountryStyle>
-    <input placeholder={selectPlaceholder} value={inputValue} onChange={onChangeInput} />
-    <ul>
-      {countriesList}
-    </ul>
+      <input placeholder={selectPlaceholder} value={inputValue} onChange={onChangeInput} />
+      <ul>{countriesList}</ul>
     </SearchCountryStyle>
   )
-}
-
-SearchCountry.propTypes = {
-  countriesData: pt.object.isRequired,
-  onClickHandleCreator: pt.func.isRequired,
-  currentCountryData: pt.object.isRequired,
 }
 
 export default SearchCountry

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { device } from '../../../../constants/devices'
+
+import { device } from '@/constants/devices'
 
 export default styled.header`
   height: 78px;
@@ -15,7 +16,7 @@ export default styled.header`
   justify-content: space-between;
   flex-direction: column;
 
-  .is-active{
+  .is-active {
     color: ${(props): string => props.theme.colors.secondaryLight};
   }
 
@@ -58,35 +59,35 @@ export default styled.header`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 0 0 0 32px;
+      margin: ${(props): string => `0 0 0 ${props.theme.unit.quadriple}`};
       text-align: center;
 
-      &:first-child{
+      &:first-child {
         opacity: 0.7;
 
-        &::after{
+        &::after {
           display: inline-block;
           content: '';
-          height: 12px;
+          height: ${(props): string => props.theme.unit.double};
           width: 1px;
-          background: #FFFFFF;
+          background: ${(props): string => props.theme.colors.white};
           opacity: 0.3;
-          margin: 0 0 0 32px;
+          margin: ${(props): string => `0 0 0 ${props.theme.unit.quadriple}`};
         }
       }
 
       .profile-avatar {
-          opacity: 1;
-          border-radius: 100px;
-          width: 32px;
-          height: 32px;
-          padding: 00;
-          margin: 0 8px 0 0;
+        opacity: 1;
+        border-radius: 100px;
+        width: ${(props): string => props.theme.unit.quadriple};
+        height: ${(props): string => props.theme.unit.quadriple};
+        padding: 0;
+        margin: ${(props): string => `0 ${props.theme.unit.single} 0 0`};
       }
 
       img {
         opacity: 0.3;
-        padding: 0 8px 0 0;
+        padding: ${(props): string => `0 ${props.theme.unit.single} 0 0`};
       }
     }
   }

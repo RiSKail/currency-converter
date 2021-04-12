@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
-import pt from 'prop-types'
 import ReactDOMServer from 'react-dom/server'
 import Leaflet from 'leaflet'
+import { GeoJsonObject } from 'geojson'
 
 import Loader from '@/components/blocks/global/Loader'
 import GoogleMap from '@/components/blocks/global/GoogleMap/component'
@@ -10,47 +10,45 @@ import LeafletMap from '@/components/blocks/global/LeafletMap'
 import YandexMap from '@/components/blocks/global/YandexMap'
 import SetMap from '@/components/blocks/global/SetMap'
 
-import { IrootState } from '@/types/rootStateTypes'
-import { IkeyableObj } from '@/types/otherTypes'
+import { RootState } from '@/types/rootStateTypes'
+import { KeyableObj } from '@/types/otherTypes'
 import { GOOGLE_MAP_URL, LEAFLET, YANDEX, GOOGLE } from '@/constants'
 
 import theme from '@/theme'
 
-import { MapBlockStyle, MapPopup, SetMapStyle } from './styles'
 import { GoogleMapContainer } from '@/components/blocks/global/GoogleMap/styles'
 import 'leaflet/dist/leaflet.css'
+import { MapContainer, MapPopup, SelectContainer, MapElement } from './styles'
 
-import { GeoJsonObject } from 'geojson'
-
-interface Iprops {
-  currentCountryData?: IkeyableObj;
-  mapData: GeoJsonObject;
+interface Props {
+  selectedCountryData?: KeyableObj
+  mapData: GeoJsonObject
 }
 
-const popupCreator = (currentCountry: IkeyableObj): ReactElement => (
+const popupCreator = (currentCountry: KeyableObj): ReactElement => (
   <MapPopup>
-    {(currentCountry.flag) && <img
-      src={currentCountry.flag}
-      width={30}
-      alt={currentCountry.name} />}
+    {currentCountry.flag && <img src={currentCountry.flag} width={30} alt={currentCountry.name} />}
     <ul>
-      <li><h1>{currentCountry.name}</h1></li>
-      {currentCountry.currencies
-        .map((
-          elem: IkeyableObj, 
-          index: number,
-        ) => <li key={`${index}_${elem.code}`}>{elem.code} - {elem.name}</li>)}
+      <li>
+        <h1>{currentCountry.name}</h1>
+      </li>
+      {currentCountry.currencies.map((elem: KeyableObj) => (
+        <li key={`${elem.name}`}>
+          {elem.code} - {elem.name}
+        </li>
+      ))}
     </ul>
   </MapPopup>
 )
 
-const MapBlock: React.FC<Iprops> = ({ currentCountryData, mapData }) => {
-  const countriesData = useSelector((state: IrootState) => state.countries)
-  const initial = useSelector((state: IrootState) => state.map)
+const MapBlock: React.FC<Props> = ({ selectedCountryData, mapData }) => {
+  const countriesData = useSelector((state: RootState) => state.countries)
+  const initial = useSelector((state: RootState) => state.map)
 
-  const onEachFeature = (country: IkeyableObj, layer: Leaflet.Layer): void => {
-    const data = Object.values(countriesData)
-      .find((elem: IkeyableObj) => (elem.alpha3Code === country.properties.adm0_a3))
+  const onEachFeature = (country: KeyableObj, layer: Leaflet.Layer): void => {
+    const data = Object.values(countriesData).find(
+      (elem: KeyableObj) => elem.alpha3Code === country.properties.adm0_a3
+    )
 
     if (data) layer.bindPopup(ReactDOMServer.renderToString(popupCreator(data)))
 
@@ -67,52 +65,54 @@ const MapBlock: React.FC<Iprops> = ({ currentCountryData, mapData }) => {
     })
   }
 
-  const SelectMapType = <SetMapStyle><SetMap/></SetMapStyle>
+  const SelectMapEngine = (
+    <SelectContainer>
+      <SetMap />
+    </SelectContainer>
+  )
 
-  switch (initial.type) {
+  switch (initial.engine) {
     default:
     case LEAFLET:
       return (
-        <MapBlockStyle>
-          {SelectMapType}
-          <LeafletMap 
-            initial={initial} 
-            onEachFeature={onEachFeature} 
-            mapData={mapData} 
+        <MapContainer>
+          {SelectMapEngine}
+          <LeafletMap
+            initial={initial}
+            onEachFeature={onEachFeature}
+            mapData={mapData}
             popupCreator={popupCreator}
-            currentCountryData={currentCountryData}/>
-        </MapBlockStyle>
+            selectedCountryData={selectedCountryData}
+          />
+        </MapContainer>
       )
     case GOOGLE:
       return (
-        <MapBlockStyle>
-          {SelectMapType}
-          <GoogleMap 
-            googleMapURL={GOOGLE_MAP_URL || ''}
-            loadingElement={<Loader/>}
-            containerElement={<GoogleMapContainer/>}
-            mapElement={<div style={{ height: `100%` }} />}
-            currentCountryData={currentCountryData}
+        <MapContainer>
+          {SelectMapEngine}
+          <GoogleMap
+            googleMapURL={GOOGLE_MAP_URL}
+            loadingElement={<Loader />}
+            containerElement={<GoogleMapContainer />}
+            mapElement={<MapElement />}
+            selectedCountryData={selectedCountryData}
             popupCreator={popupCreator}
-            initial={initial}/>
-        </MapBlockStyle>
+            initial={initial}
+          />
+        </MapContainer>
       )
     case YANDEX:
       return (
-        <MapBlockStyle>
-          {SelectMapType}
+        <MapContainer>
+          {SelectMapEngine}
           <YandexMap
-            currentCountryData={currentCountryData}
+            selectedCountryData={selectedCountryData}
             popupCreator={popupCreator}
-            initial={initial}/>
-        </MapBlockStyle>
+            initial={initial}
+          />
+        </MapContainer>
       )
   }
-}
-
-MapBlock.propTypes = {
-  currentCountryData: pt.object,
-  mapData: pt.any.isRequired,
 }
 
 export default MapBlock

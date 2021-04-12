@@ -1,8 +1,11 @@
-import React from "react"
+import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
+
+import { nop } from '@/utils/other'
+
 import Alert from './index'
 
 let container = null
@@ -23,10 +26,9 @@ describe('Alert tests', () => {
     act(() => {
       render(
         <BaseComponentTestWrapper>
-          <Alert
-            text="test"
-            callback={() => true} />
-        </BaseComponentTestWrapper>, container
+          <Alert text="test" callback={nop} />
+        </BaseComponentTestWrapper>,
+        container
       )
     })
 
@@ -37,9 +39,9 @@ describe('Alert tests', () => {
     act(() => {
       render(
         <BaseComponentTestWrapper>
-          <Alert
-            callback={() => true} />
-        </BaseComponentTestWrapper>, container
+          <Alert callback={() => true} />
+        </BaseComponentTestWrapper>,
+        container
       )
     })
 

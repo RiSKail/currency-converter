@@ -6,33 +6,33 @@ import { Redirect } from 'react-router-dom'
 import StandardLayout from '@/components/layouts/Standard'
 import SignInForm from '@/components/forms/SignIn'
 import SignUpForm from '@/components/forms/SignUp'
-import Alert from '@/components/blocks/global/Alert'
+import AlertBlock from '@/components/blocks/global/Alert'
 
 import { signIn, signUp, clearErrors } from '@/actions'
 import { CONVERTER_PAGE_PATH } from '@/constants'
-import { IrootState } from '@/types/rootStateTypes'
-import { IkeyableObj, Ialert } from '@/types/otherTypes'
+import { RootState } from '@/types/rootStateTypes'
+import { KeyableObj, Alert } from '@/types/otherTypes'
 
 import Sign from './styles'
 
-interface Iprops {
-  update: () => void;
+interface Props {
+  update: () => void
 }
 
-const SignPage: React.FC<Iprops> = () => {
+const SignPage: React.FC<Props> = () => {
   const dispatch = useDispatch()
-  const auth = useSelector((state: IrootState) => state.firebase.auth)
-  const error = useSelector((state: IrootState) => state.auth.authError)
-  const [alertShow, setAlertShow] = useState<Ialert>({ show: false })
+  const auth = useSelector((state: RootState) => state.firebase.auth)
+  const error = useSelector((state: RootState) => state.auth.authError)
+  const [alertShow, setAlertShow] = useState<Alert>({ show: false })
   const [type, setType] = useState<boolean>(true)
   const clearErrorsAction = clearErrors()
 
-  const onSignInHandler = (e: IkeyableObj): void => {
-    dispatch(signIn(e))
+  const onSignInHandler = (event: KeyableObj): void => {
+    dispatch(signIn(event))
   }
 
-  const onSignUpHandler = (e: IkeyableObj): void => {
-    dispatch(signUp(e))
+  const onSignUpHandler = (event: KeyableObj): void => {
+    dispatch(signUp(event))
   }
 
   const onSwitchType = (): void => {
@@ -46,7 +46,6 @@ const SignPage: React.FC<Iprops> = () => {
     if (error) {
       setAlertShow({ show: true, type: 'error', text: error })
       dispatch(clearErrorsAction)
-
     }
   }, [error, dispatch, clearErrorsAction])
 
@@ -54,19 +53,18 @@ const SignPage: React.FC<Iprops> = () => {
 
   return (
     <StandardLayout>
-      {alertShow.show && <Alert
-        text={alertShow.text}
-        type={alertShow.type}
-        callback={alertCallbackFunc} />}
+      {alertShow.show && (
+        <AlertBlock text={alertShow.text} type={alertShow.type} callback={alertCallbackFunc} />
+      )}
       <h1>
         {type ? <FormattedMessage id="sign_in_title" /> : <FormattedMessage id="sign_up_title" />}
       </h1>
       <Sign>
-        {type ? <SignInForm
-          onSubmit={onSignInHandler}
-          onSwitch={onSwitchType} /> : <SignUpForm 
-          onSubmit={onSignUpHandler} 
-          onSwitch={onSwitchType} />}
+        {type ? (
+          <SignInForm onSubmit={onSignInHandler} onSwitch={onSwitchType} />
+        ) : (
+          <SignUpForm onSubmit={onSignUpHandler} onSwitch={onSwitchType} />
+        )}
       </Sign>
     </StandardLayout>
   )

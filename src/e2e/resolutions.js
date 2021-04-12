@@ -1,4 +1,3 @@
-
 export default {
   iPhone8p: {
     viewport: {

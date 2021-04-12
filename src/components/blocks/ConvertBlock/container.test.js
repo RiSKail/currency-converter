@@ -5,6 +5,9 @@ import { render, unmountComponentAtNode } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
+
+import { nop } from '@/utils/other'
+
 import ConvertBlock from './container'
 
 const mockStore = configureMockStore()
@@ -41,10 +44,7 @@ it('ConvertBlock primary is render with values', () => {
   act(() => {
     render(
       <BaseComponentTestWrapper mockStore={store}>
-        <ConvertBlock
-          type="primary"
-          storedValue={['USD', 'EUR']}
-          setValue={(a) => a} />
+        <ConvertBlock type="primary" storedValue={['USD', 'EUR']} setValue={nop} />
       </BaseComponentTestWrapper>,
       container
     )
@@ -58,10 +58,7 @@ it('ConvertBlock secondary is render with values', () => {
   act(() => {
     render(
       <BaseComponentTestWrapper mockStore={store}>
-        <ConvertBlock
-          type="secondary"
-          storedValue={['USD', 'EUR']}
-          setValue={(a) => a} />
+        <ConvertBlock type="secondary" storedValue={['USD', 'EUR']} setValue={nop} />
       </BaseComponentTestWrapper>,
       container
     )
@@ -71,19 +68,16 @@ it('ConvertBlock secondary is render with values', () => {
   expect(input.value).toBe('1')
 })
 
-
 it('ConvertBlock is render without type', () => {
   act(() => {
     render(
       <BaseComponentTestWrapper mockStore={store}>
-        <ConvertBlock
-          storedValue={['USD', 'EUR']}
-          setValue={(a) => a} />
+        <ConvertBlock storedValue={['USD', 'EUR']} setValue={nop} />
       </BaseComponentTestWrapper>,
       container
     )
   })
-  
+
   const input = container.querySelector('input')
   expect(input.value).toBe('1')
 })

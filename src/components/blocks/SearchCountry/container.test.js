@@ -3,6 +3,9 @@ import 'jest-styled-components'
 import { render, unmountComponentAtNode } from 'react-dom'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
+
+import { nop } from '@/utils/other'
+
 import SearchCountry from './container'
 
 let container = null
@@ -23,7 +26,7 @@ describe('SearchCountry tests', () => {
     render(
       <BaseComponentTestWrapper>
         <SearchCountry
-          onClickHandleCreator={data => () => data}
+          onClickHandleCreator={nop}
           countriesData={{
             0: {
               currencies: [
@@ -36,12 +39,10 @@ describe('SearchCountry tests', () => {
               flag: 'https://restcountries.eu/data/afg.svg',
               name: 'Afghanistan',
               alpha3Code: 'AFG',
-              latlng: [
-                33,
-                65,
-              ],
+              latlng: [33, 65],
             },
-          }} />
+          }}
+        />
       </BaseComponentTestWrapper>,
       container
     )

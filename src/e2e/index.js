@@ -1,10 +1,11 @@
 import { generateImage } from 'jsdom-screenshot'
-import resolutions from './resolutions'
 import puppeteer from 'puppeteer'
 
 import { DEFAULT_PORT, EMAIL, PASSWORD, SIGNIN, ADMIN_LOGIN, ADMIN_PASSWORD } from '@/constants'
+import resolutions from './resolutions'
 
-export let browser, page
+export let browser
+export let page
 export const timeout = 50000
 
 const commonSettings = {
@@ -20,7 +21,7 @@ export const snapshotConfiguration = ({ filename }) => {
 export const beforeAllTest = async () => {
   browser = await puppeteer.launch({ headless: false })
   page = await browser.newPage()
-  await page.goto('http://localhost:' + DEFAULT_PORT)
+  await page.goto(`http://localhost:${DEFAULT_PORT}`)
 }
 
 export const SignInTest = async () => {
@@ -39,12 +40,10 @@ export const afterAlltest = async () => {
 }
 
 export default async (expect, componentName) => {
-  const tests = Object
-    .keys(resolutions)
-    .map(resolution => ({
-      image: generateImage(Object.assign(commonSettings, resolutions[resolution])),
-      resolutionCode: resolution,
-    }))
+  const tests = Object.keys(resolutions).map((resolution) => ({
+    image: generateImage(Object.assign(commonSettings, resolutions[resolution])),
+    resolutionCode: resolution,
+  }))
 
   for (let i = 0; i < tests.length; i += 1) {
     const { image, resolutionCode } = tests[i]

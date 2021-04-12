@@ -9,48 +9,51 @@ import Loader from '@/components/blocks/global/Loader'
 
 import { CountriesAPI } from '@/api/api'
 import { updateCountriesData } from '@/actions'
-import { IcountriesState } from '@/types/reducers'
-import { IrootState } from '@/types/rootStateTypes'
-import { IkeyableObj } from '@/types/otherTypes'
+import { RootState } from '@/types/rootStateTypes'
+import { KeyableObj } from '@/types/otherTypes'
 import { GeoJsonObject } from 'geojson'
 import { isEmpty } from '@/utils/object'
 import useDidMount from '@/utils/useDidMountHook'
 
-import MapPageStyle from './styles'
-
 import mapData from '@/data/countries.json'
+import MapPageStyle from './styles'
 
 const MapPage: React.FC = () => {
   const dispatch = useDispatch()
-  const countriesData: IcountriesState = useSelector((state: IrootState) => state.countries)
-  const authCountry = useSelector((state: IrootState) => state.auth.country)
-  const [currentCountryData, setCurrentCountryData] = useState<IkeyableObj | undefined>(authCountry)
+  const countriesData = useSelector((state: RootState) => state.countries)
+  const authCountry = useSelector((state: RootState) => state.auth.country)
+  const [countryData, setCountryData] = useState<KeyableObj | undefined>(authCountry)
 
   useDidMount(() => {
-    if (isEmpty(countriesData)) CountriesAPI.getAllCountriesInfo().then(res => {
-      dispatch(updateCountriesData(res.data))
-    })
+    if (isEmpty(countriesData)) {
+      CountriesAPI.getAllCountriesInfo().then((res) => {
+        dispatch(updateCountriesData(res.data))
+      })
+    }
   })
 
-  const onClickHandleCreator = (data: IkeyableObj) => {
-    return (): void => {
-      setCurrentCountryData(data)
-    }
+  const onClickHandleCreator = (data: KeyableObj) => (): void => {
+    setCountryData(data)
   }
 
   return (
     <StandardLayout>
-      <h1><FormattedMessage id="map_page_title" /></h1>
+      <h1>
+        <FormattedMessage id="map_page_title" />
+      </h1>
       <MapPageStyle>
-        {(!isEmpty(countriesData) && mapData && currentCountryData) &&
+        {!isEmpty(countriesData) && mapData && countryData && (
           <SearchCountryBlock
-            currentCountryData={currentCountryData}
+            selectedCountryData={countryData}
             countriesData={countriesData}
-            onClickHandleCreator={onClickHandleCreator} />}
-        {(!isEmpty(countriesData) && mapData && currentCountryData)
-          ? <Map
-            currentCountryData={currentCountryData}
-            mapData={(mapData as GeoJsonObject)} /> : <Loader />}
+            onClickHandleCreator={onClickHandleCreator}
+          />
+        )}
+        {!isEmpty(countriesData) && mapData && countryData ? (
+          <Map selectedCountryData={countryData} mapData={mapData as GeoJsonObject} />
+        ) : (
+          <Loader />
+        )}
       </MapPageStyle>
     </StandardLayout>
   )

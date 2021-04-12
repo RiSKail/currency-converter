@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
 export const useLocalStorage = (
-  key: string, initialValue?: unknown,
+  key: string,
+  initialValue?: unknown
 ): [typeof storedValue, typeof setValue] => {
   const [storedValue, setStoredValue] = useState(() => {
     try {

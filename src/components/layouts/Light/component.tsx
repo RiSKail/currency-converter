@@ -1,19 +1,9 @@
 import React, { ReactNode } from 'react'
 
-import { childrenPropType } from '@/prop-types'
-
-interface Iprops {
-  children: ReactNode;
+interface Props {
+  children: ReactNode
 }
 
-const LightLayout: React.FC<Iprops> = ({ children }) => (
-  <>
-    {children}
-  </>
-)
-
-LightLayout.propTypes = {
-  children: childrenPropType,
-}
+const LightLayout: React.FC<Props> = ({ children }) => <>{children}</>
 
 export default LightLayout

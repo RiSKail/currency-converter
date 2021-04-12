@@ -1,10 +1,10 @@
-import { IkeyableObj } from '@/types/otherTypes'
+import { KeyableObj } from '@/types/otherTypes'
 
-export interface ImapState {
-  values?: IkeyableObj;
-  center: Array<number>;
-  pathOptions: IkeyableObj;
-  minZoom: number;
-  zoom: number;
-  type: string;
+export interface MapState {
+  values?: KeyableObj
+  center: Array<number>
+  pathOptions: KeyableObj
+  minZoom: number
+  zoom: number
+  engine: string
 }

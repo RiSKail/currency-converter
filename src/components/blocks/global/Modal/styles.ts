@@ -16,8 +16,8 @@ export default styled.div`
     color: ${(props): string => props.theme.colors.fontGray};
     font-weight: ${(props): string => props.theme.fontWeights.bold};
     float: right;
-    font-size: ${(props): string => props.theme.fontSizes.tripleBig};
-    line-height: 20px;
+    font-size: ${(props): string => props.theme.fontSizes.middleBig};
+    line-height: ${(props): string => props.theme.unit.triple};
     cursor: pointer;
     transition: 0.3s;
 
@@ -28,7 +28,7 @@ export default styled.div`
 `
 
 export const ModalContent = styled.div`
-  padding: 20px;
+  padding: ${(props): string => props.theme.unit.triple};
   background-color: ${(props): string => props.theme.colors.fontLight};
   color: ${(props): string => props.theme.colors.fontDark};
   opacity: 1;

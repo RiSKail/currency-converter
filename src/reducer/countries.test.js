@@ -1,8 +1,9 @@
 import React from 'react'
 import 'jest-styled-components'
 
-import countriesReducer from './countries'
 import { updateCountriesData } from '@/actions'
+
+import countriesReducer from './countries'
 
 const state = {}
 

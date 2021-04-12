@@ -19,7 +19,7 @@ export default styled.div`
   }
 
   input {
-    box-shadow: 0px 4px 4px rgb(51 51 51 / 4%), 0px 4px 16px rgb(51 51 51 / 8%);
+    box-shadow: ${(props): string => props.theme.colors.boxShadow};
     border-radius: ${(props): string => props.theme.unit.half};
     border: none;
     outline: none;
@@ -32,25 +32,28 @@ export default styled.div`
     padding: 0;
 
     .is-active {
-      background: url( ${img}) ${(props): string => props.theme.colors.backgroundLight} no-repeat right 15px center !important;
+      background: url(${img})
+        ${(props): string => `${props.theme.colors.backgroundLight} no-repeat
+        right ${props.theme.unit.double} center !important`};
       background-blend-mode: hue;
       background-size: ${(props): string => props.theme.unit.quadriple} !important;
     }
 
     li {
       list-style: none;
-      background: ${(props): string => props.theme.colors.fontLight} right 15px center;
-      padding: ${(props): string => 
-        props.theme.unit.double + ' ' + 
-        props.theme.unit.eight + ' ' + 
-        props.theme.unit.double + ' ' + 
-        props.theme.unit.double};
+      background: ${(props): string =>
+        `${props.theme.colors.fontLight} right ${props.theme.unit.double} center`};
+      padding: ${(props): string =>
+        `${props.theme.unit.double} 
+        ${props.theme.unit.eight} 
+        ${props.theme.unit.double} 
+        ${props.theme.unit.double}`};
       margin: 0 10px 10px 0;
       display: flex;
       border-radius: ${(props): string => props.theme.unit.half};
       align-items: center;
       transition: 0.3s;
-      
+
       img {
         width: 40px;
         margin: 0 10px 0 0;
@@ -58,7 +61,8 @@ export default styled.div`
 
       &:hover {
         cursor: pointer;
-        background: ${(props): string => props.theme.colors.backgroundLight} right 15px center;
+        background: ${(props): string => `${props.theme.colors.backgroundLight} no-repeat
+        right ${props.theme.unit.double} center`};
       }
     }
   }

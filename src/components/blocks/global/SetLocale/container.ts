@@ -1,26 +1,26 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 
-import SetLocale from './component'
-
-import { IrootAction } from '@/types/rootActionTypes'
-import { IrootState } from '@/types/rootStateTypes'
+import { RootAction } from '@/types/rootActionTypes'
+import { RootState } from '@/types/rootStateTypes'
 import { setLocale } from '@/actions'
 import { InternalizationActionTypes } from '@/types/actions'
 
-interface ImapState {
-  active: string;
+import SetLocale from './component'
+
+interface MapState {
+  active: string
 }
 
-interface ImapDispatch {
-  onSetLocale: (locale: string) => InternalizationActionTypes;
+interface MapDispatch {
+  onSetLocale: (locale: string) => InternalizationActionTypes
 }
 
-const mapStateToProps = (store: IrootState): ImapState => ({
+const mapStateToProps = (store: RootState): MapState => ({
   active: store.internalization.active,
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<IrootAction>): ImapDispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>): MapDispatch => ({
   onSetLocale: (locale: string): InternalizationActionTypes => dispatch(setLocale(locale)),
 })
 

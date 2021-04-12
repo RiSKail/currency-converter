@@ -1,10 +1,12 @@
-import React from "react"
+import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
-import LeafletMap from './index'
-
 import mapData from '@/data/countries.json'
+
+import { nop } from '@/utils/other'
+
+import LeafletMap from './index'
 
 let container = null
 
@@ -22,7 +24,7 @@ afterEach(() => {
 it('LeafletMap is render without crashing', () => {
   render(
     <BaseComponentTestWrapper>
-      <LeafletMap 
+      <LeafletMap
         initial={{
           center: [0, 0],
           pathOptions: { fillOpacity: 0 },
@@ -31,10 +33,11 @@ it('LeafletMap is render without crashing', () => {
           type: 'Leaflet',
         }}
         popupCreator={() => <div>test</div>}
-        onEachFeature={() => ''}
+        onEachFeature={nop}
         mapData={mapData}
       />
-    </BaseComponentTestWrapper>, container
+    </BaseComponentTestWrapper>,
+    container
   )
 
   const div = container.querySelectorAll('div')

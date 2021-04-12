@@ -1,15 +1,15 @@
 import { createGlobalStyle } from 'styled-components'
 
 import { device } from '@/constants/devices'
-import { IkeyableObj } from '@/types/otherTypes'
+import { KeyableObj } from '@/types/otherTypes'
 
 import bg from './img/bg.jpg'
 
-interface Iprops {
-  theme: IkeyableObj;
+interface Props {
+  theme: KeyableObj
 }
 
-export default createGlobalStyle < Iprops >`
+export default createGlobalStyle<Props>`
   @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap');
   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
   @import url('https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap');
@@ -20,22 +20,22 @@ export default createGlobalStyle < Iprops >`
     
   ::-webkit-scrollbar-thumb {
     border-radius: ${(props): string => props.theme.unit.half};
-    background-color: ${(props): string => props.theme.colors.fontLightGray};
+    background-color: ${(props): string => props.theme.colors.scrollThumb};
 
     &:hover{
-      background-color: ${(props): string => props.theme.colors.fontGray};
+      background-color: ${(props): string => props.theme.colors.scrollThumbHover};
     }
   }
     
   ::-webkit-resizer{
-    background-image:url('');
-    background-repeat:no-repeat;
-    width:10px;
-    height:0px
+    background-image: url('');
+    background-repeat: no-repeat;
+    width: ${(props): string => props.theme.unit.single};
+    height: 0px;
   }
     
   ::-webkit-scrollbar{
-    width: 10px;
+    width: ${(props): string => props.theme.unit.single};
   }
 
   body {
@@ -83,8 +83,8 @@ export default createGlobalStyle < Iprops >`
         display: inline-block;
         content: '';
         height: 1px;
-        width: 64px;
-        background: #DDDDDD;
+        width: ${(props): string => props.theme.unit.eight};
+        background: ${(props): string => props.theme.colors.titleLines};
 
         @media ${device.tablet} {
           width: 144px
@@ -92,18 +92,18 @@ export default createGlobalStyle < Iprops >`
       }
 
       &::after {
-        margin: 0 0 0 25px;
+        margin: ${(props): string => `0 0 0 ${props.theme.unit.triple}`};
 
         @media ${device.tablet} {
-          margin: 0 0 0 35px;
+          margin: ${(props): string => `0 0 0 ${props.theme.unit.quadriple}`};
         }
       }
 
       &::before {
-        margin: 0 25px 0 0;
-
+        margin: ${(props): string => `0 ${props.theme.unit.triple} 0 0`};
+        
         @media ${device.tablet} {
-          margin: 0 35px 0 0;
+          margin: ${(props): string => `0 ${props.theme.unit.quadriple} 0 0`};
         }
       }
     }

@@ -1,13 +1,14 @@
-import React from "react"
+import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
 import Loader from '@/components/blocks/global/Loader'
-import GoogleMap from './index'
 
 import { GOOGLE_MAP_URL } from '@/constants'
 
 import { GoogleMapContainer } from '@/components/blocks/global/GoogleMap/styles'
+
+import GoogleMap from './index'
 
 let container = null
 
@@ -27,8 +28,8 @@ it('GoogleMap is render without crashing', () => {
     <BaseComponentTestWrapper>
       <GoogleMap
         googleMapURL={GOOGLE_MAP_URL || ''}
-        loadingElement={<Loader/>}
-        containerElement={<GoogleMapContainer/>}
+        loadingElement={<Loader />}
+        containerElement={<GoogleMapContainer />}
         mapElement={<div style={{ height: `100%` }} />}
         initial={{
           center: [0, 0],
@@ -39,7 +40,8 @@ it('GoogleMap is render without crashing', () => {
         }}
         popupCreator={() => <div>test</div>}
       />
-    </BaseComponentTestWrapper>, container
+    </BaseComponentTestWrapper>,
+    container
   )
 
   const div = container.querySelectorAll('div')

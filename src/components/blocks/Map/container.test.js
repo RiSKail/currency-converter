@@ -3,9 +3,9 @@ import { render, unmountComponentAtNode } from 'react-dom'
 import 'jest-styled-components'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
-import Map from './container'
-
 import mapData from '@/data/countries.json'
+
+import Map from './container'
 
 let container = null
 
@@ -49,11 +49,9 @@ describe('Map tests', () => {
             flag: 'https://restcountries.eu/data/afg.svg',
             name: 'Afghanistan',
             alpha3Code: 'AFG',
-            latlng: [
-              33,
-              65,
-            ],
-          }} />
+            latlng: [33, 65],
+          }}
+        />
       </BaseComponentTestWrapper>,
       container
     )

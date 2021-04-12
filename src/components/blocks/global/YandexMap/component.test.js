@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
@@ -20,7 +20,7 @@ afterEach(() => {
 it('YandexMap is render without crashing', () => {
   render(
     <BaseComponentTestWrapper>
-      <YandexMap 
+      <YandexMap
         initial={{
           center: [0, 0],
           pathOptions: { fillOpacity: 0 },
@@ -30,7 +30,8 @@ it('YandexMap is render without crashing', () => {
         }}
         popupCreator={() => <div>test</div>}
       />
-    </BaseComponentTestWrapper>, container
+    </BaseComponentTestWrapper>,
+    container
   )
 
   const div = container.querySelectorAll('div')

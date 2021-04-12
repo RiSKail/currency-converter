@@ -19,29 +19,27 @@ const rrfProps = {
   dispatch: getStore().dispatch,
 }
 
-const App: React.FC = () => {
-  return (
-    <Provider store={getStore()}>
-      <ReactReduxFirebaseProvider {...rrfProps}>
-        <WithServiceWorker
-          onError={(err: string): void => console.log(`An error occured: ${err}`)}
-          onInstalled={(): void => console.log('Service worker installed')}
-          onUpdated={(): void => console.log('Service worker updated')}
-          publicServiceWorkerDest="/service-worker.js"
-        >
-          {({ update }: { update: () => void}): ReactNode => (
-            <HttpsRedirect>
-              <Internalization>
-                <ThemeProviderWrapper>
-                  <Routers update={update} />
-                </ThemeProviderWrapper>
-              </Internalization>
-            </HttpsRedirect>
-          )}
-        </WithServiceWorker>
-      </ReactReduxFirebaseProvider>
-    </Provider>
-  )
-}
+const App: React.FC = () => (
+  <Provider store={getStore()}>
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <WithServiceWorker
+        onError={(err: string): void => console.log(`An error occured: ${err}`)}
+        onInstalled={(): void => console.log('Service worker installed')}
+        onUpdated={(): void => console.log('Service worker updated')}
+        publicServiceWorkerDest="/service-worker.js"
+      >
+        {({ update }: { update: () => void }): ReactNode => (
+          <HttpsRedirect>
+            <Internalization>
+              <ThemeProviderWrapper>
+                <Routers update={update} />
+              </ThemeProviderWrapper>
+            </Internalization>
+          </HttpsRedirect>
+        )}
+      </WithServiceWorker>
+    </ReactReduxFirebaseProvider>
+  </Provider>
+)
 
 export default App

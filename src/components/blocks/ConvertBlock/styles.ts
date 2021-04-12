@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-import { device } from '../../../constants/devices'
+
+import { device } from '@/constants/devices'
 
 export default styled.div`
-  color: ${props => props.theme.colors.font};
-  background: ${props => props.theme.colors.backgroundLight};
-  border-radius: ${props => props.theme.unit.single};
-  padding: 46px;
+  color: ${(props): string => props.theme.colors.font};
+  background: ${(props): string => props.theme.colors.backgroundLight};
+  border-radius: ${(props): string => props.theme.unit.single};
+  padding: 48px;
   display: flex;
   flex-direction: column;
   margin: 46px 0px;
@@ -19,9 +20,11 @@ export default styled.div`
     min-width: 300px;
   }
 
-  input, select, .selectBtn {
-    box-shadow: 0px 4px 4px rgba(51, 51, 51, 0.04), 0px 4px 16px rgba(51, 51, 51, 0.08);
-    border-radius: ${props => props.theme.unit.half};
+  input,
+  select,
+  .selectBtn {
+    box-shadow: ${(props): string => props.theme.colors.boxShadow};
+    border-radius: ${(props): string => props.theme.unit.half};
     border: none;
     outline: none;
     padding: 14px;
@@ -29,11 +32,11 @@ export default styled.div`
 
   .selectBtn {
     height: 45px;
-    background: #ffff;
+    background: ${(props): string => props.theme.colors.white};
   }
 
   .select {
-    margin: 0 0 20px 0;
+    margin: ${(props): string => `0 0 ${props.theme.unit.triple} 0`};
 
     ul {
       border: none;

@@ -2,21 +2,15 @@ import React, { ReactNode } from 'react'
 
 import Header from '@/components/blocks/global/Header'
 
-import { childrenPropType } from '@/prop-types'
-
-interface Iprops {
-  children: ReactNode;
+interface Props {
+  children: ReactNode
 }
 
-const StandardLayout: React.FC<Iprops> = ({ children }) => (
+const StandardLayout: React.FC<Props> = ({ children }) => (
   <>
     <Header />
     <main>{children}</main>
   </>
 )
-
-StandardLayout.propTypes = {
-  children: childrenPropType,
-}
 
 export default StandardLayout

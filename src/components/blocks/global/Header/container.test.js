@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
@@ -21,7 +21,8 @@ it('Header is render without crashing', () => {
   render(
     <BaseComponentTestWrapper>
       <Header />
-    </BaseComponentTestWrapper>, container
+    </BaseComponentTestWrapper>,
+    container
   )
 
   const ul = container.querySelectorAll('ul')

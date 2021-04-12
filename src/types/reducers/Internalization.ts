@@ -1,3 +1,3 @@
-export interface IinternalizationState{
-  active: string;
+export interface InternalizationState {
+  active: string
 }

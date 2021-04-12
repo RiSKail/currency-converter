@@ -1,59 +1,70 @@
-import { SIGN_SUCCESS, SET_AUTH_COUNTRY_INFO, SIGN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGN_IN, SIGN_UP, SIGN_OUT, CLEAR_ERRORS, SIGNIN_USER_DATA } from '@/constants'
-import { IkeyableObj } from '@/types/otherTypes'
+import {
+  SIGN_SUCCESS,
+  SET_AUTH_COUNTRY_INFO,
+  SIGN_ERROR,
+  SIGNOUT_SUCCESS,
+  SIGNUP_SUCCESS,
+  SIGN_IN,
+  SIGN_UP,
+  SIGN_OUT,
+  CLEAR_ERRORS,
+  SIGNIN_USER_DATA,
+} from '@/constants'
+import { KeyableObj } from '@/types/otherTypes'
 
-interface IsignIn {
-  type: typeof SIGN_IN;
-  payload: IkeyableObj;
+interface SignIn {
+  type: typeof SIGN_IN
+  payload: KeyableObj
 }
 
-interface IsignInUserData {
-  type: typeof SIGNIN_USER_DATA;
-  payload: IkeyableObj;
+interface SignInUserData {
+  type: typeof SIGNIN_USER_DATA
+  payload: KeyableObj
 }
 
-interface IsignUp {
-  type: typeof SIGN_UP;
-  payload: IkeyableObj;
+interface SignUp {
+  type: typeof SIGN_UP
+  payload: KeyableObj
 }
 
-interface IsignOut {
-  type: typeof SIGN_OUT;
+interface SignOut {
+  type: typeof SIGN_OUT
 }
 
-interface IsignInSuccess {
-  type: typeof SIGN_SUCCESS;
+interface SignInSuccess {
+  type: typeof SIGN_SUCCESS
 }
 
-interface IclearErrors {
-  type: typeof CLEAR_ERRORS;
+interface ClearErrors {
+  type: typeof CLEAR_ERRORS
 }
 
-interface IsignError {
-  type: typeof SIGN_ERROR;
-  err: Error;
+interface SignError {
+  type: typeof SIGN_ERROR
+  err: Error
 }
 
-interface IsignUpSuccess {
-  type: typeof SIGNUP_SUCCESS;
+interface SignUpSuccess {
+  type: typeof SIGNUP_SUCCESS
 }
 
-interface IsignOutSuccess {
-  type: typeof SIGNOUT_SUCCESS;
+interface SignOutSuccess {
+  type: typeof SIGNOUT_SUCCESS
 }
 
-interface IsetAuthCountryInfo {
-  type: typeof SET_AUTH_COUNTRY_INFO;
-  payload: IkeyableObj;
+interface SetAuthCountryInfo {
+  type: typeof SET_AUTH_COUNTRY_INFO
+  payload: KeyableObj
 }
 
 export type AuthActionTypes =
-  | IsignIn
-  | IsignInUserData
-  | IsignUp
-  | IsignOut
-  | IsignInSuccess
-  | IclearErrors
-  | IsignError
-  | IsignUpSuccess
-  | IsignOutSuccess
-  | IsetAuthCountryInfo
+  | SignIn
+  | SignInUserData
+  | SignUp
+  | SignOut
+  | SignInSuccess
+  | ClearErrors
+  | SignError
+  | SignUpSuccess
+  | SignOutSuccess
+  | SetAuthCountryInfo

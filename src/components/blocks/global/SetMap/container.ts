@@ -1,27 +1,27 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 
-import SetMap from './component'
-
-import { IrootAction } from '@/types/rootActionTypes'
-import { IrootState } from '@/types/rootStateTypes'
-import { setMapType } from '@/actions'
+import { RootAction } from '@/types/rootActionTypes'
+import { RootState } from '@/types/rootStateTypes'
+import { setMapEngine } from '@/actions'
 import { MapActionTypes } from '@/types/actions'
 
-interface ImapState {
-  active: string;
+import SetMap from './component'
+
+interface MapState {
+  active: string
 }
 
-interface ImapDispatch {
-  onSetType: (type: string) => MapActionTypes;
+interface MapDispatch {
+  onSetEngine: (type: string) => MapActionTypes
 }
 
-const mapStateToProps = (store: IrootState): ImapState => ({
-  active: store.map.type,
+const mapStateToProps = (store: RootState): MapState => ({
+  active: store.map.engine,
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<IrootAction>): ImapDispatch => ({
-  onSetType: (type: string): MapActionTypes => dispatch(setMapType(type)),
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>): MapDispatch => ({
+  onSetEngine: (type: string): MapActionTypes => dispatch(setMapEngine(type)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetMap)
