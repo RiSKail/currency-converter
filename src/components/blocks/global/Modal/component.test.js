@@ -1,8 +1,11 @@
-import React from "react"
+import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
+
+import { nop } from '@/utils/other'
+
 import Modal from './index'
 
 let container = null
@@ -23,8 +26,9 @@ describe('Modal tests', () => {
     act(() => {
       render(
         <BaseComponentTestWrapper>
-          <Modal callback={() => true}>Test</Modal>
-        </BaseComponentTestWrapper>, container
+          <Modal callback={nop}>Test</Modal>
+        </BaseComponentTestWrapper>,
+        container
       )
     })
 
@@ -35,8 +39,9 @@ describe('Modal tests', () => {
     act(() => {
       render(
         <BaseComponentTestWrapper>
-          <Modal callback={() => true} />
-        </BaseComponentTestWrapper>, container
+          <Modal callback={nop} />
+        </BaseComponentTestWrapper>,
+        container
       )
     })
 

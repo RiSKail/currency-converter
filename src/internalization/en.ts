@@ -23,7 +23,7 @@ export default {
   sign_up_title: 'Sign Up',
   sign_in_title: 'Sign In',
   signup_swap_text: 'Already have an account?',
-  signin_swap_text: 'Don\'t have an account yet?',
+  signin_swap_text: "Don't have an account yet?",
   signup_first_name_placeholder: 'First Name',
   signup_last_name_placeholder: 'Last name',
   sign_email_placeholder: 'Email',

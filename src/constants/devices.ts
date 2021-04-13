@@ -1,6 +1,6 @@
-import { IkeyableObj } from '@/types/otherTypes'
+import { KeyableObj } from '@/types/otherTypes'
 
-const size: IkeyableObj = {
+const size: KeyableObj = {
   mobileS: '320px',
   mobileM: '375px',
   mobileL: '425px',
@@ -10,7 +10,7 @@ const size: IkeyableObj = {
   desktop: '2560px',
 }
 
-export const device: IkeyableObj = {
+export const device: KeyableObj = {
   mobileS: `(min-width: ${size.mobileS})`,
   mobileM: `(min-width: ${size.mobileM})`,
   mobileL: `(min-width: ${size.mobileL})`,

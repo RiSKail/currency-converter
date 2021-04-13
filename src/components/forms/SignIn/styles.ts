@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { device } from '@/constants/devices'
 
-export default styled.div `
+export default styled.div`
   color: ${(props): string => props.theme.colors.font};
   background: ${(props): string => props.theme.colors.backgroundLight};
   border-radius: ${(props): string => props.theme.unit.single};
@@ -27,13 +27,15 @@ export default styled.div `
     align-items: center;
     width: 100%;
 
-    input, select, .selectBtn  {
-      box-shadow: 0px 4px 4px rgba(51, 51, 51, 0.04), 0px 4px 16px rgba(51, 51, 51, 0.08);
+    input,
+    select,
+    .selectBtn {
+      box-shadow: ${(props): string => props.theme.colors.boxShadow};
       border-radius: ${(props): string => props.theme.unit.half};
       border: none;
       outline: none;
       padding: ${(props): string => props.theme.unit.double};
-      margin: 0 0 20px 0;
+      margin: ${(props): string => `0 0 ${props.theme.unit.triple} 0`};
       width: 100%;
     }
 
@@ -46,7 +48,7 @@ export default styled.div `
     }
   }
 
-  .btn-switch{
+  .btn-switch {
     color: ${(props): string => props.theme.colors.fontBlue};
 
     &:hover {
@@ -56,15 +58,15 @@ export default styled.div `
   }
 
   p {
-      color:${(props): string => props.theme.colors.fontLight};
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 105%;
-      text-align: center;
+    color: ${(props): string => props.theme.colors.fontLight};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 105%;
+    text-align: center;
 
-      a {
-        text-decoration: none;
-      }
+    a {
+      text-decoration: none;
     }
+  }
 `

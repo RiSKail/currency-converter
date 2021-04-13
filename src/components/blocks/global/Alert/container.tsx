@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import pt from 'prop-types'
 
 import AlertStyle, { Colors } from './styles'
 
-interface Iprops {
-  type?: string;
-  text?: string;
-  time?: number;
-  callback(): void;
+interface Props {
+  type?: string
+  text?: string
+  time?: number
+  callback(): void
 }
 
-const Alert: React.FC<Iprops> = ({ type, text, time, callback }) => {
+const Alert: React.FC<Props> = ({ type, text, time, callback }) => {
   const intl = useIntl()
   const alertSuccess = intl.formatMessage({ id: 'alert_success_text' })
   const alertInfo = intl.formatMessage({ id: 'alert_info_text' })
@@ -20,18 +19,25 @@ const Alert: React.FC<Iprops> = ({ type, text, time, callback }) => {
   const [style, setStyle] = useState<string | undefined>()
   const [typeText, setTypeText] = useState<string>('')
   const [timerID, setTimerID] = useState<NodeJS.Timeout | unknown>()
+  const [timerRun, setTimerRun] = useState<boolean>(false)
 
-  const onToggleAlert = (): void => {
+  const onToggleAlert = useCallback((): void => {
     callback()
-  }
+  }, [callback])
+
+  const onSetTimer = useCallback((): void => {
+    if (time && !timerRun) {
+      setTimerID(
+        setTimeout(() => {
+          onToggleAlert()
+        }, time)
+      )
+      setTimerRun(true)
+    }
+  }, [time, onToggleAlert, timerRun])
 
   useEffect(() => {
-    if (time) {
-      const tempID = setTimeout(() => {
-        onToggleAlert()
-      }, time)
-      setTimerID(tempID)
-    }
+    onSetTimer()
 
     switch (type) {
       case 'error':
@@ -59,23 +65,18 @@ const Alert: React.FC<Iprops> = ({ type, text, time, callback }) => {
     return (): void => {
       clearTimeout(timerID as number)
     }
-  }, [type, time])
+  }, [type, alertError, alertInfo, alertSuccess, alertWarning, onSetTimer, timerID])
 
   return (
     <Colors>
-    <AlertStyle className={style} data-testid={type}>
-        <span className="close-btn" onClick={onToggleAlert}>&times;</span>
+      <AlertStyle className={style} data-testid={type}>
+        <span className="close-btn" onClick={onToggleAlert}>
+          &times;
+        </span>
         <strong>{typeText}!</strong> {text}
-    </AlertStyle>
+      </AlertStyle>
     </Colors>
   )
-}
-
-Alert.propTypes = {
-  type: pt.string,
-  text: pt.string,
-  time: pt.number,
-  callback: pt.func.isRequired,
 }
 
 export default Alert

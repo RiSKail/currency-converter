@@ -8,13 +8,13 @@ export default styled.div`
   transition: opacity 0.6s;
   margin-bottom: ${(props): string => props.theme.unit.double};
   border-radius: ${(props): string => props.theme.unit.half};
-  
+
   .close-btn {
     margin-left: ${(props): string => props.theme.unit.double};
     color: ${(props): string => props.theme.colors.fontLight};
     font-weight: ${(props): string => props.theme.fontWeights.bold};
     float: right;
-    font-size: ${(props): string => props.theme.fontSizes.tripleBig};
+    font-size: ${(props): string => props.theme.fontSizes.middleBig};
     line-height: ${(props): string => props.theme.unit.triple};
     cursor: pointer;
     transition: 0.3s;

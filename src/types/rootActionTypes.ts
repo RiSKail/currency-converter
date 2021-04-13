@@ -7,7 +7,7 @@ import {
   ValuesActionTypes,
 } from './actions'
 
-export type IrootAction = 
+export type RootAction =
   | AuthActionTypes
   | CountriesActionTypes
   | CurrenciesActionTypes

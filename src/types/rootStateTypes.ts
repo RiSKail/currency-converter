@@ -1,19 +1,19 @@
+import { KeyableObj } from '@/types/otherTypes'
 import {
-  IcountriesState,
-  IauthState,
-  IinternalizationState,
-  IcurrenciesState,
-  IvaluesState,
-  ImapState,
+  CountriesState,
+  AuthState,
+  InternalizationState,
+  CurrenciesState,
+  ValuesState,
+  MapState,
 } from './reducers'
-import { IkeyableObj } from '@/types/otherTypes'
 
-export interface IrootState {
-  internalization: IinternalizationState;
-  values: IvaluesState;
-  currencies: IcurrenciesState;
-  countries: IcountriesState;
-  map: ImapState;
-  auth: IauthState;
-  firebase: IkeyableObj;
+export interface RootState {
+  internalization: InternalizationState
+  values: ValuesState
+  currencies: CurrenciesState
+  countries: CountriesState
+  map: MapState
+  auth: AuthState
+  firebase: KeyableObj
 }

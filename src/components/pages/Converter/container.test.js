@@ -3,6 +3,9 @@ import 'jest-styled-components'
 import { render, unmountComponentAtNode } from 'react-dom'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
+
+import { nop } from '@/utils/other'
+
 import Converter from './container'
 
 let container = null
@@ -21,7 +24,7 @@ afterEach(() => {
 it('Converter page is render', () => {
   render(
     <BaseComponentTestWrapper>
-      <Converter update={() => true} />
+      <Converter update={nop} />
     </BaseComponentTestWrapper>,
     container
   )

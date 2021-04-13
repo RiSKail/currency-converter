@@ -1,8 +1,9 @@
 import React from 'react'
 import 'jest-styled-components'
 
-import authReducer from './auth'
 import { setAuthCountryInfo, signError, signInUserData, signOutSuccess } from '@/actions'
+
+import authReducer from './auth'
 
 const state = {
   name: '',

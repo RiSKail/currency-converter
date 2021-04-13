@@ -1,3 +1,3 @@
-export type IcurrenciesState = {
-  [key: string]: string;
+export type CurrenciesState = {
+  [key: string]: string
 }

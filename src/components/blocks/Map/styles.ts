@@ -1,72 +1,68 @@
 import styled from 'styled-components'
 
-export default styled.div`
+import theme from '@/theme'
+
+export const MapContainer = styled.div`
   background: ${(props): string => props.theme.colors.backgroundLight};
   border-radius: ${(props): string => props.theme.unit.single};
   padding: 36px;
   width: 90%;
   margin: 45px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
-  .leaflet-container {
-    height: 510px;
-    width: 100%;
+export const MapPopup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  img {
+    width: 70px;
+    border: 2px solid ${theme.colors.backgroundDark};
   }
 
-  .leaflet-interactive{
-    stroke-width: 1;
-    transition: 0.3s;
-  }
-
-  .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    background: #41485b;
-    color:  ${(props): string => props.theme.colors.fontLight};
-  }
-
-  .leaflet-popup-tip-container {
-    width: 65px;
-    height: 30px;
-    margin-left: -33px;
-  }
-
-  .leaflet-popup-content{
+  ul {
+    list-style: none;
+    padding: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
 
-    img {
-      width: 70px;
-      border: 2px solid  ${(props): string => props.theme.colors.backgroundDark};
-    }
+    li {
+      width: 200px;
+      text-align: center;
+      color: ${theme.colors.fontLightGray};
 
-    ul {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
+      h1 {
+        font-size: ${theme.fontSizes.middleSmall};
 
-      li {
-        width: 200px;
-        text-align: center;
-        color: ${(props): string => props.theme.colors.fontLightGray};
+        &::after,
+        &::before {
+          width: ${theme.unit.quadriple};
+        }
 
-        h1 {
-          font-size: ${(props): string => props.theme.fontSizes.middleSmall};
-          
-          &::after, &::before {
-            width: 30px;
-          }
+        &::before {
+          margin: 0 ${theme.unit.double} 0 0;
+        }
 
-          &::before {
-            margin: 0 15px 0 0;
-          }
-
-          &::after {
-            margin: 0 0 0 15px;
-          }
+        &::after {
+          margin: 0 0 0 ${theme.unit.double};
         }
       }
     }
   }
+`
+
+export const SelectContainer = styled.div`
+  position: absolute;
+  z-index: 9999;
+  margin: ${(props): string => `${props.theme.unit.single} 0 0 0`};
+  opacity: 0.8;
+`
+
+export const MapElement = styled.div`
+  height: 100%;
 `

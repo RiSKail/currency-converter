@@ -3,6 +3,7 @@ import 'jest-styled-components'
 import { render, unmountComponentAtNode } from 'react-dom'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
+
 import Map from './container'
 
 let container = null

@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
@@ -24,7 +24,8 @@ describe('Button tests', () => {
       render(
         <BaseComponentTestWrapper>
           <Button type="Primary">Test</Button>
-        </BaseComponentTestWrapper>, container
+        </BaseComponentTestWrapper>,
+        container
       )
     })
 
@@ -36,7 +37,8 @@ describe('Button tests', () => {
       render(
         <BaseComponentTestWrapper>
           <Button type="Circle">Test</Button>
-        </BaseComponentTestWrapper>, container
+        </BaseComponentTestWrapper>,
+        container
       )
     })
 
@@ -48,10 +50,11 @@ describe('Button tests', () => {
       render(
         <BaseComponentTestWrapper>
           <Button>Test</Button>
-        </BaseComponentTestWrapper>, container
+        </BaseComponentTestWrapper>,
+        container
       )
     })
-    
+
     expect(container.textContent).toBe('Test')
   })
 })

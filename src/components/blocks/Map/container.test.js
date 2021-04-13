@@ -3,9 +3,9 @@ import { render, unmountComponentAtNode } from 'react-dom'
 import 'jest-styled-components'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
-import Map from './container'
-
 import mapData from '@/data/countries.json'
+
+import Map from './container'
 
 let container = null
 
@@ -30,7 +30,7 @@ describe('Map tests', () => {
     )
 
     const map = container.querySelectorAll('div')
-    expect(map.length).toEqual(2)
+    expect(map.length).toEqual(4)
   })
 
   it('Map is render with currentCountryData', () => {
@@ -49,16 +49,14 @@ describe('Map tests', () => {
             flag: 'https://restcountries.eu/data/afg.svg',
             name: 'Afghanistan',
             alpha3Code: 'AFG',
-            latlng: [
-              33,
-              65,
-            ],
-          }} />
+            latlng: [33, 65],
+          }}
+        />
       </BaseComponentTestWrapper>,
       container
     )
 
     const map = container.querySelectorAll('div')
-    expect(map.length).toEqual(2)
+    expect(map.length).toEqual(4)
   })
 })

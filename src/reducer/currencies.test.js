@@ -1,8 +1,9 @@
 import React from 'react'
 import 'jest-styled-components'
 
-import currenciesReducer from './currencies'
 import { setDataListValues } from '@/actions'
+
+import currenciesReducer from './currencies'
 
 const state = {}
 

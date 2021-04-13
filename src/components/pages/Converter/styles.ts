@@ -14,7 +14,7 @@ export default styled.div`
 
   .csv-input {
     outline: none;
-    
+
     &:hover {
       cursor: pointer;
     }

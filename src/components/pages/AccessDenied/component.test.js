@@ -3,6 +3,7 @@ import 'jest-styled-components'
 import { render, unmountComponentAtNode } from 'react-dom'
 
 import BaseComponentTestWrapper from '@/components/wrappers/BaseComponentTestWrapper'
+
 import AccessDenied from './component'
 
 let container = null

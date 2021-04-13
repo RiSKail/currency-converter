@@ -1,9 +1,14 @@
-import { UPDATE_MAP_OPTIONS } from '@/constants'
-import { ImapState } from '@/types/reducers'
+import { UPDATE_MAP_OPTIONS, SET_MAP_ENGINE } from '@/constants'
+import { MapState } from '@/types/reducers'
 
-interface IupdateMapOptions {
-  type: typeof UPDATE_MAP_OPTIONS;
-  payload: ImapState;
+interface UpdateMapOptions {
+  type: typeof UPDATE_MAP_OPTIONS
+  payload: MapState
 }
 
-export type MapActionTypes = IupdateMapOptions
+interface SetMapEngine {
+  type: typeof SET_MAP_ENGINE
+  payload: string
+}
+
+export type MapActionTypes = UpdateMapOptions | SetMapEngine

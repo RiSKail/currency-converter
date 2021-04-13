@@ -1,7 +1,13 @@
 import React from 'react'
 
+import {
+  setBasePrimaryType,
+  setBaseSecondaryType,
+  updateBasePrimaryValue,
+  updateBaseSecondaryValue,
+} from '@/actions'
+
 import valuesReducer from './values'
-import { setBasePrimaryType, setBaseSecondaryType, updateBasePrimaryValue, updateBaseSecondaryValue } from '@/actions'
 
 const state = {
   primary: {
