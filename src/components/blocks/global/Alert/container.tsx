@@ -70,13 +70,7 @@ const Alert: React.FC<Props> = ({ type, text, time, callback }) => {
   return (
     <Colors>
       <AlertStyle className={style} data-testid={type}>
-        <span
-          role="button"
-          tabIndex={0}
-          className="close-btn"
-          onClick={onToggleAlert}
-          onKeyPress={onToggleAlert}
-        >
+        <span className="close-btn" onClick={onToggleAlert}>
           &times;
         </span>
         <strong>{typeText}!</strong> {text}
